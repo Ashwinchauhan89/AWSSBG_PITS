@@ -49,17 +49,23 @@ const BENEFITS = [
 
 export function BenefitsSection() {
   return (
-    <section className="py-20 border-b border-slate-800/80 bg-slate-900/30">
+    <section className="py-24 sm:py-32 border-b border-white/10 bg-[#080A0F] relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] volumetric-glow pointer-events-none -z-10" />
+      <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none -z-10" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <Badge variant="orange" size="md">
-            Why Join SBG PITS
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Designed for Student Builders
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-semibold tracking-wider uppercase">
+            <span>CAMPUS ADVANTAGES</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+            Engineered For <br />
+            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-sky-400 bg-clip-text text-transparent">
+              Student Builders
+            </span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Whether you are in your 1st year taking your first programming steps or in your final year preparing for campus placements, the AWS Student Builder Group provides the community and guidance to grow.
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+            Whether you are in your 1st year taking your first programming steps or in your final year preparing for campus placements, the AWS Student Builder Group provides the community, sandboxes, and guidance to grow.
           </p>
         </div>
 
@@ -69,15 +75,15 @@ export function BenefitsSection() {
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-800/80 bg-slate-950/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-amber-500/30 hover:bg-slate-900/40"
+                className="cinematic-glass cinematic-glass-hover rounded-3xl p-7 border border-white/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center mb-5 shadow-lg shadow-orange-500/20">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-base font-bold text-white mb-2">
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
                   {b.title}
                 </h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed font-light">
                   {b.description}
                 </p>
               </div>

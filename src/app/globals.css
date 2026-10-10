@@ -1,12 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #090d16;
-  --foreground: #f8fafc;
+  --background: #080a0f;
+  --foreground: #f5f7fa;
+  --obsidian: #080a0f;
+  --midnight: #101a2c;
   --aws-orange: #ff9900;
   --aws-orange-dark: #ec7211;
-  --aws-navy-dark: #080c14;
-  --aws-navy-surface: #0f172a;
+  --electric-blue: #43b7ff;
+  --cloud-white: #f5f7fa;
+  --muted-slate: #9ba7b7;
+  --aws-navy-dark: #080a0f;
+  --aws-navy-surface: #101a2c;
   --aws-navy-card: #131c31;
   --aws-navy-border: #1e293b;
 }
@@ -14,8 +19,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-obsidian: var(--obsidian);
+  --color-midnight: var(--midnight);
   --color-aws-orange: var(--aws-orange);
   --color-aws-orange-dark: var(--aws-orange-dark);
+  --color-electric-blue: var(--electric-blue);
+  --color-cloud-white: var(--cloud-white);
+  --color-muted-slate: var(--muted-slate);
   --color-aws-navy-dark: var(--aws-navy-dark);
   --color-aws-navy-surface: var(--aws-navy-surface);
   --color-aws-navy-card: var(--aws-navy-card);
@@ -34,8 +44,8 @@ html {
 }
 
 body {
-  background-color: #090d16;
-  color: #f1f5f9;
+  background-color: #080a0f;
+  color: #f5f7fa;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
@@ -43,7 +53,7 @@ body {
 
 ::selection {
   background: #ff9900;
-  color: #090d16;
+  color: #080a0f;
 }
 
 /* Custom Scrollbar */
@@ -203,3 +213,120 @@ body {
   background-size: 200% 100%;
   animation: shimmer 3s infinite;
 }
+
+/* Cinematic Futuristic Cloud & Festival Utilities */
+.volumetric-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 153, 0, 0.15) 0%, rgba(67, 183, 255, 0.08) 40%, transparent 70%);
+  filter: blur(40px);
+}
+
+.volumetric-blue-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(67, 183, 255, 0.18) 0%, rgba(16, 26, 44, 0.5) 50%, transparent 80%);
+  filter: blur(50px);
+}
+
+.cinematic-glass {
+  background: rgba(8, 10, 15, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cinematic-glass-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cinematic-glass-hover:hover {
+  background: rgba(16, 26, 44, 0.85);
+  border-color: rgba(255, 153, 0, 0.4);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px -5px rgba(255, 153, 0, 0.2);
+}
+
+.nav-rail-glass {
+  background: rgba(8, 10, 15, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 153, 0, 0.08);
+}
+
+.hud-corner {
+  position: relative;
+}
+
+.hud-corner::before,
+.hud-corner::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(255, 153, 0, 0.5);
+  pointer-events: none;
+}
+
+.hud-corner::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.hud-corner::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes soundbar {
+  0%, 100% { height: 3px; }
+  50% { height: 14px; }
+}
+
+@keyframes cyber-orbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-cyber-orbit {
+  animation: cyber-orbit 28s linear infinite;
+}
+
+@keyframes cyber-orbit-reverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-cyber-orbit-reverse {
+  animation: cyber-orbit-reverse 38s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.6; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 4s ease-in-out infinite;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

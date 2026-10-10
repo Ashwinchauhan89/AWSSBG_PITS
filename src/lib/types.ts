@@ -44,6 +44,8 @@ export interface CommunityEvent {
   speakerRole?: string;
   tags: string[];
   capacity?: number;
+  coverImage?: string;
+  isProposed?: boolean;
 }
 
 export type ProjectCategory =
@@ -59,6 +61,7 @@ export interface StudentProject {
   title: string;
   description: string;
   category: ProjectCategory;
+  coverImage?: string;
   techStack: string[];
   contributors: string[];
   githubUrl?: string;

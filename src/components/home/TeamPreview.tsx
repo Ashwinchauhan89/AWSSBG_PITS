@@ -9,7 +9,7 @@ export function TeamPreview() {
   const openRoles = INITIAL_TEAM_MEMBERS.filter((m) => m.isVacant).slice(0, 4);
 
   return (
-    <section className="py-20 border-b border-slate-800/80 bg-slate-950 relative">
+    <section id="team" className="py-20 border-b border-slate-800/80 bg-slate-950 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">

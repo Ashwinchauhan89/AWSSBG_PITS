@@ -3,8 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CommunityBanner } from "@/components/layout/CommunityBanner";
 import { Navbar } from "@/components/layout/Navbar";
+import { LeftNavRail } from "@/components/layout/LeftNavRail";
+import { RightSocialRail } from "@/components/layout/RightSocialRail";
 import { Footer } from "@/components/layout/Footer";
 import { ToastProvider } from "@/components/shared/ToastProvider";
+import { GsapScrollProgress } from "@/components/gsap/GsapScrollProgress";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +57,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ClientLayoutShell } from "@/components/layout/ClientLayoutShell";
+
 export default function RootLayout({
   children,
 }: {
@@ -64,13 +69,19 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-slate-950 text-slate-100 selection:bg-amber-500 selection:text-slate-950">
-        <CommunityBanner />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <ToastProvider />
+      <body className="min-h-full flex flex-col bg-[#080A0F] text-[#F5F7FA] selection:bg-amber-500 selection:text-[#080A0F] relative">
+        <ClientLayoutShell>
+          <GsapScrollProgress />
+          <CommunityBanner />
+          <Navbar />
+          <LeftNavRail />
+          <RightSocialRail />
+          <main className="flex-1 relative z-10">{children}</main>
+          <Footer />
+          <ToastProvider />
+        </ClientLayoutShell>
       </body>
     </html>
   );
 }
+

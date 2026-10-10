@@ -21,6 +21,7 @@ import {
   ApplicationFormData,
 } from "@/lib/validations/applicationSchema";
 import { COMMUNITY_INFO } from "@/lib/data/initialData";
+import { useSound } from "@/components/audio/SoundManager";
 
 const AVAILABLE_ROLES = [
   "Vice Lead / Co-Lead",
@@ -50,6 +51,7 @@ const YEARS = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
 function JoinPageContent() {
   const searchParams = useSearchParams();
   const preselectedRole = searchParams.get("role") || "";
+  const { playSuccess, playClick } = useSound();
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submissionSuccess, setSubmissionSuccess] = React.useState<{
@@ -92,6 +94,7 @@ function JoinPageContent() {
   }, [preselectedRole, setValue]);
 
   const onSubmit = async (data: ApplicationFormData) => {
+    playClick();
     setIsSubmitting(true);
     try {
       const response = await fetch("/api/applications", {
@@ -108,6 +111,7 @@ function JoinPageContent() {
         return;
       }
 
+      playSuccess();
       setSubmissionSuccess({
         id: result.data.id,
         fullName: result.data.fullName,
@@ -332,16 +336,16 @@ function JoinPageContent() {
                   )}
                 </div>
 
-                {/* Current Year */}
+                {/* Current Semester / Year */}
                 <div className="space-y-1.5">
                   <label className="block text-xs font-semibold text-slate-300">
-                    Current Academic Year <span className="text-amber-400">*</span>
+                    Current Semester / Academic Year <span className="text-amber-400">*</span>
                   </label>
                   <select
                     {...register("currentYear")}
                     className="w-full h-11 px-3.5 rounded-xl border border-slate-700/80 bg-slate-950/80 text-xs text-white focus:outline-none focus:border-amber-500"
                   >
-                    <option value="">Select current year</option>
+                    <option value="">Select semester / year</option>
                     {YEARS.map((y) => (
                       <option key={y} value={y}>
                         {y}
@@ -367,13 +371,13 @@ function JoinPageContent() {
               {/* Preferred Position */}
               <div className="space-y-1.5">
                 <label className="block text-xs font-semibold text-slate-300">
-                  Preferred Core Team Role <span className="text-amber-400">*</span>
+                  Preferred Position <span className="text-amber-400">*</span>
                 </label>
                 <select
                   {...register("preferredPosition")}
                   className="w-full h-11 px-3.5 rounded-xl border border-slate-700/80 bg-slate-950/80 text-xs text-white focus:outline-none focus:border-amber-500"
                 >
-                  <option value="">Select preferred role</option>
+                  <option value="">Select preferred position</option>
                   {AVAILABLE_ROLES.map((role) => (
                     <option key={role} value={role}>
                       {role}
@@ -401,10 +405,10 @@ function JoinPageContent() {
                 )}
               </div>
 
-              {/* Why Join */}
+              {/* Reason for Applying */}
               <div className="space-y-1.5">
                 <label className="block text-xs font-semibold text-slate-300">
-                  Why do you want to join the SBG Core Team? <span className="text-amber-400">*</span>
+                  Reason for Applying &amp; Community Goals <span className="text-amber-400">*</span>
                 </label>
                 <textarea
                   {...register("whyJoin")}
@@ -423,14 +427,14 @@ function JoinPageContent() {
               <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
                 <Code className="w-4 h-4 text-amber-400" />
                 <h3 className="text-sm font-bold uppercase tracking-wider text-white">
-                  3. Project Links &amp; Profiles (Optional)
+                  3. Relevant Projects &amp; Profiles (Optional)
                 </h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="block text-xs font-semibold text-slate-300">
-                    GitHub / Project Portfolio URL
+                    Relevant Projects / GitHub Portfolio URL
                   </label>
                   <input
                     {...register("projectLinks")}

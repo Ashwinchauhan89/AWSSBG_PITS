@@ -1,5 +1,7 @@
 import { HeroSection } from "@/components/home/HeroSection";
+import { CommunityMissionSection } from "@/components/home/CommunityMissionSection";
 import { DomainsSection } from "@/components/home/DomainsSection";
+import { LearnByBuildingSection } from "@/components/home/LearnByBuildingSection";
 import { EventsPreview } from "@/components/home/EventsPreview";
 import { ProjectsPreview } from "@/components/home/ProjectsPreview";
 import { TeamPreview } from "@/components/home/TeamPreview";
@@ -15,12 +17,31 @@ export const metadata = {
 export default function HomePage() {
   return (
     <div className="flex flex-col">
+      {/* Hero Section */}
       <HeroSection />
+
+      {/* Section 1 — The Community */}
+      <CommunityMissionSection />
+
+      {/* Section 2 — Explore Technology */}
       <DomainsSection />
+
+      {/* Section 3 — Learn by Building */}
+      <LearnByBuildingSection />
+
+      {/* Section 4 — Events and Experiences */}
       <EventsPreview />
+
+      {/* Section 5 — Student Projects */}
       <ProjectsPreview />
+
+      {/* Section 6 — Meet the Team */}
       <TeamPreview />
+
+      {/* Campus Cohort Highlights */}
       <BenefitsSection />
+
+      {/* Section 7 — Join the Community */}
       <JoinCtaSection />
     </div>
   );

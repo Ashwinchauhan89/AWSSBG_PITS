@@ -1,15 +1,44 @@
+"use client";
+
+import * as React from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import { ExternalLink, ArrowRight, Code } from "lucide-react";
 import { Github } from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { INITIAL_PROJECTS } from "@/lib/data/initialData";
+import { GsapMagnetic } from "@/components/gsap/GsapMagnetic";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 
 export function ProjectsPreview() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const featuredProjects = INITIAL_PROJECTS.filter((p) => p.featured).slice(0, 3);
 
+  useGSAP(
+    () => {
+      const cards = gsap.utils.toArray<HTMLElement>(".gsap-project-card");
+
+      gsap.from(cards, {
+        y: 45,
+        opacity: 0,
+        rotationX: 10,
+        transformPerspective: 900,
+        duration: 0.75,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section className="py-20 border-b border-slate-800/80 bg-slate-900/40 relative">
+    <section id="projects" ref={sectionRef} className="py-20 border-b border-slate-800/80 bg-slate-900/40 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">
@@ -23,19 +52,21 @@ export function ProjectsPreview() {
               Explore real-world applications engineered by student developers at PITS Ujjain using AWS cloud architecture and modern frameworks.
             </p>
           </div>
-          <Link href="/projects">
-            <Button variant="secondary" size="md" className="gap-2 shrink-0">
-              <span>Explore All Projects</span>
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
+          <GsapMagnetic strength={0.25}>
+            <Link href="/projects">
+              <Button variant="secondary" size="md" className="gap-2 shrink-0">
+                <span>Explore All Projects</span>
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </GsapMagnetic>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featuredProjects.map((project) => (
             <div
               key={project.id}
-              className="flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/80 p-6 backdrop-blur-sm transition-all duration-300 hover:border-slate-700 hover:shadow-2xl group"
+              className="gsap-project-card flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/80 p-6 backdrop-blur-sm transition-all duration-300 hover:border-slate-700 hover:shadow-2xl hover:-translate-y-1 group will-change-transform"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
