@@ -109,15 +109,56 @@ body {
   text-shadow: 0 0 20px rgba(255, 153, 0, 0.35);
 }
 
+.text-glow-sky {
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
 .glow-orange {
   box-shadow: 0 0 30px -5px rgba(255, 153, 0, 0.35);
+}
+
+.glow-orange-lg {
+  box-shadow: 0 0 50px -10px rgba(255, 153, 0, 0.45);
 }
 
 .glow-blue {
   box-shadow: 0 0 30px -5px rgba(56, 189, 248, 0.25);
 }
 
-/* Subtle pulse badge animation */
+.glow-purple {
+  box-shadow: 0 0 30px -5px rgba(168, 85, 247, 0.3);
+}
+
+/* Aurora background mesh */
+.bg-mesh-dark {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255, 153, 0, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+}
+
+.bg-radial-vignette {
+  background: radial-gradient(circle at center, transparent 30%, #090d16 90%);
+}
+
+/* Gradient borders */
+.gradient-border-amber {
+  position: relative;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.gradient-border-amber::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+  margin: -1px;
+  border-radius: inherit;
+  background: linear-gradient(to bottom right, rgba(255, 153, 0, 0.6), rgba(255, 153, 0, 0.1), rgba(56, 189, 248, 0.3));
+}
+
+/* Keyframe animations */
 @keyframes pulse-subtle {
   0%, 100% {
     opacity: 1;
@@ -129,4 +170,36 @@ body {
 
 .animate-pulse-subtle {
   animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
 }

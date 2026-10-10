@@ -206,13 +206,11 @@ function JoinPageContent() {
               </p>
             </div>
 
-            <div className="inline-block p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs font-mono text-amber-400 space-y-1">
-              <div>Reference ID: {submissionSuccess.id}</div>
-              <div className="text-[10px] text-slate-400">
-                Storage Engine:{" "}
-                {submissionSuccess.databaseConfigured
-                  ? "PostgreSQL (Prisma)"
-                  : "Active Server Store (Development Mode)"}
+            <div className="inline-block p-4 rounded-2xl bg-slate-950/80 border border-amber-500/30 text-xs font-mono text-amber-400 space-y-1.5 shadow-lg">
+              <div className="font-bold">Applicant Reference: {submissionSuccess.id}</div>
+              <div className="text-[11px] text-emerald-400 flex items-center justify-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Application Logged • Status: Under Review</span>
               </div>
             </div>
 

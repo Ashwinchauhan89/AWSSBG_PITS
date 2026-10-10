@@ -11,7 +11,9 @@ import {
   RefreshCw,
   Plus,
   ExternalLink,
-  Database,
+  Palette,
+  Sparkles,
+  Layers,
   Eye,
   Key,
 } from "lucide-react";
@@ -358,8 +360,8 @@ export default function AdminPage() {
               : "text-slate-400 hover:text-white"
           }`}
         >
-          <Database className="w-4 h-4" />
-          <span>System &amp; Database Health</span>
+          <Palette className="w-4 h-4" />
+          <span>Design System &amp; UI Showcase</span>
         </button>
       </div>
 
@@ -803,51 +805,155 @@ export default function AdminPage() {
         </div>
       )}
 
-      {/* TAB 4: SYSTEM & DATABASE HEALTH */}
+      {/* TAB 4: FRONTEND DESIGN SYSTEM & UI SHOWCASE */}
       {activeTab === "system" && (
-        <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 space-y-6">
-          <div className="flex items-center gap-2 text-white font-bold text-lg">
-            <Database className="w-5 h-5 text-amber-400" />
-            <span>Database &amp; Architecture Status</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400 uppercase">
-                Storage Engine Mode
-              </span>
-              <p className="text-sm font-bold text-white">
-                {systemInfo?.storageMode === "postgres"
-                  ? "PostgreSQL Active"
-                  : "In-Memory / Server Development Mode"}
-              </p>
-              <p className="text-[11px] text-slate-400">
-                Resilient zero-failure fallback for local development &amp; preview.
+        <div className="space-y-8">
+          {/* Header Banner */}
+          <div className="rounded-3xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-slate-900/90 to-slate-950 p-6 sm:p-8 backdrop-blur-md shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <Palette className="w-5 h-5 text-amber-400" />
+                <h3 className="text-xl font-bold text-white">
+                  Frontend Design System &amp; Component Kit
+                </h3>
+              </div>
+              <p className="text-xs text-slate-300">
+                AWS Student Builder Group • Prashanti Institute of Technology &amp; Science design tokens, UI typography, and component specifications.
               </p>
             </div>
-
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400 uppercase">
-                Prisma Schema Status
-              </span>
-              <p className="text-sm font-bold text-emerald-400">
-                Ready at prisma/schema.prisma
-              </p>
-              <p className="text-[11px] text-slate-400">
-                Models: TeamMember, Event, Project, Resource, CoreTeamApplication, ContactSubmission.
-              </p>
+            <div className="flex items-center gap-2">
+              <Badge variant="orange" size="md">
+                100% Frontend Architecture
+              </Badge>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-400 space-y-2">
-            <p className="font-semibold text-slate-300">
-              Connecting to PostgreSQL in Production:
-            </p>
-            <ol className="list-decimal pl-4 space-y-1 text-[11px]">
-              <li>Configure <code className="text-amber-400">DATABASE_URL</code> in Vercel or your .env file.</li>
-              <li>Run <code className="text-amber-400">npx prisma migrate dev</code> or <code className="text-amber-400">npx prisma db push</code>.</li>
-              <li>The API handlers automatically connect to PostgreSQL while preserving the interface.</li>
-            </ol>
+          {/* Color Tokens Matrix */}
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8 space-y-4">
+            <div className="flex items-center gap-2 text-white font-bold text-sm">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Tailored Color Palette (AWS Builder Modern Theme)</span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                <div className="h-10 rounded-xl bg-[#ff9900] shadow-md shadow-amber-500/30 flex items-center justify-center text-slate-950 font-black text-xs">
+                  #FF9900
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white">AWS Orange</p>
+                  <p className="text-[10px] text-slate-400">Primary Brand</p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                <div className="h-10 rounded-xl bg-[#090d16] border border-slate-700 flex items-center justify-center text-slate-400 font-mono text-[10px]">
+                  #090D16
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white">Deep Navy</p>
+                  <p className="text-[10px] text-slate-400">Main Canvas</p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                <div className="h-10 rounded-xl bg-[#0f172a] border border-slate-700 flex items-center justify-center text-slate-400 font-mono text-[10px]">
+                  #0F172A
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white">Navy Surface</p>
+                  <p className="text-[10px] text-slate-400">Card Base</p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                <div className="h-10 rounded-xl bg-[#38bdf8] shadow-md shadow-sky-500/20 flex items-center justify-center text-slate-950 font-black text-xs">
+                  #38BDF8
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white">Cyber Sky</p>
+                  <p className="text-[10px] text-slate-400">Tech &amp; Cloud</p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                <div className="h-10 rounded-xl bg-[#10b981] shadow-md shadow-emerald-500/20 flex items-center justify-center text-slate-950 font-black text-xs">
+                  #10B981
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white">Emerald Glow</p>
+                  <p className="text-[10px] text-slate-400">Status &amp; WhatsApp</p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                <div className="h-10 rounded-xl bg-[#a855f7] shadow-md shadow-purple-500/20 flex items-center justify-center text-white font-black text-xs">
+                  #A855F7
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white">Bedrock Violet</p>
+                  <p className="text-[10px] text-slate-400">Generative AI</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Component Showcase Gallery */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Buttons & Actions */}
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 space-y-4">
+              <div className="flex items-center gap-2 text-white font-bold text-sm">
+                <Layers className="w-4 h-4 text-amber-400" />
+                <span>Interactive Buttons</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Button size="sm" variant="primary">Primary AWS</Button>
+                <Button size="sm" variant="secondary">Secondary</Button>
+                <Button size="sm" variant="outline">Outline</Button>
+                <Button size="sm" variant="ghost">Ghost</Button>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-normal">
+                Features micro-interaction hover transforms, active click scaling, and glowing shadow accents.
+              </p>
+            </div>
+
+            {/* Badges & Tags */}
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 space-y-4">
+              <div className="flex items-center gap-2 text-white font-bold text-sm">
+                <Sparkles className="w-4 h-4 text-amber-400" />
+                <span>Badge Hierarchy</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2.5 pt-2">
+                <Badge variant="orange" size="md">AWS Cloud</Badge>
+                <Badge variant="blue" size="md">Innovation</Badge>
+                <Badge variant="slate" size="md">Community</Badge>
+                <Badge variant="outline" size="md">PITS 2026</Badge>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-normal">
+                Engineered for quick categorical identification, accessibility, and high visual contrast.
+              </p>
+            </div>
+          </div>
+
+          {/* Architecture & Rendering Specifications */}
+          <div className="rounded-3xl border border-slate-800 bg-slate-950/80 p-6 sm:p-8 space-y-4">
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+              Application Frontend Technology Stack
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+                <span className="text-amber-400 font-bold block">Next.js 16 + React 19</span>
+                <p className="text-slate-400 text-[11px]">Server and Client Components with modern metadata API and fluid routing.</p>
+              </div>
+              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+                <span className="text-sky-400 font-bold block">Tailwind CSS v4</span>
+                <p className="text-slate-400 text-[11px]">Dynamic token theme engine, glassmorphism filters, and smooth CSS transitions.</p>
+              </div>
+              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+                <span className="text-emerald-400 font-bold block">Fast Zero-DB Store</span>
+                <p className="text-slate-400 text-[11px]">Instant, zero-friction client &amp; server store with full mock responsiveness.</p>
+              </div>
+            </div>
           </div>
         </div>
       )}

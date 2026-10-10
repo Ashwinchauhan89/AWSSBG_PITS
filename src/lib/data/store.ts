@@ -20,7 +20,7 @@ interface StoreState {
   resources: LearningResource[];
   applications: CoreTeamApplication[];
   contacts: ContactSubmission[];
-  storageType: "development-mock" | "postgres";
+  storageType: "in-memory";
 }
 
 // Initial sample applications so admin dashboard isn't completely empty on first launch
@@ -91,7 +91,6 @@ declare global {
 
 function getStore(): StoreState {
   if (!globalThis.__SBG_STORE__) {
-    const isDbConnected = Boolean(process.env.DATABASE_URL);
     globalThis.__SBG_STORE__ = {
       team: [...INITIAL_TEAM_MEMBERS],
       events: [...INITIAL_EVENTS],
@@ -99,15 +98,15 @@ function getStore(): StoreState {
       resources: [...INITIAL_RESOURCES],
       applications: [...SAMPLE_APPLICATIONS],
       contacts: [...SAMPLE_CONTACTS],
-      storageType: isDbConnected ? "postgres" : "development-mock",
+      storageType: "in-memory",
     };
   }
   return globalThis.__SBG_STORE__;
 }
 
 export const dbService = {
-  isConfigured: () => Boolean(process.env.DATABASE_URL),
-  getStorageMode: () => getStore().storageType,
+  isConfigured: () => true,
+  getStorageMode: () => "in-memory" as const,
 
   // Applications
   getApplications: async (): Promise<CoreTeamApplication[]> => {

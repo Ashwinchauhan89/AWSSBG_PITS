@@ -248,7 +248,7 @@ export const INITIAL_PROJECTS: StudentProject[] = [
     description:
       "An open-source ATS and portfolio builder designed for engineering students to benchmark technical skills, track internship applications, and host dynamic resumes.",
     category: "Web Development",
-    techStack: ["Next.js", "PostgreSQL", "Prisma", "Tailwind CSS", "AWS Amplify"],
+    techStack: ["Next.js", "Tailwind CSS", "TypeScript", "AWS Amplify", "DynamoDB"],
     contributors: ["Full Stack Builders"],
     githubUrl: "https://github.com",
     featured: true,

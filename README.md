@@ -23,11 +23,11 @@ Official web platform for the **AWS Student Builder Group (SBG)** at **Prashanti
 ## 🛠️ Technology Stack
 
 - **Framework**: [Next.js](https://nextjs.org/) (App Router, Server & Client Components) with TypeScript
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with custom AWS-inspired palette (Navy surface `#090D16`, AWS Orange `#FF9900`)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with curated AWS Builder Dark Theme (Deep Navy `#090D16`, AWS Orange `#FF9900`, Cyber Sky `#38BDF8`)
 - **Icons**: [Lucide React](https://lucide.dev/) + Custom SVG Brand Icons (`@/components/ui/Icons`)
 - **Forms & Validation**: [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
 - **Feedback & Notifications**: [Sonner](https://sonner.emilkowal.ski/) toast system
-- **Database Architecture**: [Prisma ORM](https://www.prisma.io/) with PostgreSQL schema + resilient in-memory development fallback engine
+- **Architecture**: 100% Frontend-focused with instant, zero-database serverless mock store for seamless local and production deployments
 
 ---
 
@@ -41,7 +41,6 @@ cp .env.example .env.local
 
 | Variable | Description | Example / Default |
 |---|---|---|
-| `DATABASE_URL` | PostgreSQL connection string (Optional in development) | `postgresql://user:pass@localhost:5432/awssbg_pits` |
 | `ADMIN_SECRET_KEY` | Passkey for `/admin` management portal | `pits-sbg-admin2026` |
 | `NEXT_PUBLIC_APP_URL` | Base canonical domain for SEO / OpenGraph | `http://localhost:3000` |
 | `NEXT_PUBLIC_WHATSAPP_URL`| Official WhatsApp community invite link | `https://chat.whatsapp.com/EYN9G6KJxfy66GQ3gTgR13` |
@@ -76,32 +75,9 @@ npm run lint
 
 ---
 
-## 🗄️ Database & Prisma Setup
-
-The platform includes a complete Prisma schema located in `prisma/schema.prisma` covering:
-- `TeamMember`
-- `Event`
-- `Project`
-- `Resource`
-- `CoreTeamApplication`
-- `ContactSubmission`
-- `AdminUser`
-
-### Connecting PostgreSQL:
-1. Provide a valid `DATABASE_URL` in `.env.local`.
-2. Generate the client and apply migrations:
-   ```bash
-   npx prisma migrate dev --name init
-   npx prisma generate
-   ```
-
-*Note: In environments where a live PostgreSQL instance is not yet provisioned, the application seamlessly activates its in-memory storage fallback without crashing or faking persistent states.*
-
----
-
-## 🚀 Deploying to Vercel
+## 🚀 Deploying to Vercel or AWS Amplify
 
 1. Push your repository to GitHub.
-2. Import the project into the [Vercel Dashboard](https://vercel.com/new).
-3. Set the environment variables in Vercel Project Settings (`DATABASE_URL`, `ADMIN_SECRET_KEY`, `NEXT_PUBLIC_APP_URL`).
-4. Deploy! Vercel automatically runs `npm run build` and optimizes static assets and serverless route handlers.
+2. Import the project into [Vercel](https://vercel.com/new) or [AWS Amplify](https://aws.amazon.com/amplify/).
+3. Set the environment variables (`ADMIN_SECRET_KEY`, `NEXT_PUBLIC_APP_URL`).
+4. Deploy! The frontend builds smoothly with zero database setup required.
