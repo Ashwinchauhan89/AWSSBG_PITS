@@ -20,6 +20,9 @@ export const metadata = {
     "Learn about the mission, values, and student-led initiatives of the AWS Student Builder Group at Prashanti Institute of Technology & Science, Ujjain.",
 };
 
+
+
+
 const PILLARS = [
   {
     icon: BookOpen,
