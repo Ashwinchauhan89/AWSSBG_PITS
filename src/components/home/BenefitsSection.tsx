@@ -53,29 +53,29 @@ export function BenefitsSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] volumetric-glow pointer-events-none -z-10" />
       <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="responsive-container">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-semibold tracking-wider uppercase">
             <span>CAMPUS ADVANTAGES</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+          <h2 className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-white tracking-tight uppercase">
             Engineered For <br />
             <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-sky-400 bg-clip-text text-transparent">
               Student Builders
             </span>
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+          <p className="text-slate-300 text-xs sm:text-base 3xl:text-lg leading-relaxed font-light">
             Whether you are in your 1st year taking your first programming steps or in your final year preparing for campus placements, the AWS Student Builder Group provides the community, sandboxes, and guidance to grow.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 3xl:gap-8">
           {BENEFITS.map((b, idx) => {
             const Icon = b.icon;
             return (
               <div
                 key={idx}
-                className="cinematic-glass cinematic-glass-hover rounded-3xl p-7 border border-white/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 group"
+                className="cinematic-glass cinematic-glass-hover rounded-3xl p-5 sm:p-7 3xl:p-8 border border-white/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 group"
               >
                 <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center mb-5 shadow-lg shadow-orange-500/20">
                   <Icon className="w-6 h-6" />

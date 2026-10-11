@@ -32,6 +32,9 @@
   --color-aws-navy-border: var(--aws-navy-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --breakpoint-xs: 380px;
+  --breakpoint-3xl: 1920px;
+  --breakpoint-4xl: 2560px;
 }
 
 * {
@@ -41,6 +44,8 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -48,7 +53,87 @@ body {
   color: #f5f7fa;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
+  max-width: 100vw;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Master Responsive Container for Mobile, Tablets, Laptops & LED Displays */
+.responsive-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* On small and medium laptops (1280px+), safe padding ensures floating side rails never overlap content */
+@media (min-width: 1280px) {
+  .responsive-container {
+    padding-left: 5.5rem;
+    padding-right: 5.5rem;
+    max-width: 1400px;
+  }
+}
+
+/* On 2K / large desktop (1536px+) */
+@media (min-width: 1536px) {
+  .responsive-container {
+    padding-left: 6.5rem;
+    padding-right: 6.5rem;
+    max-width: 1600px;
+  }
+}
+
+/* On Ultra-wide & 1080p+ LED displays (1920px+) */
+@media (min-width: 1920px) {
+  .responsive-container {
+    padding-left: 8rem;
+    padding-right: 8rem;
+    max-width: 1860px;
+  }
+}
+
+/* On 4K & Big LED Walls (2560px+) */
+@media (min-width: 2560px) {
+  .responsive-container {
+    padding-left: 10rem;
+    padding-right: 10rem;
+    max-width: 2280px;
+  }
+}
+
+/* Touch device optimization & mobile usability */
+@media (max-width: 639px) {
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+  }
+
+  /* Prevent iOS automatic zoom by ensuring form controls have at least 16px font-size */
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="url"],
+  input[type="password"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
 ::selection {

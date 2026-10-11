@@ -152,27 +152,27 @@ export function DomainsSection() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[400px] volumetric-glow pointer-events-none -z-10" />
       <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="responsive-container">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-mono font-semibold tracking-wider uppercase">
             <span>SECTION 02 • EXPLORE TECHNOLOGY</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+          <h2 className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-white tracking-tight uppercase">
             Six Pillars of <br />
             <span className="bg-gradient-to-r from-sky-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">
               Futuristic Engineering
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto font-light">
+          <p className="text-xs sm:text-base 3xl:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto font-light">
             Each track provides structured hands-on milestones, from fundamental concepts to production-grade deployments on the AWS Cloud.
           </p>
         </div>
 
         {/* Large Immersive Panels Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 3xl:gap-8">
           {TECH_TRACKS.map((track) => {
             const Icon = track.icon;
 
@@ -180,7 +180,7 @@ export function DomainsSection() {
               <div
                 key={track.id}
                 onMouseEnter={playHover}
-                className={`group gsap-domain-card relative rounded-3xl border border-white/10 bg-gradient-to-b ${track.gradient} p-7 backdrop-blur-xl transition-all duration-300 ${track.borderGlow} hover:-translate-y-1 hud-corner`}
+                className={`group gsap-domain-card relative rounded-3xl border border-white/10 bg-gradient-to-b ${track.gradient} p-5 sm:p-7 3xl:p-8 backdrop-blur-xl transition-all duration-300 ${track.borderGlow} hover:-translate-y-1 hud-corner`}
               >
                 {/* Header row: Icon, Number, Badge */}
                 <div className="flex items-center justify-between mb-5">

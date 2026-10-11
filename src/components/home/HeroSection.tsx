@@ -1,12 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import { Sparkles, Calendar, ArrowRight, ChevronDown, ShieldCheck, Clock, Zap, Radio } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Calendar, ChevronDown, Sparkles, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { CinematicHeroCanvas } from "./CinematicHeroCanvas";
-import { CentralCloudFocalPoint } from "./CentralCloudFocalPoint";
 import { GsapMagnetic } from "@/components/gsap/GsapMagnetic";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useSound } from "@/components/audio/SoundManager";
@@ -15,60 +14,34 @@ export function HeroSection() {
   const heroRef = useRef<HTMLElement | null>(null);
   const { playHover, playClick } = useSound();
 
-  // Festival Countdown to Summit
-  const [timeLeft, setTimeLeft] = useState({
-    days: 48,
-    hours: 14,
-    minutes: 32,
-    seconds: 15,
-  });
-
-  useEffect(() => {
-    // Target date: Dec 16, 2026 (matching tech festival season)
-    const target = new Date("2026-12-16T09:00:00+05:30").getTime();
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const diff = Math.max(0, target - now);
-
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-      setTimeLeft({ days: d, hours: h, minutes: m, seconds: s });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   useGSAP(
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       tl.from(".gsap-hero-eyebrow", {
-        y: -25,
+        y: -20,
         opacity: 0,
         duration: 0.8,
-        letterSpacing: "0.3em",
+        letterSpacing: "0.25em",
       })
         .from(
           ".gsap-hero-title",
           {
-            scale: 0.94,
+            scale: 0.9,
             y: 40,
             opacity: 0,
-            duration: 1.1,
+            duration: 1.2,
             ease: "power4.out",
           },
-          "-=0.5"
+          "-=0.4"
         )
         .from(
-          ".gsap-hero-focal",
+          ".gsap-hero-flourish",
           {
-            scale: 0.8,
+            scaleX: 0,
             opacity: 0,
             duration: 1.0,
-            ease: "back.out(1.4)",
+            ease: "power2.out",
           },
           "-=0.8"
         )
@@ -79,25 +52,16 @@ export function HeroSection() {
             opacity: 0,
             duration: 0.7,
           },
-          "-=0.6"
+          "-=0.5"
         )
         .from(
           ".gsap-hero-desc",
           {
             y: 20,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.8,
           },
           "-=0.5"
-        )
-        .from(
-          ".gsap-hero-ticker",
-          {
-            y: 15,
-            opacity: 0,
-            duration: 0.6,
-          },
-          "-=0.4"
         )
         .from(
           ".gsap-hero-cta",
@@ -108,7 +72,7 @@ export function HeroSection() {
             stagger: 0.12,
             ease: "back.out(1.5)",
           },
-          "-=0.3"
+          "-=0.4"
         )
         .from(
           ".gsap-hero-scroll",
@@ -136,86 +100,82 @@ export function HeroSection() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 lg:px-8 pt-16 pb-8 overflow-hidden select-none"
+      className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-between items-center text-center px-3 sm:px-6 lg:px-8 xl:px-24 2xl:px-32 pt-6 sm:pt-10 pb-6 sm:pb-8 overflow-hidden select-none"
     >
-      {/* 1. Cinematic 3D Celestial Vortex Canvas Background */}
-      <CinematicHeroCanvas />
-
-      {/* 2. Atmospheric Ambient Light Cones & Technical Grid */}
-      <div className="absolute inset-0 bg-radial-vignette pointer-events-none -z-10" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[500px] volumetric-glow pointer-events-none -z-10" />
-      <div className="absolute inset-0 tech-grid opacity-25 pointer-events-none -z-10" />
+      {/* 1. Cinematic Panoramic Festival Backdrop Image (Matching reference screenshot) */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/cinematic_hero_bg.jpg"
+          alt="AWS Student Builder Group Tech Festival Citadel"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center scale-105"
+        />
+        {/* Cinematic Atmospheric Darkening Overlays for crisp readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080A0F] via-[#080A0F]/65 to-[#080A0F]/55" />
+        <div className="absolute inset-0 bg-radial-vignette opacity-85" />
+        <div className="absolute inset-0 tech-grid opacity-15" />
+      </div>
 
       {/* Top spacing */}
-      <div className="w-full h-2" />
+      <div className="w-full h-1 sm:h-2" />
 
-      {/* Central Content Column */}
-      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center my-auto py-6 space-y-6 sm:space-y-8">
-        {/* Eyebrow Label & Festival Edition Badge */}
-        <div className="gsap-hero-eyebrow flex flex-wrap items-center justify-center gap-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#101A2C]/90 border border-sky-400/40 text-[10px] sm:text-xs font-mono font-semibold tracking-[0.2em] text-sky-400 uppercase shadow-lg shadow-sky-500/10 backdrop-blur-md">
-            <Radio className="w-3 h-3 text-sky-400 animate-pulse" />
-            <span>PRASHANTI INSTITUTE OF TECHNOLOGY &amp; SCIENCE</span>
-          </div>
-
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF9900]/15 border border-[#FF9900]/40 text-[10px] font-mono font-bold tracking-wider text-[#FF9900] uppercase shadow-lg shadow-[#FF9900]/15 backdrop-blur-md">
-            <Zap className="w-3 h-3 text-[#FF9900]" />
-            <span>2026 EDITION // UJJAIN</span>
-          </div>
+      {/* 2. Main Centered Festival Content Column (Exact layout from reference screenshot) */}
+      <div className="relative z-10 max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl mx-auto flex flex-col items-center my-auto py-4 sm:py-8 space-y-4 sm:space-y-6 md:space-y-8 w-full">
+        {/* Eyebrow Institutional Credit */}
+        <div className="gsap-hero-eyebrow inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#080A0F]/80 border border-white/20 text-[7.5px] xs:text-[10px] sm:text-xs font-mono font-bold tracking-[0.1em] xs:tracking-[0.18em] sm:tracking-[0.25em] text-slate-300 uppercase shadow-xl backdrop-blur-md max-w-[95%]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FF9900] animate-ping shrink-0" />
+          <span className="truncate">PRASHANTI INSTITUTE OF TECHNOLOGY &amp; SCIENCE • UJJAIN</span>
         </div>
 
-        {/* Central Cloud / Technological Focal Point */}
-        <div className="gsap-hero-focal -my-4 sm:-my-2">
-          <CentralCloudFocalPoint />
-        </div>
-
-        {/* Main Title (Monumental Cinematic Typography) */}
-        <div className="space-y-3">
-          <h1 className="gsap-hero-title text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase text-glow drop-shadow-[0_0_50px_rgba(255,153,0,0.4)] leading-[1.04]">
-            AWS STUDENT <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">
-              BUILDER GROUP
-            </span>
+        {/* Dramatic Ornate Monumental Title with Flourishing Calligraphy Swoosh */}
+        <div className="relative flex flex-col items-center w-full px-2">
+          <h1 className="gsap-hero-title text-[2.75rem] xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[10rem] 3xl:text-[12rem] 4xl:text-[14rem] font-serif font-black tracking-tight xs:tracking-wide sm:tracking-wider text-white uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)] leading-[0.95] max-w-full">
+            BUILDERS
           </h1>
 
-          {/* Hero Headline */}
-          <p className="gsap-hero-headline text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-amber-300 to-orange-400">
-            Build. Learn. Innovate.
-          </p>
+          {/* Calligraphic Flourish Underline Swoosh (Responsive scaling) */}
+          <div className="gsap-hero-flourish w-full max-w-[240px] xs:max-w-xs sm:max-w-xl md:max-w-2xl 2xl:max-w-3xl 3xl:max-w-4xl -mt-2 xs:-mt-4 sm:-mt-6 relative pointer-events-none">
+            <svg
+              viewBox="0 0 600 80"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-auto drop-shadow-[0_2px_12px_rgba(255,153,0,0.6)]"
+            >
+              {/* Ornate Calligraphy Swoosh Path */}
+              <path
+                d="M 60 15 C 140 -5, 220 5, 300 25 C 380 45, 480 50, 540 35 C 570 25, 530 45, 440 55 C 320 68, 160 62, 50 48 C 20 44, 40 30, 90 28 C 170 25, 350 42, 520 38"
+                stroke="url(#flourishGrad)"
+                strokeWidth="3.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="opacity-95"
+              />
+              <circle cx="520" cy="38" r="3.5" fill="#FF9900" />
+              <defs>
+                <linearGradient id="flourishGrad" x1="0" y1="0" x2="600" y2="80" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#F5F7FA" />
+                  <stop offset="0.5" stopColor="#FF9900" />
+                  <stop offset="1" stopColor="#43B7FF" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
 
-          {/* Supporting Description */}
-          <p className="gsap-hero-desc text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
-            Where student developers explore cloud technology, build intelligent applications, and turn ideas into real-world projects.
+          {/* Sub-headline: AWS Student Builder Group */}
+          <p className="gsap-hero-headline mt-1 text-[11px] xs:text-sm sm:text-xl md:text-2xl 3xl:text-3xl font-mono font-bold tracking-[0.1em] sm:tracking-[0.2em] text-[#FF9900] uppercase">
+            AWS STUDENT BUILDER GROUP
           </p>
         </div>
 
-        {/* Festival Summit Countdown Live Ticker */}
-        <div className="gsap-hero-ticker inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-[#101A2C]/80 border border-white/10 backdrop-blur-md shadow-lg">
-          <div className="flex items-center gap-1.5 text-xs font-mono text-[#FF9900] font-bold">
-            <Clock className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "12s" }} />
-            <span className="uppercase tracking-wider text-[11px]">FLAGSHIP SUMMIT:</span>
-          </div>
-          <div className="flex items-center gap-2 font-mono text-xs sm:text-sm font-black text-white">
-            <span className="bg-[#080A0F] px-2 py-0.5 rounded border border-white/10 text-amber-400">
-              {String(timeLeft.days).padStart(2, "0")}d
-            </span>
-            <span className="text-white/30">:</span>
-            <span className="bg-[#080A0F] px-2 py-0.5 rounded border border-white/10 text-sky-400">
-              {String(timeLeft.hours).padStart(2, "0")}h
-            </span>
-            <span className="text-white/30">:</span>
-            <span className="bg-[#080A0F] px-2 py-0.5 rounded border border-white/10 text-slate-200">
-              {String(timeLeft.minutes).padStart(2, "0")}m
-            </span>
-            <span className="text-white/30">:</span>
-            <span className="bg-[#080A0F] px-2 py-0.5 rounded border border-white/10 text-[#FF9900]">
-              {String(timeLeft.seconds).padStart(2, "0")}s
-            </span>
-          </div>
-        </div>
+        {/* Supporting Editorial Description */}
+        <p className="gsap-hero-desc text-xs sm:text-base md:text-lg 3xl:text-xl text-slate-200 max-w-2xl 3xl:max-w-3xl mx-auto leading-relaxed font-light drop-shadow-md px-2 sm:px-0">
+          The AWS Student Builder Group at Prashanti Institute of Technology &amp; Science serves as a powerful intellectual platform where student innovators explore cloud computing, build intelligent applications, and turn visionary ideas into real-world projects.
+        </p>
 
-        {/* Primary and Secondary Calls to Action */}
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+        {/* Dual CTAs (Responsive stacking) */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto pt-2">
           <GsapMagnetic className="gsap-hero-cta w-full sm:w-auto" strength={0.3}>
             <a
               href="#community"
@@ -225,7 +185,7 @@ export function HeroSection() {
             >
               <Button
                 size="lg"
-                className="w-full sm:w-auto gap-2.5 px-8 py-4 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-2xl shadow-orange-500/35 border-0 transition-transform active:scale-95"
+                className="w-full sm:w-auto gap-2.5 px-6 sm:px-8 py-3.5 rounded-full font-mono font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-2xl shadow-orange-500/40 border-0 transition-transform active:scale-95"
               >
                 <span>EXPLORE THE COMMUNITY</span>
                 <ArrowRight className="w-4 h-4" />
@@ -243,36 +203,36 @@ export function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto gap-2.5 px-8 py-4 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider border-sky-400/50 text-sky-300 hover:bg-sky-400/10 hover:border-sky-400 transition-colors backdrop-blur-md shadow-lg shadow-sky-500/10"
+                className="w-full sm:w-auto gap-2.5 px-6 sm:px-8 py-3.5 rounded-full font-mono font-bold text-xs uppercase tracking-wider border-white/30 text-white hover:bg-white/10 hover:border-white transition-colors backdrop-blur-md shadow-lg"
               >
-                <Calendar className="w-4 h-4 text-sky-400" />
-                <span>UPCOMING EVENTS</span>
+                <Calendar className="w-4 h-4 text-[#FF9900]" />
+                <span>UPCOMING WORKSHOPS</span>
               </Button>
             </Link>
           </GsapMagnetic>
         </div>
 
-        {/* Clear Educational Disclaimer */}
-        <div className="flex items-center justify-center gap-2 text-[11px] font-mono text-slate-400 pt-1">
-          <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span>Student-led educational community • Independent campus chapter</span>
+        {/* Disclaimer Notice */}
+        <div className="flex items-center justify-center gap-2 text-[10px] sm:text-[11px] font-mono text-slate-400 pt-1">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#FF9900] shrink-0" />
+          <span>Independent student-led campus community • Not official AWS corporate site</span>
         </div>
       </div>
 
-      {/* Subtle Animated Scroll Indicator */}
+      {/* 3. Subtle Animated Scroll Indicator */}
       <div className="gsap-hero-scroll relative z-10 flex flex-col items-center gap-1.5 pt-4 text-[10px] font-mono tracking-[0.25em] text-slate-400 uppercase">
         <a
           href="#community"
           onClick={handleScrollToCommunity}
           onMouseEnter={playHover}
-          className="group flex flex-col items-center gap-1 hover:text-amber-400 transition-colors"
+          className="group flex flex-col items-center gap-1 hover:text-[#FF9900] transition-colors"
           aria-label="Scroll to explore"
         >
           <span>SCROLL TO EXPLORE</span>
-          <div className="w-5 h-8 rounded-full border border-white/20 group-hover:border-amber-400/60 flex items-start justify-center p-1 transition-colors">
-            <span className="w-1 h-2 rounded-full bg-amber-400 animate-bounce" />
+          <div className="w-5 h-8 rounded-full border border-white/20 group-hover:border-[#FF9900]/60 flex items-start justify-center p-1 transition-colors">
+            <span className="w-1 h-2 rounded-full bg-[#FF9900] animate-bounce" />
           </div>
-          <ChevronDown className="w-3.5 h-3.5 text-amber-400 animate-pulse -mt-0.5" />
+          <ChevronDown className="w-3.5 h-3.5 text-[#FF9900] animate-pulse -mt-0.5" />
         </a>
       </div>
     </section>

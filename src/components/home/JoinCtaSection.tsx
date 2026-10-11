@@ -11,8 +11,8 @@ export function JoinCtaSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-to-tr from-amber-500/15 via-orange-500/10 to-sky-500/15 blur-3xl pointer-events-none -z-10" />
       <div className="absolute inset-0 tech-grid opacity-25 pointer-events-none -z-10" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div className="hud-corner rounded-3xl border border-amber-500/40 bg-gradient-to-b from-[#101A2C]/90 via-[#080A0F]/95 to-[#101A2C]/90 p-8 sm:p-16 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
+      <div className="responsive-container text-center relative z-10">
+        <div className="hud-corner rounded-3xl border border-amber-500/40 bg-gradient-to-b from-[#101A2C]/90 via-[#080A0F]/95 to-[#101A2C]/90 p-6 sm:p-16 3xl:p-20 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
           {/* Subtle Ambient Scanline Effect */}
           <div className="absolute inset-0 bg-radial-vignette opacity-40 pointer-events-none" />
 
@@ -23,14 +23,14 @@ export function JoinCtaSection() {
           </div>
 
           {/* Prompt Headline: Your Next Big Idea Starts Here. */}
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-[1.08] max-w-3xl mx-auto text-glow drop-shadow-[0_0_35px_rgba(255,153,0,0.3)]">
+          <h2 className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl 3xl:text-7xl font-black text-white tracking-tight uppercase leading-[1.08] max-w-3xl 3xl:max-w-4xl mx-auto text-glow drop-shadow-[0_0_35px_rgba(255,153,0,0.3)]">
             Your Next Big Idea <br />
             <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-sky-400 bg-clip-text text-transparent">
               Starts Here.
             </span>
           </h2>
 
-          <p className="mt-5 text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="mt-4 sm:mt-5 text-xs sm:text-base md:text-lg 3xl:text-xl text-slate-300 max-w-2xl 3xl:max-w-3xl mx-auto leading-relaxed font-light">
             Connect with student developers, access hands-on AWS sandbox workshops, receive project mentoring, and build cloud-native applications at Prashanti Institute of Technology &amp; Science.
           </p>
 

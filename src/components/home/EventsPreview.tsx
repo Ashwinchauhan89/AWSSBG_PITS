@@ -39,22 +39,22 @@ export function EventsPreview() {
 
   return (
     <section id="events" ref={sectionRef} className="py-20 border-b border-slate-800/80 bg-slate-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="responsive-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">
             <Badge variant="orange" size="md">
               Upcoming Activities
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl 3xl:text-5xl font-extrabold text-white tracking-tight">
               Workshops, Hackathons &amp; Labs
             </h2>
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
               Join peer-led technical bootcamps, hands-on cloud labs, and architecture reviews at Prashanti Institute of Technology &amp; Science.
             </p>
           </div>
           <GsapMagnetic strength={0.25}>
-            <Link href="/events">
-              <Button variant="secondary" size="md" className="gap-2 shrink-0">
+            <Link href="/events" className="w-full sm:w-auto">
+              <Button variant="secondary" size="md" className="gap-2 shrink-0 w-full sm:w-auto">
                 <span>View All Events</span>
                 <ArrowRight className="w-4 h-4" />
               </Button>
@@ -62,7 +62,7 @@ export function EventsPreview() {
           </GsapMagnetic>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {upcomingEvents.map((event) => (
             <div
               key={event.id}

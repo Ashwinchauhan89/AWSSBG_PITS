@@ -66,7 +66,7 @@ export function CommunityMissionSection() {
       <div className="absolute top-0 right-1/4 w-[600px] h-[350px] volumetric-blue-glow pointer-events-none -z-10" />
       <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="responsive-container">
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-semibold tracking-wider uppercase">
@@ -74,18 +74,18 @@ export function CommunityMissionSection() {
             <span>SECTION 01 • THE COMMUNITY</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+          <h2 className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-white tracking-tight uppercase">
             Build Beyond Limits. <br />
             <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-sky-400 bg-clip-text text-transparent">
               Learn Without Boundaries.
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light max-w-3xl mx-auto pt-2">
+          <p className="text-sm sm:text-lg 3xl:text-xl text-slate-300 leading-relaxed font-light max-w-3xl 3xl:max-w-4xl mx-auto pt-2">
             Explore cloud computing, artificial intelligence, machine learning, and modern software development through hands-on learning, technical workshops, and collaborative innovation.
           </p>
 
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3 text-xs font-mono text-slate-400">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs font-mono text-slate-400">
             <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#101A2C]/80 border border-white/10">
               <Users className="w-3.5 h-3.5 text-amber-400" />
               <span>Group Leader: <strong>{COMMUNITY_INFO.leaderName}</strong></span>
@@ -98,49 +98,49 @@ export function CommunityMissionSection() {
         </div>
 
         {/* Community Mission Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-8 border border-white/10 relative overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-6 sm:p-8 3xl:p-10 border border-white/10 relative overflow-hidden">
             <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20">
               <Sparkles className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">
               Hands-On Cloud Labs
             </h3>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               We replace abstract slides with live AWS environments. Students deploy microservices on EC2, configure S3 static assets, and run serverless functions with zero friction.
             </p>
           </div>
 
-          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-8 border border-white/10 relative overflow-hidden">
+          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-6 sm:p-8 3xl:p-10 border border-white/10 relative overflow-hidden">
             <div className="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-500/30 text-sky-400 flex items-center justify-center mb-6 shadow-lg shadow-sky-500/20">
               <Award className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">
               AI &amp; Generative Mastery
             </h3>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Dive deep into Amazon Bedrock, SageMaker pipelines, and Retrieval-Augmented Generation (RAG). Learn to connect enterprise-grade LLMs to real campus applications.
             </p>
           </div>
 
-          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-8 border border-white/10 relative overflow-hidden">
+          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-6 sm:p-8 3xl:p-10 border border-white/10 relative overflow-hidden md:col-span-2 lg:col-span-1">
             <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/20">
               <Users className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">
               Collaborative Innovation
             </h3>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Build resume-defining portfolio projects in multi-disciplinary student teams. Participate in campus hackathons, code reviews, and peer architecture sessions.
             </p>
           </div>
         </div>
 
         {/* Verified Community Metrics with Counters */}
-        <div className="hud-corner rounded-3xl border border-white/10 bg-[#101A2C]/60 p-8 sm:p-10 backdrop-blur-xl shadow-2xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
-            <div className="pt-4 md:pt-0">
-              <div ref={metric1Ref} className="text-3xl sm:text-5xl font-black text-amber-400 font-mono tracking-tight">
+        <div className="hud-corner rounded-3xl border border-white/10 bg-[#101A2C]/60 p-5 sm:p-10 backdrop-blur-xl shadow-2xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 text-center">
+            <div className="p-4 sm:p-6 rounded-2xl bg-[#080A0F]/70 border border-white/5 flex flex-col justify-center">
+              <div ref={metric1Ref} className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-amber-400 font-mono tracking-tight">
                 0%
               </div>
               <p className="text-xs sm:text-sm font-medium text-slate-300 mt-2">
@@ -149,8 +149,8 @@ export function CommunityMissionSection() {
               <p className="text-[10px] text-slate-400 font-mono mt-0.5">Community Driven</p>
             </div>
 
-            <div className="pt-4 md:pt-0">
-              <div ref={metric2Ref} className="text-3xl sm:text-5xl font-black text-white font-mono tracking-tight">
+            <div className="p-4 sm:p-6 rounded-2xl bg-[#080A0F]/70 border border-white/5 flex flex-col justify-center">
+              <div ref={metric2Ref} className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-white font-mono tracking-tight">
                 00
               </div>
               <p className="text-xs sm:text-sm font-medium text-slate-300 mt-2">
@@ -159,8 +159,8 @@ export function CommunityMissionSection() {
               <p className="text-[10px] text-slate-400 font-mono mt-0.5">Cloud, AI, DevOps &amp; Web</p>
             </div>
 
-            <div className="pt-4 md:pt-0">
-              <div ref={metric3Ref} className="text-3xl sm:text-5xl font-black text-sky-400 font-mono tracking-tight">
+            <div className="p-4 sm:p-6 rounded-2xl bg-[#080A0F]/70 border border-white/5 flex flex-col justify-center">
+              <div ref={metric3Ref} className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-sky-400 font-mono tracking-tight">
                 0+
               </div>
               <p className="text-xs sm:text-sm font-medium text-slate-300 mt-2">
@@ -169,8 +169,8 @@ export function CommunityMissionSection() {
               <p className="text-[10px] text-slate-400 font-mono mt-0.5">Planned Curriculum</p>
             </div>
 
-            <div className="pt-4 md:pt-0">
-              <div ref={metric4Ref} className="text-3xl sm:text-5xl font-black text-emerald-400 font-mono tracking-tight">
+            <div className="p-4 sm:p-6 rounded-2xl bg-[#080A0F]/70 border border-white/5 flex flex-col justify-center">
+              <div ref={metric4Ref} className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-emerald-400 font-mono tracking-tight">
                 0/7
               </div>
               <p className="text-xs sm:text-sm font-medium text-slate-300 mt-2">

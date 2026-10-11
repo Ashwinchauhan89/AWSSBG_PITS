@@ -10,31 +10,31 @@ export function TeamPreview() {
 
   return (
     <section id="team" className="py-20 border-b border-slate-800/80 bg-slate-950 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="responsive-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">
             <Badge variant="orange" size="md">
               Leadership &amp; Core Team
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl 3xl:text-5xl font-extrabold text-white tracking-tight">
               Community Leads &amp; Coordinators
             </h2>
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
               Meet our student leadership team driving cloud literacy, technical workshops, and developer mentoring at Prashanti Institute of Technology &amp; Science.
             </p>
           </div>
-          <Link href="/team">
-            <Button variant="secondary" size="md" className="gap-2 shrink-0">
+          <Link href="/team" className="w-full sm:w-auto">
+            <Button variant="secondary" size="md" className="gap-2 shrink-0 w-full sm:w-auto">
               <span>View Full Directory</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           {/* Confirmed Group Leader Card */}
           {leader && (
-            <div className="lg:col-span-5 rounded-3xl border border-amber-500/40 bg-gradient-to-b from-amber-500/10 via-slate-900/90 to-slate-950 p-8 backdrop-blur-md shadow-2xl relative flex flex-col justify-between">
+            <div className="lg:col-span-5 rounded-3xl border border-amber-500/40 bg-gradient-to-b from-amber-500/10 via-slate-900/90 to-slate-950 p-6 sm:p-8 backdrop-blur-md shadow-2xl relative flex flex-col justify-between">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <Badge variant="orange" size="md" className="font-bold">

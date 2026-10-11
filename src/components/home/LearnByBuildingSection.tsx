@@ -155,7 +155,7 @@ export function LearnByBuildingSection() {
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] volumetric-glow pointer-events-none -z-10" />
       <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="responsive-container">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-semibold tracking-wider uppercase">
@@ -163,20 +163,20 @@ export function LearnByBuildingSection() {
             <span>SECTION 03 • LEARN BY BUILDING</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+          <h2 className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-white tracking-tight uppercase">
             Engineering By Practice, <br />
             <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-sky-400 bg-clip-text text-transparent">
               Not Theory Alone
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
+          <p className="text-xs sm:text-base 3xl:text-lg text-slate-300 leading-relaxed font-light">
             Our philosophy is simple: the deepest learning happens when you launch, break, debug, and ship real cloud architectures with your peers.
           </p>
         </div>
 
         {/* 4 Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
           {PILLARS.map((p, i) => {
             const Icon = p.icon;
             return (

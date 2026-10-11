@@ -39,22 +39,22 @@ export function ProjectsPreview() {
 
   return (
     <section id="projects" ref={sectionRef} className="py-20 border-b border-slate-800/80 bg-slate-900/40 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="responsive-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">
             <Badge variant="blue" size="md">
               Student Innovations
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl 3xl:text-5xl font-extrabold text-white tracking-tight">
               Built by Students, Powered by Cloud
             </h2>
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
               Explore real-world applications engineered by student developers at PITS Ujjain using AWS cloud architecture and modern frameworks.
             </p>
           </div>
           <GsapMagnetic strength={0.25}>
-            <Link href="/projects">
-              <Button variant="secondary" size="md" className="gap-2 shrink-0">
+            <Link href="/projects" className="w-full sm:w-auto">
+              <Button variant="secondary" size="md" className="gap-2 shrink-0 w-full sm:w-auto">
                 <span>Explore All Projects</span>
                 <ArrowRight className="w-4 h-4" />
               </Button>
@@ -62,7 +62,7 @@ export function ProjectsPreview() {
           </GsapMagnetic>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProjects.map((project) => (
             <div
               key={project.id}

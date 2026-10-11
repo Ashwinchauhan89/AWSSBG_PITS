@@ -4,12 +4,12 @@ import { COMMUNITY_INFO } from "@/lib/data/initialData";
 
 export function CommunityBanner() {
   return (
-    <div className="relative z-40 bg-gradient-to-r from-slate-950 via-amber-950/40 to-slate-950 border-b border-amber-500/20 text-xs py-2 px-4 text-slate-300">
-      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+    <div className="relative z-40 bg-gradient-to-r from-slate-950 via-amber-950/40 to-slate-950 border-b border-amber-500/20 text-[11px] sm:text-xs py-2 px-3 sm:px-4 text-slate-300">
+      <div className="max-w-7xl 2xl:max-w-[1500px] 3xl:max-w-[1800px] 4xl:max-w-[2100px] mx-auto px-2 sm:px-4 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
           <span className="font-semibold text-white">Campus Community:</span>
-          <span>
+          <span className="truncate">
             {COMMUNITY_INFO.name} @ {COMMUNITY_INFO.collegeShort}
           </span>
           <span className="hidden md:inline text-slate-400">

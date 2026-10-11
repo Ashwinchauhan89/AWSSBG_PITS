@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Cloud,
   Menu,
   X,
   Sparkles,
@@ -12,27 +11,26 @@ import {
   Calendar,
   Layers,
   BookOpen,
-  Mail,
-  ShieldCheck,
+  PhoneCall,
   MessageCircle,
 } from "lucide-react";
-import { Github, Linkedin, Instagram } from "@/components/ui/Icons";
+import {
+  Instagram,
+  TwitterX,
+  Linkedin,
+  Facebook,
+  YouTube,
+  WhatsApp,
+  Discord,
+} from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 import { COMMUNITY_INFO } from "@/lib/data/initialData";
-import { GsapMagnetic } from "@/components/gsap/GsapMagnetic";
 import { SoundToggle } from "@/components/audio/SoundToggle";
-
-const NAV_LINKS = [
-  { href: "/", label: "Home", icon: Cloud },
-  { href: "/about", label: "About", icon: Users },
-  { href: "/resources", label: "Learning", icon: BookOpen },
-  { href: "/events", label: "Events", icon: Calendar },
-  { href: "/projects", label: "Projects", icon: Layers },
-  { href: "/team", label: "Team", icon: Users },
-];
+import { useSound } from "@/components/audio/SoundManager";
 
 export function Navbar() {
   const pathname = usePathname();
+  const { playHover, playClick } = useSound();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [prevPathname, setPrevPathname] = React.useState(pathname);
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -45,223 +43,259 @@ export function Navbar() {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      setIsScrolled(window.scrollY > 20);
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
+        "sticky top-0 z-50 w-full transition-all duration-300 select-none",
         isScrolled
-          ? "bg-[#080A0F]/85 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/50 py-2.5"
-          : "bg-transparent border-b border-white/5 py-4"
+          ? "bg-[#080A0F]/90 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/80 py-2 sm:py-2.5"
+          : "bg-transparent py-3 sm:py-4"
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-12 items-center justify-between gap-4">
-          {/* Brand Logo */}
+      <div className="max-w-7xl 2xl:max-w-[1500px] 3xl:max-w-[1800px] 4xl:max-w-[2100px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+        <div className="flex h-12 items-center justify-between gap-2 sm:gap-4">
+          {/* 1. Left Brand Mark (Matching TF™ aesthetic from Techfest reference) */}
           <Link
             href="/"
-            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-lg p-1"
+            onClick={playClick}
+            onMouseEnter={playHover}
+            className="flex items-center gap-1 sm:gap-1.5 group focus:outline-none shrink-0"
           >
-            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 shadow-lg shadow-orange-500/25 group-hover:scale-105 transition-transform">
-              <Cloud className="h-5 w-5 text-slate-950" strokeWidth={2.5} />
-              <span className="absolute -bottom-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-400" />
+            <div className="flex items-baseline">
+              <span className="text-xl sm:text-2xl lg:text-3xl font-black italic tracking-tighter text-white group-hover:text-[#FF9900] transition-colors font-mono">
+                SBG
+              </span>
+              <span className="text-[9px] sm:text-[10px] font-bold text-[#FF9900] ml-0.5 align-super">
+                ™
               </span>
             </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="text-base font-black tracking-tight text-white group-hover:text-amber-400 transition-colors">
-                  AWS SBG
-                </span>
-                <span className="rounded bg-amber-500/15 px-1.5 py-0.2 text-[9px] font-mono font-bold text-amber-400 border border-amber-500/30">
-                  PITS
-                </span>
-              </div>
-              <span className="text-[10px] font-mono tracking-widest text-slate-400 -mt-0.5 uppercase">
-                Ujjain Chapter
-              </span>
-            </div>
+            <span className="hidden md:inline-block text-[8px] sm:text-[9px] font-mono text-slate-400 pl-2 border-l border-white/15 uppercase tracking-widest">
+              PITS UJJAIN
+            </span>
           </Link>
 
-          {/* Desktop Floating Navigation Dock */}
-          <nav className="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#101A2C]/60 border border-white/10 backdrop-blur-md shadow-inner">
-            {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
-              return (
+          {/* 2. Center Futuristic Beveled HUD Frame (Responsive across tablets and screens) */}
+          <nav className="hidden lg:flex items-center relative shrink-0">
+            {/* SVG Beveled Polygon Bracket Border */}
+            <div className="relative flex items-center px-4 xl:px-8 py-1.5 xl:py-2 bg-[#080A0F]/90 backdrop-blur-xl border border-white/20 shadow-[0_4px_25px_rgba(0,0,0,0.6)] [clip-path:polygon(12px_0%,calc(100%-12px)_0%,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0%_calc(100%-12px),0%_12px)]">
+              {/* Corner tech accents */}
+              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-[#FF9900]/70" />
+              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[#FF9900]/70" />
+              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-[#FF9900]/70" />
+              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-[#FF9900]/70" />
+
+              <div className="flex items-center gap-4 xl:gap-8 text-[10px] xl:text-[11px] font-mono font-bold tracking-[0.14em] uppercase">
+                {/* Learning / Resources */}
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  href="/resources"
+                  onClick={playClick}
+                  onMouseEnter={playHover}
                   className={cn(
-                    "px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200",
-                    isActive
-                      ? "text-amber-400 bg-amber-500/15 font-semibold border border-amber-500/30 shadow-sm"
-                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:border-amber-500/20"
+                    "transition-colors hover:text-[#FF9900]",
+                    pathname === "/resources" ? "text-[#FF9900]" : "text-slate-300"
                   )}
                 >
-                  {link.label}
+                  LEARNING
                 </Link>
-              );
-            })}
+
+                {/* Workshops with EARLY BIRD badge */}
+                <div className="relative flex flex-col items-center">
+                  <span className="absolute -top-3.5 text-[7px] xl:text-[8px] font-mono font-black tracking-wider text-[#FF9900] bg-[#FF9900]/15 px-1.5 py-0.2 rounded border border-[#FF9900]/30 animate-pulse">
+                    EARLY BIRD
+                  </span>
+                  <Link
+                    href="/events"
+                    onClick={playClick}
+                    onMouseEnter={playHover}
+                    className={cn(
+                      "transition-colors hover:text-[#FF9900] pt-1",
+                      pathname === "/events" ? "text-[#FF9900]" : "text-slate-300"
+                    )}
+                  >
+                    WORKSHOPS
+                  </Link>
+                </div>
+
+                {/* Competitions / Projects */}
+                <Link
+                  href="/projects"
+                  onClick={playClick}
+                  onMouseEnter={playHover}
+                  className={cn(
+                    "transition-colors hover:text-[#FF9900]",
+                    pathname === "/projects" ? "text-[#FF9900]" : "text-slate-300"
+                  )}
+                >
+                  COMPETITIONS
+                </Link>
+
+                {/* Ignite / Summit / Community */}
+                <Link
+                  href="/about"
+                  onClick={playClick}
+                  onMouseEnter={playHover}
+                  className={cn(
+                    "transition-colors hover:text-[#FF9900]",
+                    pathname === "/about" ? "text-[#FF9900]" : "text-slate-300"
+                  )}
+                >
+                  IGNITE
+                </Link>
+              </div>
+            </div>
           </nav>
 
-          {/* Right Action Buttons */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* 3. Right Profile Button & Sound Toggle (Responsive) */}
+          <div className="hidden sm:flex items-center gap-2 lg:gap-3 shrink-0">
             <SoundToggle />
 
+            {/* ASHWIN Profile Button */}
             <Link
-              href="/admin"
-              className="text-xs text-slate-400 hover:text-slate-200 px-2 py-1.5 rounded-lg hover:bg-slate-800/40 transition-colors flex items-center gap-1"
-              title="Admin Portal"
+              href="/team"
+              onClick={playClick}
+              onMouseEnter={playHover}
+              className="px-3 lg:px-4 py-1.5 rounded-lg bg-[#080A0F] border border-white/30 hover:border-[#FF9900] text-[11px] lg:text-xs font-mono font-bold tracking-widest text-white hover:text-[#FF9900] shadow-md transition-all uppercase"
+              title="Group Leader Profile: Ashwin Chauhan"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-slate-500" />
-              <span className="hidden xl:inline text-[11px] font-mono">Admin</span>
+              ASHWIN
             </Link>
 
-            <a
-              href={COMMUNITY_INFO.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 transition-all"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span>WhatsApp</span>
-            </a>
-
-            <GsapMagnetic strength={0.25}>
-              <Link
-                href="/join"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 text-slate-950 shadow-md shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Join Community</span>
-              </Link>
-            </GsapMagnetic>
-          </div>
-
-          {/* Mobile Menu Trigger */}
-          <div className="flex items-center gap-2 lg:hidden">
             <Link
               href="/join"
-              className="sm:hidden inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-slate-950"
+              onClick={playClick}
+              onMouseEnter={playHover}
+              className="inline-flex items-center gap-1.5 px-3 lg:px-3.5 py-1.5 rounded-lg text-[11px] lg:text-xs font-mono font-bold bg-[#FF9900] text-slate-950 hover:bg-amber-400 transition-colors shadow-md shadow-[#FF9900]/20 uppercase"
             >
-              Join
+              <Sparkles className="w-3 h-3" />
+              <span>JOIN</span>
             </Link>
+          </div>
+
+          {/* Mobile Menu Trigger & Sound Toggle */}
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
+            <SoundToggle />
+
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 focus:outline-none focus:ring-2 focus:ring-amber-500"
-              aria-label="Toggle navigation menu"
-              aria-expanded={mobileMenuOpen}
+              onClick={() => {
+                playClick();
+                setMobileMenuOpen(!mobileMenuOpen);
+              }}
+              aria-label="Toggle menu"
+              className="p-2 rounded-lg bg-[#080A0F] border border-white/10 text-white"
             >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer (Clean Accessible Menu replacing side rails) */}
+      {/* Mobile & Tablet Full-Feature Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-white/10 bg-[#080A0F]/98 backdrop-blur-2xl px-6 pt-4 pb-8 space-y-4">
-          <div className="text-[11px] font-mono tracking-widest uppercase text-amber-400/80 mb-2">
-            Navigation Rail
-          </div>
-          <nav className="flex flex-col space-y-1.5">
-            {NAV_LINKS.map((link) => {
-              const Icon = link.icon;
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors",
-                    isActive
-                      ? "bg-amber-500/15 text-amber-400 font-semibold border border-amber-500/30"
-                      : "text-slate-300 hover:bg-white/5 hover:text-white"
-                  )}
-                >
-                  <Icon className="h-4 w-4 text-slate-400" />
-                  {link.label}
-                </Link>
-              );
-            })}
+        <div className="lg:hidden px-4 pt-4 pb-6 bg-[#080A0F]/98 border-b border-white/15 backdrop-blur-2xl space-y-4 max-h-[calc(100dvh-4rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-200 shadow-2xl">
+          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:border-[#FF9900]/50"
+            >
+              <span>HOME</span>
+            </Link>
+            <Link
+              href="/resources"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:border-[#FF9900]/50"
+            >
+              <span>LEARNING</span>
+            </Link>
+            <Link
+              href="/events"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-lg bg-white/5 border border-[#FF9900]/40 text-[#FF9900]"
+            >
+              <span>WORKSHOPS</span>
+              <span className="text-[8px] bg-[#FF9900]/20 px-1 rounded">EARLY BIRD</span>
+            </Link>
+            <Link
+              href="/projects"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:border-[#FF9900]/50"
+            >
+              <span>COMPETITIONS</span>
+            </Link>
+            <Link
+              href="/team"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 p-2.5 rounded-lg bg-white/5 border border-white/10 text-[#FF9900] font-bold"
+            >
+              <span>ASHWIN (LEAD)</span>
+            </Link>
+            <Link
+              href="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:border-[#FF9900]/50"
+            >
+              <span>ABOUT US</span>
+            </Link>
             <Link
               href="/contact"
-              className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:border-[#FF9900]/50 col-span-2"
             >
-              <Mail className="h-4 w-4 text-slate-400" />
-              Contact
+              <PhoneCall className="w-3.5 h-3.5 text-sky-400" />
+              <span>CONTACT CAMPUS CHAPTER</span>
             </Link>
-          </nav>
+          </div>
 
-          {/* Social Media Links for Mobile */}
-          <div className="pt-4 border-t border-white/10 space-y-3">
-            <div className="text-[11px] font-mono tracking-widest uppercase text-slate-400">
-              Community Channels
-            </div>
-            <div className="flex items-center gap-3">
-              <a
-                href={COMMUNITY_INFO.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20"
-                aria-label="WhatsApp"
-              >
-                <MessageCircle className="w-5 h-5" />
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 text-slate-300 border border-white/10 hover:text-white"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500/20"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 border border-pink-500/30 hover:bg-pink-500/20"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
+          <Link
+            href="/join"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block w-full py-2.5 text-center rounded-lg bg-[#FF9900] text-slate-950 font-mono font-bold text-xs uppercase shadow-lg shadow-[#FF9900]/25"
+          >
+            JOIN CORE TEAM (MIN 7.0 CGPA)
+          </Link>
 
-            <div className="pt-2 flex flex-col gap-2">
-              <Link
-                href="/join"
-                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-lg shadow-orange-500/20"
-              >
-                <Sparkles className="w-4 h-4" />
-                Apply for Core Team
-              </Link>
-              <Link
-                href="/admin"
-                className="flex items-center justify-center gap-2 w-full py-2 text-xs text-slate-500 hover:text-slate-300 font-mono"
-              >
-                <ShieldCheck className="w-3.5 h-3.5" />
-                Admin Portal
-              </Link>
+          {/* Mobile Social Links Row (Full parity with desktop rail) */}
+          <div className="pt-2 border-t border-white/10">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+              Official Channels:
+            </span>
+            <div className="flex items-center justify-between gap-1 text-slate-300">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-pink-400" title="Instagram">
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-white" title="X">
+                <TwitterX className="w-4 h-4" />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-sky-400" title="LinkedIn">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-blue-500" title="Facebook">
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-red-500" title="YouTube">
+                <YouTube className="w-4 h-4" />
+              </a>
+              <a href={COMMUNITY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-emerald-400" title="WhatsApp">
+                <WhatsApp className="w-4 h-4" />
+              </a>
+              <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-indigo-400" title="Discord">
+                <Discord className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
