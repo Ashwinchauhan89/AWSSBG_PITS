@@ -26,18 +26,23 @@ const RAIL_ITEMS: RailItem[] = [
 export function LeftNavRail() {
   const pathname = usePathname();
   const { playHover, playClick } = useSound();
-  const [activeSection, setActiveSection] = React.useState<string>("home");
+  const [homeScrollSection, setHomeScrollSection] = React.useState<string>("home");
   const isHomePage = pathname === "/";
 
+  const activeSection = !isHomePage
+    ? pathname.startsWith("/events")
+      ? "events"
+      : pathname.startsWith("/projects")
+      ? "projects"
+      : pathname.startsWith("/contact")
+      ? "contact"
+      : pathname.startsWith("/about")
+      ? "about"
+      : ""
+    : homeScrollSection;
+
   React.useEffect(() => {
-    if (!isHomePage) {
-      if (pathname.startsWith("/events")) setActiveSection("events");
-      else if (pathname.startsWith("/projects")) setActiveSection("projects");
-      else if (pathname.startsWith("/contact")) setActiveSection("contact");
-      else if (pathname.startsWith("/about")) setActiveSection("about");
-      else setActiveSection("");
-      return;
-    }
+    if (!isHomePage) return;
 
     const handleScroll = () => {
       const sections = ["hero", "community", "technology", "events", "projects", "team", "join"];
@@ -49,10 +54,10 @@ export function LeftNavRail() {
           const top = el.offsetTop;
           const height = el.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
-            if (section === "hero") setActiveSection("home");
-            else if (section === "events") setActiveSection("events");
-            else if (section === "projects") setActiveSection("projects");
-            else if (section === "community") setActiveSection("about");
+            if (section === "hero") setHomeScrollSection("home");
+            else if (section === "events") setHomeScrollSection("events");
+            else if (section === "projects") setHomeScrollSection("projects");
+            else if (section === "community") setHomeScrollSection("about");
             break;
           }
         }
@@ -71,7 +76,7 @@ export function LeftNavRail() {
       if (el) {
         e.preventDefault();
         el.scrollIntoView({ behavior: "smooth" });
-        setActiveSection(item.id);
+        setHomeScrollSection(item.id);
       }
     }
   };

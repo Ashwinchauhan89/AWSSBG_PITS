@@ -49,13 +49,14 @@ export function BuilderTerminalDrawer({
   const [inputVal, setInputVal] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const msgIdRef = useRef(0);
 
   useEffect(() => {
     if (isOpen) {
       playWarp();
       setTimeout(() => inputRef.current?.focus(), 150);
     }
-  }, [isOpen]);
+  }, [isOpen, playWarp]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -72,14 +73,19 @@ export function BuilderTerminalDrawer({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  const handleQuery = (query: string) => {
+  const handleQuery = React.useCallback((query: string) => {
     if (!query.trim()) return;
 
+    msgIdRef.current += 1;
+    const currentId = `msg-${msgIdRef.current}-${query.slice(0, 5)}`;
+    const now = new Date();
+    const timeStr = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     const userMsg: Message = {
-      id: `msg-${Date.now()}`,
+      id: currentId,
       sender: "user",
       text: query,
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      timestamp: timeStr,
     };
 
     setMessages((prev) => [...prev, userMsg]);
@@ -130,19 +136,24 @@ export function BuilderTerminalDrawer({
       }
 
       playSuccess();
+      msgIdRef.current += 1;
+      const aiReplyId = `ai-${msgIdRef.current}`;
+      const replyTime = new Date();
+      const replyTimeStr = `${String(replyTime.getHours()).padStart(2, "0")}:${String(replyTime.getMinutes()).padStart(2, "0")}`;
+
       setMessages((prev) => [
         ...prev,
         {
-          id: `ai-${Date.now()}`,
+          id: aiReplyId,
           sender: "ai",
           text: replyText,
           actionUrl,
           actionText,
-          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          timestamp: replyTimeStr,
         },
       ]);
     }, 400);
-  };
+  }, [playClick, playSuccess]);
 
   if (!isOpen) return null;
 

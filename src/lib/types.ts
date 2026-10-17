@@ -5,6 +5,18 @@ export type RoleCategory =
   | "Outreach"
   | "Creative";
 
+export interface LearningTopic {
+  title: string;
+  description: string;
+}
+
+export interface PracticalTask {
+  title: string;
+  objective: string;
+  deliverables?: string[];
+  awsServices?: string[];
+}
+
 export interface TeamMember {
   id: string;
   name: string;
@@ -18,7 +30,13 @@ export interface TeamMember {
   department?: string;
   year?: string;
   isVacant?: boolean;
+  learningPath?: LearningTopic[];
+  practicalTask?: PracticalTask;
+  specialFocus?: string;
+  tags?: string[];
+  isAdditional?: boolean;
 }
+
 
 export type EventCategory =
   | "AWS Cloud"

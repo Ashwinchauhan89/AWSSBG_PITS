@@ -24,16 +24,14 @@ import { COMMUNITY_INFO } from "@/lib/data/initialData";
 import { useSound } from "@/components/audio/SoundManager";
 
 const AVAILABLE_ROLES = [
-  "Vice Lead / Co-Lead",
-  "Cloud & AWS Lead",
-  "AI / Machine Learning Lead",
-  "Web Development Lead",
-  "Events & Workshop Coordinator",
-  "Community & Outreach Lead",
-  "Marketing & Social Media Lead",
-  "Design & Creative Lead",
-  "Documentation Coordinator",
-  "General Core Volunteer",
+  "Data Engineering Associate (Mentored by Anchit Malik)",
+  "Cloud Computing Associate (Mentored by Tanish Namdev)",
+  "AI / ML & MLOps Associate (Mentored by Shafque Ansari)",
+  "Innovation, Logistics & Event Associate (Mentored by Aayesha Malik)",
+  "Software Engineering & DevOps Associate (Mentored by Aakansha Panchal)",
+  "Marketing & Digital Growth Associate (Mentored by Muskan Goyal)",
+  "Graphic Design & Creative Media Associate (Mentored by Harshit Singh Sikarwar)",
+  "General Student Cloud Builder Volunteer",
 ];
 
 const DEPARTMENTS = [
