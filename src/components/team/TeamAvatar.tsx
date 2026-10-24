@@ -1,17 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { User } from "lucide-react";
 
 export interface TeamAvatarProps {
   src?: string;
   alt: string;
   name: string;
-  size?: "sm" | "md" | "lg" | "xl" | "hero";
+  size?: "sm" | "md" | "lg" | "xl" | "hero" | "leader" | "leader-xl";
   variant?: "circular" | "rounded";
   glowColor?: "amber" | "blue" | "purple" | "emerald" | "pink" | "cyan" | "slate";
   showStatus?: boolean;
   statusLabel?: string;
+  showChipBadge?: boolean;
   className?: string;
 }
 
@@ -21,6 +23,8 @@ const SIZE_MAP = {
   lg: "w-20 h-20 text-xl",
   xl: "w-28 h-28 text-2xl",
   hero: "w-32 h-32 sm:w-40 sm:h-40 text-3xl sm:text-4xl",
+  leader: "w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 text-4xl sm:text-5xl",
+  "leader-xl": "w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 text-5xl sm:text-6xl",
 };
 
 const GLOW_MAP = {
@@ -42,6 +46,7 @@ export function TeamAvatar({
   glowColor = "amber",
   showStatus = false,
   statusLabel = "Active",
+  showChipBadge = false,
   className = "",
 }: TeamAvatarProps) {
   const [imageError, setImageError] = useState(false);
@@ -59,10 +64,12 @@ export function TeamAvatar({
 
   const initials = getInitials(name);
   const sizeClasses = SIZE_MAP[size];
-  const glowClasses = GLOW_MAP[glowColor] || GLOW_MAP.amber;
+  const glowClasses = GLOW_MAP[glowColor] || GLOW_MAP.purple;
   const radiusClasses =
     variant === "circular"
       ? "rounded-full"
+      : size === "leader" || size === "leader-xl"
+      ? "rounded-[2.5rem]"
       : size === "hero"
       ? "rounded-[2rem]"
       : size === "xl" || size === "lg"
@@ -75,23 +82,23 @@ export function TeamAvatar({
     <div className={`relative inline-block shrink-0 group ${className}`}>
       {/* Outer ambient glow halo */}
       <div
-        className={`absolute -inset-1 ${radiusClasses} bg-gradient-to-tr ${glowClasses} opacity-40 blur-md group-hover:opacity-75 transition-opacity duration-300 pointer-events-none`}
+        className={`absolute -inset-1.5 ${radiusClasses} bg-gradient-to-tr ${glowClasses} opacity-40 blur-lg group-hover:opacity-75 transition-opacity duration-300 pointer-events-none`}
       />
 
       {/* Portrait Container */}
       <div
-        className={`relative ${sizeClasses} ${radiusClasses} overflow-hidden border-2 border-white/20 shadow-xl bg-slate-900 flex items-center justify-center`}
+        className={`relative ${sizeClasses} ${radiusClasses} overflow-hidden border-2 border-white/20 shadow-2xl bg-slate-900 flex items-center justify-center`}
       >
         {hasValidImage ? (
           <>
-            {/* Real photo rendering */}
+            {/* Real photo rendering with 1080x1080 cover & centered framing */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
-              alt={alt || name}
+              alt={alt || `${name} portrait`}
               onLoad={() => setIsLoaded(true)}
               onError={() => setImageError(true)}
-              className={`w-full h-full object-cover object-top transition-all duration-300 group-hover:scale-105 ${
+              className={`w-full h-full object-cover object-center transition-all duration-300 group-hover:scale-105 ${
                 isLoaded ? "opacity-100" : "opacity-0"
               }`}
             />
@@ -119,10 +126,26 @@ export function TeamAvatar({
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10 pointer-events-none" />
       </div>
 
+      {/* Purple pixel chip logo accent badge */}
+      {showChipBadge && (
+        <div
+          className="absolute -top-2 -right-2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#090D18]/90 border border-purple-500/50 shadow-lg shadow-purple-500/30 p-1 flex items-center justify-center backdrop-blur-md"
+          title="PITS Cloud Computing Brand Identity"
+        >
+          <Image
+            src="/images/branding/purple-pixel-chip.png"
+            alt="PITS Cloud Pixel Chip"
+            width={24}
+            height={24}
+            className="w-full h-full object-contain"
+          />
+        </div>
+      )}
+
       {/* Online / Appointed Status Indicator */}
       {showStatus && (
         <span
-          className="absolute -bottom-1 -right-1 flex h-5 w-5 sm:h-6 sm:w-6"
+          className="absolute -bottom-1 -right-1 flex h-5 w-5 sm:h-6 sm:w-6 z-20"
           title={statusLabel}
         >
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />

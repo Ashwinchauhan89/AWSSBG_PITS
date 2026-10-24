@@ -69,11 +69,11 @@ export function Navbar() {
             onMouseEnter={playHover}
             className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none shrink-0"
           >
-            {/* Geometric Brand Logo Emblem */}
+            {/* Geometric Purple Pixel-Chip Brand Logo Emblem */}
             <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#080A0F] border border-purple-500/40 p-0.5 flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:border-purple-400 group-hover:shadow-purple-500/50 transition-all duration-300">
               <Image
-                src="/images/branding/community-mark-transparent.png"
-                alt="PITS Cloud Computing - Student Builder Group Logo"
+                src="/images/branding/purple-pixel-chip.png"
+                alt="PITS Cloud Computing - Purple Pixel Chip Brand Logo"
                 width={36}
                 height={36}
                 className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
@@ -179,11 +179,11 @@ export function Navbar() {
               <div className="relative w-7 h-7 lg:w-8 lg:h-8 rounded-full overflow-hidden bg-slate-900 border border-purple-500/60 shadow-sm shadow-purple-500/30 group-hover:border-purple-400 group-hover:shadow-purple-500/50 transition-all shrink-0 flex items-center justify-center">
                 {!avatarError ? (
                   <Image
-                    src="/images/team/ashwin-chauhan.jpg"
+                    src="/images/team/ashwin-chauhan.webp"
                     alt="Ashwin Chauhan - Student Builder Group Leader"
                     width={32}
                     height={32}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-center"
                     onError={() => setAvatarError(true)}
                   />
                 ) : (
@@ -218,11 +218,11 @@ export function Navbar() {
             >
               {!avatarError ? (
                 <Image
-                  src="/images/team/ashwin-chauhan.jpg"
+                  src="/images/team/ashwin-chauhan.webp"
                   alt="Ashwin Chauhan - Student Builder Group Leader"
                   width={32}
                   height={32}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-center"
                   onError={() => setAvatarError(true)}
                 />
               ) : (
@@ -253,7 +253,7 @@ export function Navbar() {
           <div className="flex items-center gap-2.5 pb-3 border-b border-white/10">
             <div className="w-8 h-8 rounded-lg bg-[#080A0F] border border-purple-500/40 p-1 flex items-center justify-center shrink-0 shadow-md shadow-purple-500/20">
               <Image
-                src="/images/branding/community-mark-transparent.png"
+                src="/images/branding/purple-pixel-chip.png"
                 alt="PITS Cloud Computing Logo"
                 width={32}
                 height={32}
@@ -281,11 +281,11 @@ export function Navbar() {
             <div className="relative w-10 h-10 rounded-full overflow-hidden bg-slate-900 border border-purple-500/60 shadow-md shadow-purple-500/30 shrink-0 flex items-center justify-center">
               {!avatarError ? (
                 <Image
-                  src="/images/team/ashwin-chauhan.jpg"
+                  src="/images/team/ashwin-chauhan.webp"
                   alt="Ashwin Chauhan - Student Builder Group Leader"
                   width={40}
                   height={40}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-center"
                   onError={() => setAvatarError(true)}
                 />
               ) : (

@@ -102,19 +102,19 @@ export function HeroSection() {
       ref={heroRef}
       className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-between items-center text-center px-3 sm:px-6 lg:px-8 xl:px-24 2xl:px-32 pt-6 sm:pt-10 pb-6 sm:pb-8 overflow-hidden select-none"
     >
-      {/* 1. Cinematic Panoramic Festival Backdrop Image (Matching reference screenshot) */}
+      {/* 1. Futuristic Cloud + X Themed Infrastructure Backdrop */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/cinematic_hero_bg.jpg"
-          alt="AWS Student Builder Group Tech Festival Citadel"
+          src="/images/backgrounds/cloud-x-background.webp"
+          alt="AWS Student Builder Group Cloud Infrastructure with Futuristic X Motif"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center scale-105"
+          className="object-cover object-center scale-100"
         />
-        {/* Cinematic Atmospheric Darkening Overlays for crisp readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080A0F] via-[#080A0F]/65 to-[#080A0F]/55" />
-        <div className="absolute inset-0 bg-radial-vignette opacity-85" />
+        {/* Atmospheric Darkening & Vignette Overlays for pristine readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080A0F] via-[#080A0F]/60 to-[#080A0F]/45" />
+        <div className="absolute inset-0 bg-radial-vignette opacity-80" />
         <div className="absolute inset-0 tech-grid opacity-15" />
       </div>
 
@@ -123,11 +123,11 @@ export function HeroSection() {
 
       {/* 2. Main Centered Festival Content Column (Exact layout from reference screenshot) */}
       <div className="relative z-10 max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl mx-auto flex flex-col items-center my-auto py-4 sm:py-8 space-y-4 sm:space-y-6 md:space-y-8 w-full">
-        {/* Eyebrow Institutional Credit */}
-        <div className="gsap-hero-eyebrow inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#080A0F]/85 border border-purple-500/30 text-[7.5px] xs:text-[10px] sm:text-xs font-mono font-bold tracking-[0.1em] xs:tracking-[0.18em] sm:tracking-[0.25em] text-slate-200 uppercase shadow-xl shadow-purple-500/10 backdrop-blur-md max-w-[95%]">
+        {/* Eyebrow Institutional Credit with Purple Pixel Chip Brand Logo */}
+        <div className="gsap-hero-eyebrow inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#080A0F]/90 border border-purple-500/40 text-[7.5px] xs:text-[10px] sm:text-xs font-mono font-bold tracking-[0.1em] xs:tracking-[0.18em] sm:tracking-[0.25em] text-slate-200 uppercase shadow-xl shadow-purple-500/15 backdrop-blur-md max-w-[95%]">
           <Image
-            src="/images/branding/community-mark-transparent.png"
-            alt="PITS Cloud Computing Community Emblem"
+            src="/images/branding/purple-pixel-chip.png"
+            alt="PITS Cloud Computing Purple Pixel Chip"
             width={18}
             height={18}
             className="w-4 h-4 object-contain rounded shrink-0 shadow-sm shadow-purple-500/40"

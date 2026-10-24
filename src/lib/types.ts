@@ -37,6 +37,7 @@ export interface TeamMember {
   tags?: string[];
   isAdditional?: boolean;
   responsibilities?: string[];
+  group?: "leader" | "core" | "additional";
 }
 
 

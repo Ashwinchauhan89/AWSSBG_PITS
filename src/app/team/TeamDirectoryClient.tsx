@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Image from "next/image";
 import {
   ShieldCheck,
   Sparkles,
@@ -246,7 +247,7 @@ export function TeamDirectoryClient() {
           <div className="flex items-center gap-4">
             <TeamAvatar
               src={director.avatarUrl}
-              alt={director.name}
+              alt={`${director.name} - ${director.role}`}
               name={director.name}
               size="lg"
               variant="circular"
@@ -413,12 +414,29 @@ export function TeamDirectoryClient() {
   };
 
   return (
-    <div className="py-12 sm:py-20 relative">
+    <div className="py-12 sm:py-20 relative overflow-hidden">
+      {/* Cloud + X themed background motif overlay */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] pointer-events-none -z-10 opacity-35 blur-[1px]">
+        <Image
+          src="/images/backgrounds/cloud-x-background.webp"
+          alt="Cloud Infrastructure with Futuristic X Motif"
+          fill
+          className="object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#080A0F]/80 to-[#080A0F]" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Page Hero Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-semibold tracking-wider uppercase">
-            <ShieldCheck className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/35 text-purple-300 text-xs font-mono font-semibold tracking-wider uppercase shadow-sm shadow-purple-500/15 backdrop-blur-md">
+            <Image
+              src="/images/branding/purple-pixel-chip.png"
+              alt="PITS Cloud Chip"
+              width={16}
+              height={16}
+              className="w-4 h-4 object-contain rounded shrink-0 shadow-sm shadow-purple-500/40"
+            />
             <span>OFFICIAL LEADERSHIP &amp; DIRECTORATE BOARD</span>
           </div>
 
@@ -470,17 +488,18 @@ export function TeamDirectoryClient() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Leader Avatar & Bio */}
-              <div className="lg:col-span-4 flex flex-col items-center sm:items-start text-center sm:text-left space-y-4">
+              <div className="lg:col-span-5 flex flex-col items-center sm:items-start text-center sm:text-left space-y-4">
                 <TeamAvatar
                   src={leader.avatarUrl}
                   alt={`${leader.name} - ${leader.role}`}
                   name={leader.name}
-                  size="hero"
-                  variant="circular"
+                  size="leader"
+                  variant="rounded"
                   glowColor="purple"
+                  showChipBadge={true}
                   showStatus={true}
                   statusLabel="Appointed Student Builder Group Leader"
-                  className="shadow-2xl shadow-purple-500/25 ring-2 ring-purple-500/30"
+                  className="shadow-2xl shadow-purple-500/30 ring-2 ring-purple-500/40"
                 />
 
                 <div>

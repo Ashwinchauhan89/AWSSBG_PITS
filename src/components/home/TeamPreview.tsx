@@ -11,16 +11,15 @@ import {
   Sparkles,
   Users,
   Compass,
-  GraduationCap,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Github, Linkedin } from "@/components/ui/Icons";
 import { INITIAL_TEAM_MEMBERS, COMMUNITY_INFO } from "@/lib/data/initialData";
 import { TeamAvatar } from "@/components/team/TeamAvatar";
+import { TeamProfileCard } from "@/components/team/TeamProfileCard";
 import { GsapMagnetic } from "@/components/gsap/GsapMagnetic";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useSound } from "@/components/audio/SoundManager";
-import { TeamMember } from "@/lib/types";
 
 export function TeamPreview() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -57,130 +56,21 @@ export function TeamPreview() {
     { scope: sectionRef }
   );
 
-  const getGlowColor = (category: string) => {
-    switch (category) {
-      case "Leadership":
-        return "amber" as const;
-      case "Technical":
-        return "blue" as const;
-      case "Operations":
-        return "emerald" as const;
-      case "Outreach":
-        return "cyan" as const;
-      case "Creative":
-        return "purple" as const;
-      default:
-        return "slate" as const;
-    }
-  };
-
-  const renderMemberCard = (director: TeamMember, badgeLabel?: string) => {
-    const glow = getGlowColor(director.category);
-
-    return (
-      <div
-        key={director.id}
-        onMouseEnter={playHover}
-        className="gsap-team-card cinematic-glass cinematic-glass-hover rounded-3xl p-6 border border-white/10 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden"
-      >
-        <div className="space-y-4">
-          {/* Top category & badge */}
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">
-              {director.category}
-            </span>
-            {badgeLabel && (
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300">
-                {badgeLabel}
-              </span>
-            )}
-          </div>
-
-          {/* Avatar & Info Row */}
-          <div className="flex items-center gap-3.5">
-            <TeamAvatar
-              src={director.avatarUrl}
-              alt={`${director.name} - ${director.role}`}
-              name={director.name}
-              size="md"
-              variant="circular"
-              glowColor={glow}
-              showStatus={false}
-            />
-
-            <div className="space-y-0.5 min-w-0">
-              <h4 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors truncate font-sans">
-                {director.name}
-              </h4>
-              <p className="text-[11px] font-mono text-slate-400 truncate">
-                {director.department || "Computer Science & Engineering"}
-              </p>
-            </div>
-          </div>
-
-          {/* Exact Designation */}
-          <div className="rounded-xl bg-[#080A0F]/80 border border-white/5 p-2.5">
-            <span className="text-xs font-mono font-bold text-amber-400 leading-tight block">
-              {director.role}
-            </span>
-          </div>
-
-          {/* Bio */}
-          <p className="text-xs text-slate-300 leading-relaxed font-light line-clamp-3">
-            {director.bio}
-          </p>
-
-          {/* Practical Task / Focus */}
-          {director.practicalTask && (
-            <div className="pt-2 text-[11px] text-slate-400 font-light border-t border-white/10">
-              <span className="font-semibold text-slate-300 font-mono text-[10px] uppercase block mb-0.5 text-sky-400">
-                Key Deliverable:
-              </span>
-              <span className="line-clamp-2">{director.practicalTask.title}</span>
-            </div>
-          )}
-        </div>
-
-        {/* Footer: Tags & Profile Link */}
-        <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between gap-2">
-          <div className="flex flex-wrap gap-1">
-            {director.tags?.slice(0, 2).map((tag, i) => (
-              <span
-                key={i}
-                className="text-[9.5px] font-mono px-2 py-0.5 rounded bg-[#080A0F] text-slate-400 border border-white/5"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <Link
-            href="/team"
-            onClick={playClick}
-            className="text-[11px] font-mono text-amber-400 hover:text-amber-300 transition-colors shrink-0 inline-flex items-center gap-1 group/btn"
-          >
-            <span>Roadmap</span>
-            <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
-          </Link>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <section
       id="team"
       ref={sectionRef}
       className="py-24 sm:py-32 border-b border-white/10 bg-[#080A0F] relative overflow-hidden font-sans"
     >
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] volumetric-glow pointer-events-none -z-10" />
+      {/* Cloud & Futuristic X ambient background accents */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[450px] bg-gradient-to-r from-purple-900/15 via-indigo-900/15 to-transparent blur-3xl pointer-events-none -z-10" />
       <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none -z-10" />
 
       <div className="responsive-container">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="space-y-3 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono font-semibold tracking-wider uppercase">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono font-semibold tracking-wider uppercase shadow-sm shadow-purple-500/10">
               <ShieldCheck className="w-3.5 h-3.5 text-purple-400" />
               <span>LEADERSHIP DIRECTORY • CAMPUS CHAPTER</span>
             </div>
@@ -205,40 +95,41 @@ export function TeamPreview() {
           </GsapMagnetic>
         </div>
 
-        {/* 1. Overall Group Leader Profile Card (Prominent with subtle purple accent) */}
+        {/* 1. Overall Group Leader Profile Card (Prominent Large Portrait with Purple Pixel-Chip Accent) */}
         {leader && (
-          <div className="mb-16">
+          <div className="mb-20">
             <div
               onMouseEnter={playHover}
-              className="hud-corner rounded-3xl border border-purple-500/30 hover:border-purple-400/50 bg-gradient-to-b from-[#131024]/95 via-[#090c14]/95 to-[#101726]/90 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl relative overflow-hidden group transition-all duration-300"
+              className="hud-corner rounded-[2rem] sm:rounded-[2.5rem] border border-purple-500/35 hover:border-purple-400/60 bg-gradient-to-b from-[#131024]/95 via-[#090C16]/95 to-[#101726]/90 p-6 sm:p-10 lg:p-12 backdrop-blur-2xl shadow-2xl relative overflow-hidden group transition-all duration-300"
             >
               {/* Subtle purple accent volumetric glow & restrained gold highlights */}
-              <div className="absolute top-0 right-0 w-[500px] h-[300px] bg-gradient-to-bl from-purple-600/15 via-indigo-600/10 to-transparent blur-3xl pointer-events-none -z-10" />
-              <div className="absolute bottom-0 left-0 w-[400px] h-[250px] bg-gradient-to-tr from-amber-500/10 via-orange-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
+              <div className="absolute top-0 right-0 w-[550px] h-[350px] bg-gradient-to-bl from-purple-600/20 via-indigo-600/10 to-transparent blur-3xl pointer-events-none -z-10" />
+              <div className="absolute bottom-0 left-0 w-[450px] h-[250px] bg-gradient-to-tr from-amber-500/10 via-purple-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Leader Portrait & Identity */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                {/* Leader Portrait: Large 280-320px Square Portrait with Rounded Corners & Pixel-Chip Accent */}
                 <div className="lg:col-span-5 flex flex-col items-center sm:items-start text-center sm:text-left space-y-4">
-                  <div className="flex flex-col sm:flex-row items-center gap-6">
+                  <div className="flex flex-col items-center sm:items-start gap-6">
                     <TeamAvatar
                       src={leader.avatarUrl}
                       alt={`${leader.name} - ${leader.role}`}
                       name={leader.name}
-                      size="hero"
-                      variant="circular"
+                      size="leader"
+                      variant="rounded"
                       glowColor="purple"
+                      showChipBadge={true}
                       showStatus={true}
                       statusLabel="Appointed Student Builder Group Leader"
-                      className="shadow-2xl shadow-purple-500/25 ring-2 ring-purple-500/30"
+                      className="shadow-2xl shadow-purple-500/30 ring-2 ring-purple-500/40"
                     />
 
-                    <div className="space-y-1.5">
+                    <div className="space-y-1.5 w-full">
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/40 text-purple-300 text-xs font-mono font-bold">
                         <Award className="w-3.5 h-3.5 text-amber-400" />
                         <span>Overall Group Leader</span>
                       </div>
 
-                      <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight font-sans">
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight font-sans">
                         {leader.name}
                       </h3>
 
@@ -259,35 +150,35 @@ export function TeamPreview() {
                 </div>
 
                 {/* Leader Bio, Responsibilities & Strategic Directives */}
-                <div className="lg:col-span-7 space-y-4 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-white/10 lg:pl-8">
+                <div className="lg:col-span-7 space-y-5 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-white/10 lg:pl-10">
                   <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
                     {leader.bio}
                   </p>
 
                   {/* Explicit Responsibilities as required */}
-                  <div className="pt-2">
-                    <span className="text-[10px] font-mono font-bold text-purple-300 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
+                  <div className="pt-1">
+                    <span className="text-[11px] font-mono font-bold text-purple-300 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
                       <Compass className="w-3.5 h-3.5 text-purple-400" />
                       Key Responsibilities &amp; Leadership Directives:
                     </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      <div className="rounded-xl bg-[#080A0F]/80 border border-purple-500/20 p-2.5 flex items-center gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <div className="rounded-xl bg-[#080A0F]/85 border border-purple-500/25 p-2.5 flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                         <span className="text-xs text-slate-200">Community leadership</span>
                       </div>
-                      <div className="rounded-xl bg-[#080A0F]/80 border border-purple-500/20 p-2.5 flex items-center gap-2">
+                      <div className="rounded-xl bg-[#080A0F]/85 border border-purple-500/25 p-2.5 flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                         <span className="text-xs text-slate-200">Technical direction</span>
                       </div>
-                      <div className="rounded-xl bg-[#080A0F]/80 border border-purple-500/20 p-2.5 flex items-center gap-2">
+                      <div className="rounded-xl bg-[#080A0F]/85 border border-purple-500/25 p-2.5 flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                         <span className="text-xs text-slate-200">Workshops &amp; bootcamps</span>
                       </div>
-                      <div className="rounded-xl bg-[#080A0F]/80 border border-purple-500/20 p-2.5 flex items-center gap-2">
+                      <div className="rounded-xl bg-[#080A0F]/85 border border-purple-500/25 p-2.5 flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                         <span className="text-xs text-slate-200">Project initiatives</span>
                       </div>
-                      <div className="rounded-xl bg-[#080A0F]/80 border border-purple-500/20 p-2.5 flex items-center gap-2 sm:col-span-2">
+                      <div className="rounded-xl bg-[#080A0F]/85 border border-purple-500/25 p-2.5 flex items-center gap-2 sm:col-span-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                         <span className="text-xs text-slate-200">Student collaboration &amp; mentoring</span>
                       </div>
@@ -295,7 +186,7 @@ export function TeamPreview() {
                   </div>
 
                   {/* Actions & Links */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/10">
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/10">
                     <div className="flex flex-wrap gap-1.5">
                       {leader.tags?.slice(0, 4).map((tag, i) => (
                         <span
@@ -311,7 +202,7 @@ export function TeamPreview() {
                       <Link
                         href="/team#leader"
                         onClick={playClick}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-300 hover:text-white hover:bg-purple-500/25 text-xs font-mono transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/35 text-purple-300 hover:text-white hover:bg-purple-500/25 text-xs font-mono transition-colors shadow-sm shadow-purple-500/20"
                         title="View Full Leader Roadmap & Portfolio"
                       >
                         <span>Leader Profile</span>
@@ -358,7 +249,7 @@ export function TeamPreview() {
         )}
 
         {/* 2. Core Leadership Team (Dedicated Section with 5 Members) */}
-        <div className="mb-16">
+        <div className="mb-20">
           <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-4">
             <div>
               <div className="inline-flex items-center gap-2 text-xs font-mono text-amber-400 font-bold mb-1">
@@ -378,7 +269,9 @@ export function TeamPreview() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreDirectors.map((director) => renderMemberCard(director, "Core Team"))}
+            {coreDirectors.map((director) => (
+              <TeamProfileCard key={director.id} member={director} badgeLabel="Core Directorate" />
+            ))}
           </div>
         </div>
 
@@ -403,7 +296,9 @@ export function TeamPreview() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-            {additionalDirectors.map((director) => renderMemberCard(director, "Additional Team"))}
+            {additionalDirectors.map((director) => (
+              <TeamProfileCard key={director.id} member={director} badgeLabel="Outreach & Creative" />
+            ))}
           </div>
         </div>
       </div>
