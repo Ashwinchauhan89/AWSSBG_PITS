@@ -126,8 +126,8 @@ export function HeroSection() {
         {/* Eyebrow Institutional Credit */}
         <div className="gsap-hero-eyebrow inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#080A0F]/85 border border-purple-500/30 text-[7.5px] xs:text-[10px] sm:text-xs font-mono font-bold tracking-[0.1em] xs:tracking-[0.18em] sm:tracking-[0.25em] text-slate-200 uppercase shadow-xl shadow-purple-500/10 backdrop-blur-md max-w-[95%]">
           <Image
-            src="/images/brand-logo.png"
-            alt="AWS SBG Brand Emblem"
+            src="/images/branding/community-mark-transparent.png"
+            alt="PITS Cloud Computing Community Emblem"
             width={18}
             height={18}
             className="w-4 h-4 object-contain rounded shrink-0 shadow-sm shadow-purple-500/40"

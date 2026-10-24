@@ -55,8 +55,8 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-[#080A0F] border border-purple-500/35 p-1.5 shadow-lg shadow-purple-500/20 shrink-0">
                 <Image
-                  src="/images/brand-logo.png"
-                  alt="AWS SBG Logo"
+                  src="/images/branding/community-mark-transparent.png"
+                  alt="PITS Cloud Computing Community Seal"
                   width={40}
                   height={40}
                   className="w-full h-full object-contain"

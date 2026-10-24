@@ -105,8 +105,8 @@ export function LeftNavRail() {
           className="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-500/20 hover:scale-105 transition-all duration-300 p-1.5 shadow-md shadow-purple-500/20"
         >
           <Image
-            src="/images/brand-logo.png"
-            alt="AWS SBG Brand Logo"
+            src="/images/branding/community-mark-transparent.png"
+            alt="PITS Cloud Computing Community Emblem"
             width={32}
             height={32}
             className="w-full h-full object-contain drop-shadow transition-transform duration-300 group-hover:rotate-6"

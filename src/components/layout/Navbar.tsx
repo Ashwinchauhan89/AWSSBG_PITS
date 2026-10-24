@@ -78,10 +78,10 @@ export function Navbar() {
             className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none shrink-0"
           >
             {/* Geometric Brand Logo Emblem */}
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#080A0F] border border-purple-500/35 p-1 flex items-center justify-center shadow-lg shadow-purple-500/20 group-hover:border-purple-400 group-hover:shadow-purple-500/40 transition-all duration-300">
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#080A0F] border border-purple-500/40 p-0.5 flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:border-purple-400 group-hover:shadow-purple-500/50 transition-all duration-300">
               <Image
-                src="/images/brand-logo.png"
-                alt="AWS SBG Logo"
+                src="/images/branding/community-mark-transparent.png"
+                alt="PITS Cloud Computing - Student Builder Group Logo"
                 width={36}
                 height={36}
                 className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
@@ -223,8 +223,8 @@ export function Navbar() {
           <div className="flex items-center gap-2.5 pb-3 border-b border-white/10">
             <div className="w-8 h-8 rounded-lg bg-[#080A0F] border border-purple-500/40 p-1 flex items-center justify-center shrink-0 shadow-md shadow-purple-500/20">
               <Image
-                src="/images/brand-logo.png"
-                alt="AWS SBG Logo"
+                src="/images/branding/community-mark-transparent.png"
+                alt="PITS Cloud Computing Logo"
                 width={32}
                 height={32}
                 className="w-full h-full object-contain"
