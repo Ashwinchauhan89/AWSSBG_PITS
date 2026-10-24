@@ -116,9 +116,6 @@ export default function ProjectsPage() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
           <div className="space-y-4 max-w-2xl">
-            <Badge variant="blue" size="md">
-              Student Innovation Portfolio
-            </Badge>
             <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
               Cloud &amp; AI Builds
             </h1>
