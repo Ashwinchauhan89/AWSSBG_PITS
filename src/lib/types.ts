@@ -87,6 +87,9 @@ export interface StudentProject {
   liveDemoUrl?: string;
   featured: boolean;
   architectureNotes?: string;
+  problemStatement?: string;
+  status?: "Sample Project Concept" | "Prototype" | "Active Development" | "Completed Showcase";
+  isSampleConcept?: boolean;
 }
 
 export type ResourceCategory =

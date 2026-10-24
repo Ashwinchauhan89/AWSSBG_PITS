@@ -2,44 +2,80 @@
 
 import * as React from "react";
 import { useRef } from "react";
-import { Sparkles, Users, Award, ShieldCheck, MapPin, ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { Badge } from "@/components/ui/Badge";
+import { BookOpen, Hammer, Users, Sparkles, MapPin, ShieldCheck } from "lucide-react";
 import { COMMUNITY_INFO } from "@/lib/data/initialData";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { useSound } from "@/components/audio/SoundManager";
+
+interface FeatureCard {
+  title: string;
+  tagline: string;
+  description: string;
+  icon: React.ElementType;
+  accentColor: string;
+  badgeBg: string;
+  borderColor: string;
+  glowEffect: string;
+  bulletPoints: string[];
+}
+
+const FEATURE_CARDS: FeatureCard[] = [
+  {
+    title: "Learn",
+    tagline: "Foundations & Applied Skills",
+    description:
+      "Explore cloud technologies, AI/ML, software engineering, and modern development tools through practical workshops, curriculum labs, and peer study groups.",
+    icon: BookOpen,
+    accentColor: "text-amber-400",
+    badgeBg: "bg-amber-500/10 text-amber-300 border-amber-500/30",
+    borderColor: "hover:border-amber-400/50",
+    glowEffect: "group-hover:shadow-[0_0_35px_rgba(255,153,0,0.22)]",
+    bulletPoints: [
+      "AWS Cloud Primitives & Free Tier Safety",
+      "Foundational AI/ML & Prompt Engineering",
+      "Modern TypeScript & Web Architectures",
+    ],
+  },
+  {
+    title: "Build",
+    tagline: "Prototypes & Collaborative Code",
+    description:
+      "Turn ideas into real-world applications, prototypes, and collaborative projects with fellow student developers across all engineering branches.",
+    icon: Hammer,
+    accentColor: "text-sky-400",
+    badgeBg: "bg-sky-500/10 text-sky-300 border-sky-500/30",
+    borderColor: "hover:border-sky-400/50",
+    glowEffect: "group-hover:shadow-[0_0_35px_rgba(56,189,248,0.22)]",
+    bulletPoints: [
+      "Serverless APIs & Cloud Storage Systems",
+      "Generative AI & Bedrock RAG Prototypes",
+      "Open-Source Repositories with CI/CD",
+    ],
+  },
+  {
+    title: "Connect",
+    tagline: "Community & Peer Mentorship",
+    description:
+      "Share knowledge, collaborate with peers, and participate in community activities, campus meetups, and student tech showcases at PITS Ujjain.",
+    icon: Users,
+    accentColor: "text-emerald-400",
+    badgeBg: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
+    borderColor: "hover:border-emerald-400/50",
+    glowEffect: "group-hover:shadow-[0_0_35px_rgba(52,211,153,0.22)]",
+    bulletPoints: [
+      "Cross-Department Peer Collaboration",
+      "Technical Talks & Architecture Reviews",
+      "Direct Mentorship with Appointed Leads",
+    ],
+  },
+];
 
 export function CommunityMissionSection() {
   const containerRef = useRef<HTMLElement | null>(null);
-  const metric1Ref = useRef<HTMLDivElement | null>(null);
-  const metric2Ref = useRef<HTMLDivElement | null>(null);
-  const metric3Ref = useRef<HTMLDivElement | null>(null);
-  const metric4Ref = useRef<HTMLDivElement | null>(null);
+  const { playHover } = useSound();
 
   useGSAP(
     () => {
-      // Metric Counters
-      const countData = { m1: 0, m2: 0, m3: 0, m4: 0 };
-      gsap.to(countData, {
-        m1: 100,
-        m2: 6,
-        m3: 15,
-        m4: 24,
-        duration: 2.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-        onUpdate: () => {
-          if (metric1Ref.current) metric1Ref.current.textContent = `${Math.floor(countData.m1)}%`;
-          if (metric2Ref.current) metric2Ref.current.textContent = `0${Math.floor(countData.m2)}`;
-          if (metric3Ref.current) metric3Ref.current.textContent = `${Math.floor(countData.m3)}+`;
-          if (metric4Ref.current) metric4Ref.current.textContent = `${Math.floor(countData.m4)}/7`;
-        },
-      });
-
-      // Stagger entrance
       gsap.from(".gsap-mission-card", {
         y: 35,
         opacity: 0,
@@ -71,18 +107,18 @@ export function CommunityMissionSection() {
         <div className="text-center max-w-4xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-semibold tracking-wider uppercase">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>SECTION 01 • THE COMMUNITY</span>
+            <span>SECTION A • COMMUNITY OVERVIEW</span>
           </div>
 
           <h2 className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-white tracking-tight uppercase">
-            Build Beyond Limits. <br />
+            Where Students{" "}
             <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-sky-400 bg-clip-text text-transparent">
-              Learn Without Boundaries.
+              Become Builders.
             </span>
           </h2>
 
           <p className="text-sm sm:text-lg 3xl:text-xl text-slate-300 leading-relaxed font-light max-w-3xl 3xl:max-w-4xl mx-auto pt-2">
-            Explore cloud computing, artificial intelligence, machine learning, and modern software development through hands-on learning, technical workshops, and collaborative innovation.
+            PITS Cloud Computing is a student-led technology community at Prashanti Institute of Technology &amp; Science, Ujjain, where students explore cloud computing, artificial intelligence, software development, and emerging technologies through practical learning, collaborative projects, and technical events.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs font-mono text-slate-400">
@@ -97,95 +133,60 @@ export function CommunityMissionSection() {
           </div>
         </div>
 
-        {/* Community Mission Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-6 sm:p-8 3xl:p-10 border border-white/10 relative overflow-hidden">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">
-              Hands-On Cloud Labs
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              We replace abstract slides with live AWS environments. Students deploy microservices on EC2, configure S3 static assets, and run serverless functions with zero friction.
-            </p>
-          </div>
+        {/* 3 Visual Feature Cards: Learn • Build • Connect */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16">
+          {FEATURE_CARDS.map((card, idx) => {
+            const Icon = card.icon;
+            return (
+              <div
+                key={card.title}
+                onMouseEnter={playHover}
+                className={`gsap-mission-card cinematic-glass rounded-3xl p-6 sm:p-8 3xl:p-10 border border-white/10 relative overflow-hidden transition-all duration-300 group hover:-translate-y-1.5 ${card.borderColor} ${card.glowEffect} hud-corner`}
+              >
+                {/* Top Badge & Number */}
+                <div className="flex items-center justify-between mb-6">
+                  <div
+                    className={`w-12 h-12 rounded-2xl ${card.badgeBg} flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 duration-300`}
+                  >
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-slate-500 uppercase tracking-widest">
+                    PILLAR 0{idx + 1}
+                  </span>
+                </div>
 
-          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-6 sm:p-8 3xl:p-10 border border-white/10 relative overflow-hidden">
-            <div className="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-500/30 text-sky-400 flex items-center justify-center mb-6 shadow-lg shadow-sky-500/20">
-              <Award className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">
-              AI &amp; Generative Mastery
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Dive deep into Amazon Bedrock, SageMaker pipelines, and Retrieval-Augmented Generation (RAG). Learn to connect enterprise-grade LLMs to real campus applications.
-            </p>
-          </div>
+                {/* Card Title & Tagline */}
+                <h3 className="text-xl sm:text-2xl font-black text-white mb-1 group-hover:text-amber-400 transition-colors">
+                  {card.title}
+                </h3>
+                <p className="text-xs font-mono text-slate-400 mb-4 font-medium">
+                  {card.tagline}
+                </p>
 
-          <div className="gsap-mission-card cinematic-glass cinematic-glass-hover rounded-3xl p-6 sm:p-8 3xl:p-10 border border-white/10 relative overflow-hidden md:col-span-2 lg:col-span-1">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/20">
-              <Users className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">
-              Collaborative Innovation
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Build resume-defining portfolio projects in multi-disciplinary student teams. Participate in campus hackathons, code reviews, and peer architecture sessions.
-            </p>
-          </div>
+                {/* Card Description */}
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light mb-6">
+                  {card.description}
+                </p>
+
+                {/* Bullet Points */}
+                <div className="pt-4 border-t border-white/10 space-y-2">
+                  {card.bulletPoints.map((point, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs text-slate-300 font-light">
+                      <span className={`w-1.5 h-1.5 rounded-full ${card.accentColor} shrink-0`} />
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Verified Community Metrics with Counters */}
-        <div className="hud-corner rounded-3xl border border-white/10 bg-[#101A2C]/60 p-5 sm:p-10 backdrop-blur-xl shadow-2xl">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 text-center">
-            <div className="p-4 sm:p-6 rounded-2xl bg-[#080A0F]/70 border border-white/5 flex flex-col justify-center">
-              <div ref={metric1Ref} className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-amber-400 font-mono tracking-tight">
-                0%
-              </div>
-              <p className="text-xs sm:text-sm font-medium text-slate-300 mt-2">
-                Student &amp; Peer-Led
-              </p>
-              <p className="text-[10px] text-slate-400 font-mono mt-0.5">Community Driven</p>
-            </div>
-
-            <div className="p-4 sm:p-6 rounded-2xl bg-[#080A0F]/70 border border-white/5 flex flex-col justify-center">
-              <div ref={metric2Ref} className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-white font-mono tracking-tight">
-                00
-              </div>
-              <p className="text-xs sm:text-sm font-medium text-slate-300 mt-2">
-                Technical Tracks
-              </p>
-              <p className="text-[10px] text-slate-400 font-mono mt-0.5">Cloud, AI, DevOps &amp; Web</p>
-            </div>
-
-            <div className="p-4 sm:p-6 rounded-2xl bg-[#080A0F]/70 border border-white/5 flex flex-col justify-center">
-              <div ref={metric3Ref} className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-sky-400 font-mono tracking-tight">
-                0+
-              </div>
-              <p className="text-xs sm:text-sm font-medium text-slate-300 mt-2">
-                Hands-on Workshops
-              </p>
-              <p className="text-[10px] text-slate-400 font-mono mt-0.5">Planned Curriculum</p>
-            </div>
-
-            <div className="p-4 sm:p-6 rounded-2xl bg-[#080A0F]/70 border border-white/5 flex flex-col justify-center">
-              <div ref={metric4Ref} className="text-2xl xs:text-3xl sm:text-5xl 3xl:text-6xl font-black text-emerald-400 font-mono tracking-tight">
-                0/7
-              </div>
-              <p className="text-xs sm:text-sm font-medium text-slate-300 mt-2">
-                Developer Lab Access
-              </p>
-              <p className="text-[10px] text-slate-400 font-mono mt-0.5">PITS Campus &amp; Discord</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Clear Educational Community Distinction */}
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center gap-2 text-xs text-slate-400 bg-white/5 border border-white/10 px-4 py-2 rounded-full">
-            <ShieldCheck className="w-4 h-4 text-amber-400" />
-            <span>Independent academic community at Prashanti Institute of Technology &amp; Science • Not an official AWS corporate site</span>
+        {/* Community Distinction Banner */}
+        <div className="text-center">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 bg-white/5 border border-white/10 px-4 py-2.5 rounded-full max-w-2xl mx-auto">
+            <ShieldCheck className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>Independent academic community at Prashanti Institute of Technology &amp; Science • Student Builder Group Program</span>
           </div>
         </div>
       </div>

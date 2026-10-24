@@ -1,137 +1,190 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import {
-  Sparkles,
   ArrowRight,
   ShieldCheck,
   Award,
-  Cpu,
-  BookOpen,
-  Terminal,
-  ExternalLink,
-  Layers,
-  GraduationCap,
+  MapPin,
+  CheckCircle2,
 } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Github, Linkedin } from "@/components/ui/Icons";
 import { INITIAL_TEAM_MEMBERS, COMMUNITY_INFO } from "@/lib/data/initialData";
 import { TeamAvatar } from "@/components/team/TeamAvatar";
+import { GsapMagnetic } from "@/components/gsap/GsapMagnetic";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { useSound } from "@/components/audio/SoundManager";
+
+interface CoreDirector {
+  name: string;
+  role: string;
+  category: "Leadership" | "Technical" | "Operations" | "Outreach" | "Creative";
+  department: string;
+  avatarUrl?: string;
+  bio: string;
+  tags: string[];
+  keyFocus: string;
+}
+
+const CORE_TEAM_DIRECTORS: CoreDirector[] = [
+  {
+    name: "Anchit Malik",
+    role: "Co-Lead & Director of Data Engineering",
+    category: "Leadership",
+    department: "Computer Science & Engineering",
+    bio: "Co-leads community operations and directs data engineering architectures, specializing in scalable ETL pipelines, analytical data modeling, and cloud data warehouses on AWS.",
+    tags: ["Data Engineering", "ETL Pipelines", "AWS Glue", "Redshift", "Python", "SQL"],
+    keyFocus: "ETL pipelines, AWS Glue, and analytics data warehousing.",
+  },
+  {
+    name: "Tanish Namdev",
+    role: "Technical Lead & Director of Cloud Computing",
+    category: "Technical",
+    department: "Computer Science & Engineering",
+    bio: "Directs foundational and advanced cloud computing tracks, architecting secure multi-tier virtual environments, networking topologies, and serverless backends.",
+    tags: ["Cloud Computing", "Amazon EC2", "Amazon VPC", "IAM", "Amazon S3", "Security"],
+    keyFocus: "Core compute, VPC networking, and IAM least-privilege security.",
+  },
+  {
+    name: "Shafque Ansari",
+    role: "Director of AI, Machine Learning & MLOps",
+    category: "Technical",
+    department: "Computer Science & Engineering (AI/ML)",
+    bio: "Leads machine learning and generative AI initiatives, specializing in foundation model integration with Amazon Bedrock, SageMaker MLOps, and responsible AI practices.",
+    tags: ["AI & ML", "Generative AI", "Amazon Bedrock", "SageMaker", "MLOps", "LLMs"],
+    keyFocus: "Amazon Bedrock LLMs, SageMaker Studio, and MLOps deployment.",
+  },
+  {
+    name: "Aaysha Malik",
+    role: "Director of Innovation, Logistics & Event Execution",
+    category: "Operations",
+    department: "Computer Science & Engineering",
+    bio: "Spearheads student innovation and end-to-end event execution, championing product ideation on AWS, design thinking, and world-class campus workshop logistics.",
+    tags: ["Innovation", "Design Thinking", "Event Execution", "Operations", "AWS Well-Architected"],
+    keyFocus: "Hands-on lab logistics, design thinking, and campus event execution.",
+  },
+  {
+    name: "Aakansha Panchal",
+    role: "Director of Software Engineering & DevOps",
+    category: "Technical",
+    department: "Computer Science & Engineering",
+    bio: "Heads full-stack software development and automated DevOps pipelines, driving modern containerization, CI/CD with GitHub Actions, and cloud deployments.",
+    tags: ["Software Engineering", "DevOps", "CI/CD", "Docker", "AWS Amplify", "GitHub Actions"],
+    keyFocus: "Full-stack web applications, Docker containers, and CI/CD automation.",
+  },
+  {
+    name: "Muskan Goyal",
+    role: "Director of Marketing & Digital Development",
+    category: "Outreach",
+    department: "Computer Science & Engineering",
+    bio: "Leads digital growth, brand outreach, and technical storytelling, expanding community reach across social platforms and amplifying student builder achievements.",
+    tags: ["Marketing", "Digital Growth", "Technical Writing", "SEO", "Community Outreach"],
+    keyFocus: "Community growth, technical writing, and digital campaign outreach.",
+  },
+  {
+    name: "Krishub",
+    role: "Director of Graphic Design & Creative Social Outreach",
+    category: "Creative",
+    department: "Computer Science & Engineering",
+    bio: "Directs visual brand identity, UI/UX aesthetics, and creative social outreach, translating complex cloud architectures into high-impact graphics and social media designs.",
+    tags: ["Graphic Design", "UI/UX", "Visual Identity", "Canva", "Architecture Infographics"],
+    keyFocus: "Visual identity, UI/UX design, and technical cloud infographics.",
+  },
+];
 
 export function TeamPreview() {
-  const leader =
-    INITIAL_TEAM_MEMBERS.find((m) => m.isLead) || INITIAL_TEAM_MEMBERS[0];
-  const directors = INITIAL_TEAM_MEMBERS.filter(
-    (m) => !m.isLead && !m.isVacant
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const { playHover } = useSound();
+  const leader = INITIAL_TEAM_MEMBERS.find((m) => m.isLead) || INITIAL_TEAM_MEMBERS[0];
+
+  useGSAP(
+    () => {
+      gsap.from(".gsap-team-card", {
+        y: 35,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.7,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    },
+    { scope: sectionRef }
   );
 
-  const getCategoryColor = (category: string) => {
+  const getGlowColor = (category: string) => {
     switch (category) {
       case "Leadership":
-        return {
-          glow: "amber" as const,
-          badge: "bg-amber-500/10 text-amber-300 border-amber-500/30",
-          accent: "text-amber-400",
-          border: "hover:border-amber-500/40",
-        };
+        return "amber" as const;
       case "Technical":
-        return {
-          glow: "blue" as const,
-          badge: "bg-sky-500/10 text-sky-300 border-sky-500/30",
-          accent: "text-sky-400",
-          border: "hover:border-sky-500/40",
-        };
+        return "blue" as const;
       case "Operations":
-        return {
-          glow: "emerald" as const,
-          badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
-          accent: "text-emerald-400",
-          border: "hover:border-emerald-500/40",
-        };
+        return "emerald" as const;
       case "Outreach":
-        return {
-          glow: "cyan" as const,
-          badge: "bg-teal-500/10 text-teal-300 border-teal-500/30",
-          accent: "text-teal-400",
-          border: "hover:border-teal-500/40",
-        };
+        return "cyan" as const;
       case "Creative":
-        return {
-          glow: "pink" as const,
-          badge: "bg-pink-500/10 text-pink-300 border-pink-500/30",
-          accent: "text-pink-400",
-          border: "hover:border-pink-500/40",
-        };
+        return "purple" as const;
       default:
-        return {
-          glow: "slate" as const,
-          badge: "bg-slate-500/10 text-slate-300 border-slate-500/30",
-          accent: "text-slate-400",
-          border: "hover:border-slate-500/40",
-        };
+        return "slate" as const;
     }
   };
 
   return (
     <section
       id="team"
-      className="py-24 border-b border-slate-800/80 bg-slate-950 relative overflow-hidden"
+      ref={sectionRef}
+      className="py-24 sm:py-32 border-b border-white/10 bg-[#080A0F] relative overflow-hidden"
     >
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-sky-500/10 blur-[130px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] volumetric-glow pointer-events-none -z-10" />
+      <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none -z-10" />
 
       <div className="responsive-container">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="space-y-3 max-w-3xl">
-            <div className="inline-flex items-center gap-2">
-              <Badge variant="orange" size="md" className="font-semibold">
-                Official Chapter Leadership Board
-              </Badge>
-              <span className="text-xs text-amber-400 font-mono hidden sm:inline-flex items-center gap-1 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                AWS Student Builder Group
-              </span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-semibold tracking-wider uppercase">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>SECTION F • CORE TEAM &amp; LEADERSHIP</span>
             </div>
-            <h2 className="text-3xl xs:text-4xl sm:text-5xl font-black text-white tracking-tight">
-              Leadership &amp; Core Team
-            </h2>
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Meet our appointed student leadership steering Cloud Computing, Data
-              Engineering, AI &amp; MLOps, DevOps, Innovation, Marketing, and
-              Creative outreach at{" "}
-              <span className="text-amber-300 font-medium">
-                Prashanti Institute of Technology &amp; Science, Ujjain
+            <h2 className="text-2xl xs:text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
+              Core Team &amp; <br />
+              <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-sky-400 bg-clip-text text-transparent">
+                Chapter Leadership
               </span>
-              .
+            </h2>
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+              Meet our appointed student leadership steering Cloud Computing, Data Engineering, AI &amp; MLOps, DevOps, Innovation, Marketing, and Creative outreach at Prashanti Institute of Technology &amp; Science, Ujjain.
             </p>
           </div>
-          <Link href="/team" className="w-full sm:w-auto">
-            <Button
-              variant="secondary"
-              size="md"
-              className="gap-2 shrink-0 w-full sm:w-auto font-mono text-xs shadow-lg shadow-black/40"
-            >
-              <span>View Full Directory &amp; Roadmaps</span>
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
+
+          <GsapMagnetic strength={0.25}>
+            <Link href="/team" className="w-full sm:w-auto">
+              <Button variant="secondary" size="md" className="gap-2 shrink-0 w-full sm:w-auto font-mono text-xs">
+                <span>View Full Directory</span>
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </GsapMagnetic>
         </div>
 
         {/* 1. Prominent Group Leader Profile Card */}
         {leader && (
           <div className="mb-16">
-            <div className="hud-corner rounded-3xl border border-amber-500/40 bg-gradient-to-b from-[#131b2e]/95 via-[#090c14]/95 to-[#101726]/90 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
-              {/* Leader glowing volumetric light */}
+            <div
+              onMouseEnter={playHover}
+              className="hud-corner rounded-3xl border border-amber-500/40 bg-gradient-to-b from-[#131b2e]/95 via-[#090c14]/95 to-[#101726]/90 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl relative overflow-hidden group"
+            >
               <div className="absolute top-0 right-0 w-[500px] h-[300px] bg-gradient-to-bl from-amber-500/15 via-orange-500/10 to-transparent blur-3xl pointer-events-none -z-10" />
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Leader Portrait & Identity */}
-                <div className="lg:col-span-5 flex flex-col items-center sm:items-start text-center sm:text-left space-y-5">
+                <div className="lg:col-span-5 flex flex-col items-center sm:items-start text-center sm:text-left space-y-4">
                   <div className="flex flex-col sm:flex-row items-center gap-6">
-                    {/* Circular Portrait Frame */}
                     <TeamAvatar
                       src={leader.avatarUrl}
                       alt={leader.name}
@@ -147,116 +200,89 @@ export function TeamPreview() {
                     <div className="space-y-1.5">
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono font-bold">
                         <Award className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Chapter Leader &amp; Founder</span>
+                        <span>Chapter Group Leader</span>
                       </div>
+
                       <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                         {leader.name}
                       </h3>
-                      <p className="text-sm font-bold text-amber-400 font-mono">
-                        {leader.role}
-                      </p>
-                      <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-slate-300 font-mono pt-0.5">
-                        <GraduationCap className="w-4 h-4 text-amber-400 shrink-0" />
-                        <span>
-                          {leader.institution ||
-                            `${COMMUNITY_INFO.college}, Ujjain`}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-slate-400 font-mono">
-                        {leader.department} • {leader.year}
-                      </p>
-                    </div>
-                  </div>
 
-                  {/* Social Links & Connect */}
-                  <div className="flex items-center gap-2 pt-2">
-                    {leader.linkedinUrl && (
-                      <a
-                        href={leader.linkedinUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-amber-500/20 hover:border-amber-500/40 transition-colors"
-                        title="Connect on LinkedIn"
-                      >
-                        <Linkedin className="w-4 h-4" />
-                      </a>
-                    )}
-                    {leader.githubUrl && (
-                      <a
-                        href={leader.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-                        title="GitHub Profile"
-                      >
-                        <Github className="w-4 h-4" />
-                      </a>
-                    )}
-                    <a
-                      href={`mailto:${COMMUNITY_INFO.email}`}
-                      className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 text-xs font-mono transition-colors flex items-center gap-1.5"
-                    >
-                      <span>Direct Contact</span>
-                      <ExternalLink className="w-3 h-3 text-slate-400" />
-                    </a>
+                      <p className="text-xs sm:text-sm text-amber-400 font-mono font-semibold">
+                        Student Builder Group Leader
+                      </p>
+
+                      <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-slate-400 font-light">
+                        <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                        <span>{COMMUNITY_INFO.college}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Leader Mission & Capstone Task */}
-                <div className="lg:col-span-7 space-y-5 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-6 lg:pt-0 lg:pl-8">
-                  <blockquote className="text-xs sm:text-sm font-light italic text-slate-200 border-l-2 border-amber-400 pl-4 py-1 leading-relaxed bg-amber-500/5 rounded-r-xl">
-                    &ldquo;Our vision at Prashanti Institute is to cultivate
-                    hands-on cloud and AI literacy where student developers
-                    don&apos;t just read about technologies—they launch services,
-                    architect solutions, and build resume-defining prototypes
-                    together.&rdquo;
-                  </blockquote>
-
+                {/* Leader Bio & Strategic Directives */}
+                <div className="lg:col-span-7 space-y-4 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-white/10 lg:pl-8">
                   <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
                     {leader.bio}
                   </p>
 
-                  {/* Capstone milestone spotlight */}
-                  {leader.practicalTask && (
-                    <div className="p-4 rounded-2xl bg-black/40 border border-amber-500/20 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
-                          <Terminal className="w-3.5 h-3.5" />
-                          <span>Chapter Capstone Task</span>
-                        </div>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30">
-                          Active Milestone
-                        </span>
-                      </div>
-                      <div className="text-xs font-bold text-white">
-                        {leader.practicalTask.title}
-                      </div>
-                      <p className="text-[11px] text-slate-300 leading-relaxed font-light">
-                        {leader.practicalTask.objective}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <div className="rounded-2xl bg-[#080A0F]/80 border border-white/10 p-3.5 space-y-1">
+                      <span className="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3 h-3 text-amber-400" />
+                        Key Directive:
+                      </span>
+                      <p className="text-xs text-slate-300 font-light">
+                        Coordinate cross-domain bootcamps, hands-on lab governance, and zero-cost Free Tier safety.
                       </p>
                     </div>
-                  )}
 
-                  {/* Domain Tags & Roadmap Link */}
-                  <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+                    <div className="rounded-2xl bg-[#080A0F]/80 border border-white/10 p-3.5 space-y-1">
+                      <span className="text-[10px] font-mono font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3 h-3 text-sky-400" />
+                        Builder Focus:
+                      </span>
+                      <p className="text-xs text-slate-300 font-light">
+                        AWS Well-Architected Framework, certification pathways, and student project mentorship.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/10">
                     <div className="flex flex-wrap gap-1.5">
-                      {leader.tags?.map((tag) => (
+                      {leader.tags?.slice(0, 4).map((tag, i) => (
                         <span
-                          key={tag}
-                          className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/10"
+                          key={i}
+                          className="text-[10px] font-mono px-2.5 py-0.5 rounded-md bg-[#080A0F] text-slate-300 border border-white/10"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <Link
-                      href="/team"
-                      className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1.5 font-mono group/link"
-                    >
-                      <span>Explore Chapter Roadmap</span>
-                      <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                    </Link>
+                    <div className="flex items-center gap-3">
+                      {leader.githubUrl && (
+                        <a
+                          href={leader.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-slate-400 hover:text-white transition-colors"
+                          title="GitHub Profile"
+                        >
+                          <Github className="w-4 h-4" />
+                        </a>
+                      )}
+                      {leader.linkedinUrl && (
+                        <a
+                          href={leader.linkedinUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-slate-400 hover:text-sky-400 transition-colors"
+                          title="LinkedIn Profile"
+                        >
+                          <Linkedin className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -264,169 +290,80 @@ export function TeamPreview() {
           </div>
         )}
 
-        {/* 2. Core Team Members Grid (7 Directors) */}
+        {/* 2. Core Team Responsive Grid (7 Directors) */}
         <div>
-          <div className="flex items-center justify-between mb-8 pb-3 border-b border-slate-800">
-            <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 text-xs font-mono text-sky-400 font-bold">
-                <Cpu className="w-3.5 h-3.5" />
-                <span>EXECUTIVE BOARD • 7 CORE DIRECTORATES</span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">
-                Appointed Core Team Members
-              </h3>
-            </div>
-            <span className="text-xs text-slate-400 font-mono hidden sm:inline-block">
-              {directors.length} Appointed Leaders
+          <div className="mb-8 flex items-center justify-between">
+            <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-amber-400" />
+              Core Team Directors
+            </h3>
+            <span className="text-xs font-mono text-slate-400">
+              7 Appointed Directorates
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {directors.map((member) => {
-              const theme = getCategoryColor(member.category);
-              return (
-                <div
-                  key={member.id}
-                  className={`hud-corner rounded-3xl border border-slate-800/90 bg-gradient-to-b from-[#101726]/90 via-[#0a0d14]/95 to-[#101726]/80 p-6 backdrop-blur-xl shadow-xl flex flex-col justify-between space-y-5 ${theme.border} transition-all duration-300 hover:shadow-2xl group`}
-                >
-                  <div className="space-y-4">
-                    {/* Top Row: Category Badge & Socials */}
-                    <div className="flex items-center justify-between gap-2">
-                      <span
-                        className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border font-bold ${theme.badge}`}
-                      >
-                        {member.category}
-                      </span>
-                      <div className="flex items-center gap-1.5">
-                        {member.linkedinUrl && (
-                          <a
-                            href={member.linkedinUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-                            title="LinkedIn Profile"
-                          >
-                            <Linkedin className="w-3.5 h-3.5" />
-                          </a>
-                        )}
-                        {member.githubUrl && (
-                          <a
-                            href={member.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-                            title="GitHub Profile"
-                          >
-                            <Github className="w-3.5 h-3.5" />
-                          </a>
-                        )}
-                      </div>
+            {CORE_TEAM_DIRECTORS.map((director) => (
+              <div
+                key={director.name}
+                onMouseEnter={playHover}
+                className="gsap-team-card cinematic-glass cinematic-glass-hover rounded-3xl p-6 border border-white/10 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group"
+              >
+                <div className="space-y-4">
+                  {/* Avatar & Department Row */}
+                  <div className="flex items-center gap-3.5">
+                    <TeamAvatar
+                      src={director.avatarUrl}
+                      alt={director.name}
+                      name={director.name}
+                      size="md"
+                      variant="circular"
+                      glowColor={getGlowColor(director.category)}
+                      showStatus={false}
+                    />
+
+                    <div className="space-y-0.5 min-w-0">
+                      <h4 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors truncate">
+                        {director.name}
+                      </h4>
+                      <p className="text-[11px] font-mono text-slate-400 truncate">
+                        {director.department}
+                      </p>
                     </div>
-
-                    {/* Member Portrait & Details */}
-                    <div className="flex flex-col items-center text-center space-y-3 pt-2">
-                      {/* Circular Portrait Frame */}
-                      <TeamAvatar
-                        src={member.avatarUrl}
-                        alt={member.name}
-                        name={member.name}
-                        size="xl"
-                        variant="circular"
-                        glowColor={theme.glow}
-                        className="shadow-lg group-hover:scale-105 transition-transform"
-                      />
-
-                      <div className="space-y-1 w-full">
-                        <h4 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
-                          {member.name}
-                        </h4>
-                        <p
-                          className={`text-xs font-bold font-mono ${theme.accent} leading-tight min-h-[2.25rem] flex items-center justify-center`}
-                        >
-                          {member.role}
-                        </p>
-                        <p className="text-[11px] text-slate-300 font-mono truncate">
-                          {member.institution ||
-                            "Prashanti Institute of Technology & Science, Ujjain"}
-                        </p>
-                        <p className="text-[10px] text-slate-400 font-mono">
-                          {member.department} • {member.year}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Special Focus Spotlight (e.g. Aaysha Malik) */}
-                    {member.specialFocus && (
-                      <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-[11px] font-light leading-relaxed">
-                        <span className="font-bold font-mono text-amber-400 block text-[10px] uppercase mb-0.5">
-                          Strategic Focus
-                        </span>
-                        {member.specialFocus}
-                      </div>
-                    )}
-
-                    {/* Bio Snippet */}
-                    <p className="text-xs text-slate-300 leading-relaxed font-light line-clamp-3">
-                      {member.bio}
-                    </p>
-
-                    {/* Practical Task Preview */}
-                    {member.practicalTask && (
-                      <div className="p-3 rounded-xl bg-slate-950/70 border border-white/5 space-y-1">
-                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400 font-bold uppercase">
-                          <BookOpen className="w-3 h-3 text-amber-400" />
-                          <span>Key Task Objective</span>
-                        </div>
-                        <p className="text-[11px] text-slate-300 line-clamp-2 font-light">
-                          {member.practicalTask.objective}
-                        </p>
-                      </div>
-                    )}
                   </div>
 
-                  {/* Card Bottom: Tags & Link to Full Roadmap */}
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                    <div className="flex flex-wrap gap-1">
-                      {member.tags?.slice(0, 2).map((t) => (
-                        <span
-                          key={t}
-                          className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400 border border-white/5"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
+                  {/* Role Title */}
+                  <div className="rounded-xl bg-[#080A0F]/80 border border-white/5 p-2.5">
+                    <span className="text-xs font-mono font-bold text-amber-400 leading-tight block">
+                      {director.role}
+                    </span>
+                  </div>
 
-                    <Link
-                      href="/team"
-                      className="text-xs font-mono font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
-                    >
-                      <span>Roadmap</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                  {/* Bio */}
+                  <p className="text-xs text-slate-300 leading-relaxed font-light line-clamp-3">
+                    {director.bio}
+                  </p>
+
+                  {/* Key Focus Area */}
+                  <div className="pt-2 text-[11px] text-slate-400 font-light border-t border-white/10">
+                    <span className="font-semibold text-slate-300">Focus: </span>
+                    <span>{director.keyFocus}</span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
 
-          {/* Bottom Callout Banner */}
-          <div className="mt-12 p-6 rounded-3xl border border-slate-800 bg-gradient-to-r from-slate-900/90 via-slate-950 to-slate-900/90 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="space-y-1 text-center sm:text-left">
-              <h4 className="text-sm font-bold text-white">
-                Aspire to lead cloud tracks with our Directors?
-              </h4>
-              <p className="text-xs text-slate-400 font-light">
-                Join as a Junior Associate or domain builder under the mentorship
-                of our core leadership board.
-              </p>
-            </div>
-            <Link href="/join" className="w-full sm:w-auto shrink-0">
-              <Button size="md" className="gap-2 w-full sm:w-auto font-mono text-xs">
-                <Sparkles className="w-4 h-4" />
-                <span>Apply for Junior Associate</span>
-              </Button>
-            </Link>
+                {/* Tags */}
+                <div className="pt-4 mt-4 border-t border-white/10 flex flex-wrap gap-1">
+                  {director.tags.slice(0, 3).map((tag, i) => (
+                    <span
+                      key={i}
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#080A0F] text-slate-400 border border-white/5"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

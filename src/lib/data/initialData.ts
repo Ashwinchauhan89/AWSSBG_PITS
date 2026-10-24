@@ -17,6 +17,7 @@ export const COMMUNITY_INFO = {
   leaderRole: "AWS Student Builder Group Leader",
   whatsappUrl: "https://chat.whatsapp.com/EYN9G6KJxfy66GQ3gTgR13",
   officialAwsSbgUrl: "https://builder.aws.com/community/student-builder-groups",
+  meetupUrl: "https://www.meetup.com/pro/aws-student-builder-groups/",
   githubOrgUrl: "https://github.com",
   linkedinOrgUrl: "https://linkedin.com",
 };
@@ -641,6 +642,8 @@ export const INITIAL_PROJECTS: StudentProject[] = [
   {
     id: "proj-campus-resource-hub",
     title: "PITS Campus Resource Hub on AWS",
+    problemStatement:
+      "Engineering students often lack centralized, high-speed access to verified academic resources, previous university question papers, and curriculum lab walkthroughs.",
     description:
       "A centralized educational repository and past examination papers portal built by student builders. Utilizes Amazon S3 for secure document storage, CloudFront for fast edge delivery, and Next.js frontend.",
     category: "Cloud Computing",
@@ -649,11 +652,15 @@ export const INITIAL_PROJECTS: StudentProject[] = [
     githubUrl: "https://github.com",
     liveDemoUrl: "https://awssbg-pits.vercel.app",
     featured: true,
+    status: "Prototype",
+    isSampleConcept: false,
     architectureNotes: "Serverless static site generation cached across CloudFront POPs with pre-signed S3 URLs.",
   },
   {
     id: "proj-campus-ai-tutor",
     title: "Campus AI Academic Assistant",
+    problemStatement:
+      "Students revising late at night encounter blockers understanding complex distributed systems and cloud documentation without access to immediate technical mentors.",
     description:
       "A student-built intelligent study companion that leverages Amazon Bedrock models to answer curriculum queries, summarize technical papers, and generate flashcards for computer science subjects.",
     category: "Generative AI",
@@ -661,11 +668,15 @@ export const INITIAL_PROJECTS: StudentProject[] = [
     contributors: ["AI/ML Domain Builders"],
     githubUrl: "https://github.com",
     featured: true,
+    status: "Sample Project Concept",
+    isSampleConcept: true,
     architectureNotes: "RAG pipeline querying course syllabi and lecture slides embedded in an in-memory vector index.",
   },
   {
     id: "proj-attendance-iot-monitor",
     title: "Smart Lab IoT Presence Monitor",
+    problemStatement:
+      "Manual lab attendance sheets and unmonitored server room environmental factors create operational overhead and lack real-time occupancy telemetry.",
     description:
       "An IoT proof-of-concept prototype tracking environmental metrics and lab occupancy using ESP32 microcontrollers communicating with AWS IoT Core and DynamoDB.",
     category: "Cloud Computing",
@@ -673,11 +684,15 @@ export const INITIAL_PROJECTS: StudentProject[] = [
     contributors: ["IoT & Cloud Student Group"],
     githubUrl: "https://github.com",
     featured: false,
+    status: "Sample Project Concept",
+    isSampleConcept: true,
     architectureNotes: "MQTT topics piped into AWS IoT Core rules engine triggering Lambda ingestion into DynamoDB.",
   },
   {
     id: "proj-placement-portal",
     title: "Developer Resume & Placement Tracker",
+    problemStatement:
+      "Graduating engineering students lack a dedicated, peer-reviewed platform to benchmark cloud architectures and format tech stacks for company recruitment drives.",
     description:
       "An open-source ATS and portfolio builder designed for engineering students to benchmark technical skills, track internship applications, and host dynamic resumes.",
     category: "Web Development",
@@ -685,6 +700,8 @@ export const INITIAL_PROJECTS: StudentProject[] = [
     contributors: ["Full Stack Builders"],
     githubUrl: "https://github.com",
     featured: true,
+    status: "Sample Project Concept",
+    isSampleConcept: true,
     architectureNotes: "Full-stack SSR web application with relational database and automated CI/CD branch deployments.",
   },
 ];

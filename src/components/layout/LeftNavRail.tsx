@@ -46,7 +46,7 @@ export function LeftNavRail() {
     if (!isHomePage) return;
 
     const handleScroll = () => {
-      const sections = ["hero", "community", "technology", "events", "projects", "team", "join"];
+      const sections = ["hero", "community", "technology", "roadmap", "events", "projects", "team", "highlights", "join"];
       const scrollPos = window.scrollY + window.innerHeight / 3;
 
       for (const section of sections) {

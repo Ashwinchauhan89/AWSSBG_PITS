@@ -1,7 +1,7 @@
 import { HeroSection } from "@/components/home/HeroSection";
 import { CommunityMissionSection } from "@/components/home/CommunityMissionSection";
 import { DomainsSection } from "@/components/home/DomainsSection";
-import { LearnByBuildingSection } from "@/components/home/LearnByBuildingSection";
+import { LearningRoadmapSection } from "@/components/home/LearningRoadmapSection";
 import { EventsPreview } from "@/components/home/EventsPreview";
 import { ProjectsPreview } from "@/components/home/ProjectsPreview";
 import { TeamPreview } from "@/components/home/TeamPreview";
@@ -26,8 +26,8 @@ export default function HomePage() {
       {/* Section 2 — Explore Technology */}
       <DomainsSection />
 
-      {/* Section 3 — Learn by Building */}
-      <LearnByBuildingSection />
+      {/* Section C — Learning Roadmap */}
+      <LearningRoadmapSection />
 
       {/* Section 4 — Events and Experiences */}
       <EventsPreview />
