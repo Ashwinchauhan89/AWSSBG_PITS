@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Home, Calendar, Layers, PhoneCall, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -87,7 +88,33 @@ export function LeftNavRail() {
       className="fixed left-2 xl:left-3 2xl:left-5 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center select-none"
     >
       {/* Floating Pill Container (Exact style from reference screenshot) */}
-      <div className="bg-[#080A0F]/85 border border-white/10 py-3 px-1.5 rounded-2xl flex flex-col items-center gap-3 shadow-2xl backdrop-blur-xl">
+      <div className="bg-[#080A0F]/85 border border-white/10 py-2.5 px-1.5 rounded-2xl flex flex-col items-center gap-2 shadow-2xl backdrop-blur-xl">
+        {/* Brand Logo Emblem Top Button */}
+        <Link
+          href="/"
+          onClick={(e) => {
+            playClick();
+            if (isHomePage) {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setHomeScrollSection("home");
+            }
+          }}
+          onMouseEnter={playHover}
+          aria-label="AWS SBG Home"
+          className="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-500/20 hover:scale-105 transition-all duration-300 p-1.5 shadow-md shadow-purple-500/20"
+        >
+          <Image
+            src="/images/brand-logo.png"
+            alt="AWS SBG Brand Logo"
+            width={32}
+            height={32}
+            className="w-full h-full object-contain drop-shadow transition-transform duration-300 group-hover:rotate-6"
+            priority
+          />
+        </Link>
+        <div className="w-8 h-px bg-white/10 my-0.5" />
+
         {RAIL_ITEMS.map((item) => {
           const Icon = item.icon;
           const isActive = activeSection === item.id;

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Menu,
@@ -69,13 +70,24 @@ export function Navbar() {
     >
       <div className="max-w-7xl 2xl:max-w-[1500px] 3xl:max-w-[1800px] 4xl:max-w-[2100px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
         <div className="flex h-12 items-center justify-between gap-2 sm:gap-4">
-          {/* 1. Left Brand Mark (Matching TF™ aesthetic from Techfest reference) */}
+          {/* 1. Left Brand Mark (Matching TF™ aesthetic with Brand Logo Emblem) */}
           <Link
             href="/"
             onClick={playClick}
             onMouseEnter={playHover}
-            className="flex items-center gap-1 sm:gap-1.5 group focus:outline-none shrink-0"
+            className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none shrink-0"
           >
+            {/* Geometric Brand Logo Emblem */}
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#080A0F] border border-purple-500/35 p-1 flex items-center justify-center shadow-lg shadow-purple-500/20 group-hover:border-purple-400 group-hover:shadow-purple-500/40 transition-all duration-300">
+              <Image
+                src="/images/brand-logo.png"
+                alt="AWS SBG Logo"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                priority
+              />
+            </div>
             <div className="flex items-baseline">
               <span className="text-xl sm:text-2xl lg:text-3xl font-black italic tracking-tighter text-white group-hover:text-[#FF9900] transition-colors font-mono">
                 SBG
@@ -207,6 +219,26 @@ export function Navbar() {
       {/* Mobile & Tablet Full-Feature Navigation Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden px-4 pt-4 pb-6 bg-[#080A0F]/98 border-b border-white/15 backdrop-blur-2xl space-y-4 max-h-[calc(100dvh-4rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-200 shadow-2xl">
+          {/* Mobile Drawer Brand Header */}
+          <div className="flex items-center gap-2.5 pb-3 border-b border-white/10">
+            <div className="w-8 h-8 rounded-lg bg-[#080A0F] border border-purple-500/40 p-1 flex items-center justify-center shrink-0 shadow-md shadow-purple-500/20">
+              <Image
+                src="/images/brand-logo.png"
+                alt="AWS SBG Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <div className="text-xs font-mono font-bold text-white tracking-wider flex items-center gap-1">
+                <span>AWS SBG</span>
+                <span className="text-[9px] text-[#FF9900]">PITS</span>
+              </div>
+              <div className="text-[9px] font-mono text-slate-400">STUDENT BUILDER GROUP • UJJAIN</div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 gap-2 text-xs font-mono">
             <Link
               href="/"

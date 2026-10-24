@@ -124,8 +124,14 @@ export function HeroSection() {
       {/* 2. Main Centered Festival Content Column (Exact layout from reference screenshot) */}
       <div className="relative z-10 max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl mx-auto flex flex-col items-center my-auto py-4 sm:py-8 space-y-4 sm:space-y-6 md:space-y-8 w-full">
         {/* Eyebrow Institutional Credit */}
-        <div className="gsap-hero-eyebrow inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#080A0F]/80 border border-white/20 text-[7.5px] xs:text-[10px] sm:text-xs font-mono font-bold tracking-[0.1em] xs:tracking-[0.18em] sm:tracking-[0.25em] text-slate-300 uppercase shadow-xl backdrop-blur-md max-w-[95%]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF9900] animate-ping shrink-0" />
+        <div className="gsap-hero-eyebrow inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#080A0F]/85 border border-purple-500/30 text-[7.5px] xs:text-[10px] sm:text-xs font-mono font-bold tracking-[0.1em] xs:tracking-[0.18em] sm:tracking-[0.25em] text-slate-200 uppercase shadow-xl shadow-purple-500/10 backdrop-blur-md max-w-[95%]">
+          <Image
+            src="/images/brand-logo.png"
+            alt="AWS SBG Brand Emblem"
+            width={18}
+            height={18}
+            className="w-4 h-4 object-contain rounded shrink-0 shadow-sm shadow-purple-500/40"
+          />
           <span className="truncate">PRASHANTI INSTITUTE OF TECHNOLOGY &amp; SCIENCE • UJJAIN</span>
         </div>
 

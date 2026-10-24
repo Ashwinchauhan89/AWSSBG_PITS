@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Cloud,
   ExternalLink,
@@ -52,8 +53,14 @@ export function Footer() {
           {/* Col 1 & 2: About Community */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-md shadow-orange-500/20">
-                <Cloud className="h-5 w-5" strokeWidth={2.5} />
+              <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-[#080A0F] border border-purple-500/35 p-1.5 shadow-lg shadow-purple-500/20 shrink-0">
+                <Image
+                  src="/images/brand-logo.png"
+                  alt="AWS SBG Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <h4 className="text-base font-bold text-white tracking-tight">
