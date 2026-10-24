@@ -13,7 +13,7 @@ Place the team photos in this directory (`public/images/team/`). The website aut
 | **Aaysha Malik** | Director of Innovation, Logistics & Event Execution | `aaysha-malik.jpg` |
 | **Aakansha Panchal** | Director of Software Engineering & DevOps | `aakansha-panchal.jpg` |
 | **Muskan Goyal** | Director of Marketing & Digital Development | `muskan-goyal.jpg` |
-| **Krishub** | Director of Graphic Design & Creative Social Outreach | `krishub.jpg` |
+| **Harshit Singh Sikarwar** | Director of Graphic Design, Research & Creative Social Outreach | `harshit-singh-sikarwar.jpg` |
 
 > **Format Tips:**
 > - Recommended format: `.jpg`, `.png`, or `.webp`

@@ -456,36 +456,37 @@ export function TeamDirectoryClient() {
         </div>
 
         {/* 1. Monumental Leader Showcase (Ashwin Chauhan) */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-2 border-b border-white/10 pb-3">
-            <ShieldCheck className="w-5 h-5 text-amber-400" />
+        <div id="leader" className="space-y-6 scroll-mt-24">
+          <div className="flex items-center gap-2 border-b border-purple-500/30 pb-3">
+            <ShieldCheck className="w-5 h-5 text-purple-400" />
             <h2 className="text-lg font-bold text-white uppercase tracking-wider font-mono">
-              Appointed Student Chapter Leader &amp; Founder
+              Overall Student Group Leader &amp; Founder
             </h2>
           </div>
 
-          <div className="hud-corner rounded-3xl border border-amber-500/40 bg-gradient-to-b from-[#101A2C]/95 via-[#080A0F]/95 to-[#101A2C]/85 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-[550px] h-[350px] volumetric-glow pointer-events-none -z-10" />
+          <div className="hud-corner rounded-3xl border border-purple-500/30 hover:border-purple-400/50 bg-gradient-to-b from-[#131024]/95 via-[#080A0F]/95 to-[#101A2C]/85 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl relative overflow-hidden group transition-all duration-300">
+            <div className="absolute top-0 right-0 w-[550px] h-[350px] bg-gradient-to-bl from-purple-600/15 via-indigo-600/10 to-transparent blur-3xl pointer-events-none -z-10" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[250px] bg-gradient-to-tr from-amber-500/10 via-orange-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Leader Avatar & Bio */}
               <div className="lg:col-span-4 flex flex-col items-center sm:items-start text-center sm:text-left space-y-4">
                 <TeamAvatar
                   src={leader.avatarUrl}
-                  alt={leader.name}
+                  alt={`${leader.name} - ${leader.role}`}
                   name={leader.name}
                   size="hero"
                   variant="circular"
-                  glowColor="amber"
+                  glowColor="purple"
                   showStatus={true}
-                  statusLabel="Appointed Chapter Leader"
-                  className="shadow-2xl shadow-orange-500/25"
+                  statusLabel="Appointed Student Builder Group Leader"
+                  className="shadow-2xl shadow-purple-500/25 ring-2 ring-purple-500/30"
                 />
 
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-mono font-bold mb-1">
-                    <Award className="w-3 h-3" />
-                    <span>FOUNDER &amp; CHAPTER LEAD</span>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/15 border border-purple-500/40 text-purple-300 text-[11px] font-mono font-bold mb-1">
+                    <Award className="w-3 h-3 text-amber-400" />
+                    <span>OVERALL GROUP LEADER</span>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                     {leader.name}
@@ -568,6 +569,36 @@ export function TeamDirectoryClient() {
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
                   {leader.bio}
                 </p>
+
+                {/* Leader Core Responsibilities */}
+                <div className="p-4 rounded-2xl bg-purple-500/5 border border-purple-500/20 space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs font-bold font-mono text-purple-300 uppercase tracking-wider">
+                    <Compass className="w-4 h-4 text-purple-400" />
+                    <span>Core Leadership Responsibilities</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>Community leadership</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>Technical direction</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>Workshops &amp; bootcamps</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>Project initiatives</span>
+                    </div>
+                    <div className="flex items-center gap-2 sm:col-span-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>Student collaboration &amp; mentoring</span>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Leader Learning Roadmap & Practical Task Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
@@ -808,7 +839,7 @@ export function TeamDirectoryClient() {
               </div>
               <h4 className="text-sm font-bold text-white">Marketing &amp; Design</h4>
               <p className="text-xs text-slate-400 leading-relaxed font-light">
-                <strong>Muskan</strong> &amp; <strong>Krishub</strong> craft visual infographics, LinkedIn campaigns, and share student achievements.
+                <strong>Muskan</strong> &amp; <strong>Harshit</strong> craft visual infographics, research-backed technical graphics, LinkedIn campaigns, and share student achievements.
               </p>
             </div>
           </div>

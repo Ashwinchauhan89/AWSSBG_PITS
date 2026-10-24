@@ -36,6 +36,7 @@ export interface TeamMember {
   specialFocus?: string;
   tags?: string[];
   isAdditional?: boolean;
+  responsibilities?: string[];
 }
 
 

@@ -80,7 +80,15 @@ export default function AboutPage() {
               The AWS Student Builder Group at {COMMUNITY_INFO.collegeShort} is a student-led developer forum established to bridge the gap between academic classroom coursework and modern industry cloud practices.
             </p>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Under the leadership of Group Leader <strong className="text-amber-400">{COMMUNITY_INFO.leaderName}</strong>, our community organizes weekend bootcamps, hands-on console sessions, architecture reviews, and hackathon teams. We believe that the best way to master Amazon Web Services is by launching real services, testing architectures, and debugging live code.
+              Under the leadership of Group Leader{" "}
+              <Link
+                href="/team#leader"
+                className="text-amber-400 hover:text-amber-300 underline underline-offset-4 font-semibold transition-colors"
+                title="View Ashwin Chauhan Leadership Profile"
+              >
+                {COMMUNITY_INFO.leaderName}
+              </Link>
+              , our community organizes weekend bootcamps, hands-on console sessions, architecture reviews, and hackathon teams. We believe that the best way to master Amazon Web Services is by launching real services, testing architectures, and debugging live code.
             </p>
 
             <div className="space-y-2 pt-2">
@@ -122,7 +130,14 @@ export default function AboutPage() {
                 </div>
                 <div className="flex justify-between py-1 border-b border-slate-800/40">
                   <span className="text-slate-400">Leader:</span>
-                  <span className="font-semibold text-white">{COMMUNITY_INFO.leaderName}</span>
+                  <Link
+                    href="/team#leader"
+                    className="font-semibold text-purple-300 hover:text-white transition-colors inline-flex items-center gap-1"
+                    title="View Group Leader Profile"
+                  >
+                    <span>{COMMUNITY_INFO.leaderName}</span>
+                    <span className="text-[10px] text-amber-400">&rarr;</span>
+                  </Link>
                 </div>
                 <div className="flex justify-between py-1 border-b border-slate-800/40">
                   <span className="text-slate-400">Model:</span>

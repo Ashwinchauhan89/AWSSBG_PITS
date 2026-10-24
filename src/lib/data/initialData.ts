@@ -38,6 +38,13 @@ export const INITIAL_TEAM_MEMBERS: TeamMember[] = [
     linkedinUrl: "https://linkedin.com/in/",
     githubUrl: "https://github.com/",
     tags: ["Leadership", "Cloud Architecture", "AWS SBG", "Mentorship", "Solutions Architect"],
+    responsibilities: [
+      "Community leadership",
+      "Technical direction",
+      "Workshops",
+      "Project initiatives",
+      "Student collaboration",
+    ],
     learningPath: [
       {
         title: "AWS Well-Architected Framework",
@@ -417,21 +424,21 @@ export const INITIAL_TEAM_MEMBERS: TeamMember[] = [
     },
   },
   {
-    id: "lead-krishub",
-    name: "Krishub",
-    role: "Director of Graphic Design & Creative Social Outreach",
+    id: "lead-harshit-singh-sikarwar",
+    name: "Harshit Singh Sikarwar",
+    role: "Director of Graphic Design, Research & Creative Social Outreach",
     category: "Creative",
     isLead: false,
     isAdditional: true,
     institution: "Prashanti Institute of Technology & Science, Ujjain",
-    avatarUrl: "/images/team/krishub.jpg",
-    bio: "Directs visual brand identity, UI/UX aesthetics, and creative social outreach, translating complex cloud architectures into high-impact graphics and social media designs.",
+    avatarUrl: "/images/team/harshit-singh-sikarwar.jpg",
+    bio: "Directs visual brand identity, research, UI/UX aesthetics, and creative social outreach, translating complex cloud architectures into high-impact graphics and social media designs.",
     department: "Computer Science & Engineering",
     year: "3rd Year",
     isVacant: false,
     linkedinUrl: "https://linkedin.com/in/",
     githubUrl: "https://github.com/",
-    tags: ["Graphic Design", "UI/UX", "Brand Guidelines", "Infographics", "Visual Identity", "Canva", "Creative Outreach"],
+    tags: ["Graphic Design", "Research", "UI/UX", "Brand Guidelines", "Infographics", "Visual Identity", "Canva", "Creative Outreach"],
     learningPath: [
       {
         title: "Canva & Graphic Design Mastery",
