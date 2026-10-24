@@ -27,6 +27,7 @@ export interface TeamMember {
   linkedinUrl?: string;
   githubUrl?: string;
   avatarUrl?: string;
+  institution?: string;
   department?: string;
   year?: string;
   isVacant?: boolean;

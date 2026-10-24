@@ -27,10 +27,10 @@ const AVAILABLE_ROLES = [
   "Data Engineering Associate (Mentored by Anchit Malik)",
   "Cloud Computing Associate (Mentored by Tanish Namdev)",
   "AI / ML & MLOps Associate (Mentored by Shafque Ansari)",
-  "Innovation, Logistics & Event Associate (Mentored by Aayesha Malik)",
+  "Innovation, Logistics & Event Associate (Mentored by Aaysha Malik)",
   "Software Engineering & DevOps Associate (Mentored by Aakansha Panchal)",
   "Marketing & Digital Growth Associate (Mentored by Muskan Goyal)",
-  "Graphic Design & Creative Media Associate (Mentored by Harshit Singh Sikarwar)",
+  "Graphic Design & Creative Media Associate (Mentored by Krishub)",
   "General Student Cloud Builder Volunteer",
 ];
 

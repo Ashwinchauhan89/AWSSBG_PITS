@@ -27,6 +27,7 @@ import {
   Copy,
   ChevronRight,
   GitBranch,
+  GraduationCap,
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
 import { Badge } from "@/components/ui/Badge";
@@ -35,6 +36,7 @@ import { INITIAL_TEAM_MEMBERS, COMMUNITY_INFO } from "@/lib/data/initialData";
 import { TeamMember } from "@/lib/types";
 import { toast } from "sonner";
 import { useSound } from "@/components/audio/SoundManager";
+import { TeamAvatar } from "@/components/team/TeamAvatar";
 
 type FilterCategory = "All" | "Leadership" | "Technical" | "Operations" | "Outreach" | "Creative";
 
@@ -214,6 +216,28 @@ export function TeamDirectoryClient() {
             </div>
 
             <div className="flex items-center gap-2">
+              {director.linkedinUrl && (
+                <a
+                  href={director.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
+                  title="LinkedIn Profile"
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {director.githubUrl && (
+                <a
+                  href={director.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
+                  title="GitHub Profile"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                </a>
+              )}
               <button
                 onClick={() => copyRoadmap(director)}
                 className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs transition-colors flex items-center gap-1 font-mono"
@@ -228,23 +252,43 @@ export function TeamDirectoryClient() {
             </div>
           </div>
 
-          {/* Director Header: Initials Avatar + Info */}
-          <div className="flex items-start gap-4">
-            <div
-              className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr ${theme.gradient} flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shrink-0 border border-white/20`}
-            >
-              {getInitials(director.name)}
-            </div>
+          {/* Director Header: Circular Portrait Avatar + Info */}
+          <div className="flex items-center gap-4">
+            <TeamAvatar
+              src={director.avatarUrl}
+              alt={director.name}
+              name={director.name}
+              size="lg"
+              variant="circular"
+              glowColor={
+                director.category === "Leadership"
+                  ? "amber"
+                  : director.category === "Technical"
+                  ? "blue"
+                  : director.category === "Operations"
+                  ? "emerald"
+                  : director.category === "Outreach"
+                  ? "cyan"
+                  : director.category === "Creative"
+                  ? "pink"
+                  : "slate"
+              }
+              className="group-hover:scale-105 transition-transform"
+            />
 
-            <div className="space-y-1">
-              <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-amber-400 transition-colors">
+            <div className="space-y-1 min-w-0">
+              <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-amber-400 transition-colors truncate">
                 {director.name}
               </h3>
-              <p className={`text-xs font-bold font-mono ${theme.accent}`}>
+              <p className={`text-xs font-bold font-mono ${theme.accent} leading-tight`}>
                 {director.role}
               </p>
-              <p className="text-[11px] text-slate-400 font-mono">
-                {COMMUNITY_INFO.collegeShort} • {director.department} ({director.year})
+              <p className="text-[11px] text-slate-300 font-mono flex items-center gap-1 truncate pt-0.5">
+                <GraduationCap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>{director.institution || "Prashanti Institute of Technology & Science, Ujjain"}</span>
+              </p>
+              <p className="text-[10px] text-slate-400 font-mono">
+                {director.department} ({director.year})
               </p>
             </div>
           </div>
@@ -443,17 +487,17 @@ export function TeamDirectoryClient() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Leader Avatar & Bio */}
               <div className="lg:col-span-4 flex flex-col items-center sm:items-start text-center sm:text-left space-y-4">
-                <div className="relative">
-                  <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-tr from-amber-500 via-orange-500 to-amber-600 flex items-center justify-center text-slate-950 font-black text-4xl shadow-2xl shadow-orange-500/30 border-2 border-white/20">
-                    {getInitials(leader.name)}
-                  </div>
-                  <span className="absolute -bottom-2 -right-2 flex h-6 w-6">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-6 w-6 bg-emerald-500 border-2 border-[#080A0F] text-[10px] items-center justify-center font-bold text-slate-950">
-                      ✓
-                    </span>
-                  </span>
-                </div>
+                <TeamAvatar
+                  src={leader.avatarUrl}
+                  alt={leader.name}
+                  name={leader.name}
+                  size="hero"
+                  variant="circular"
+                  glowColor="amber"
+                  showStatus={true}
+                  statusLabel="Appointed Chapter Leader"
+                  className="shadow-2xl shadow-orange-500/25"
+                />
 
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-mono font-bold mb-1">
@@ -466,8 +510,12 @@ export function TeamDirectoryClient() {
                   <p className="text-sm font-bold text-amber-400 mt-0.5 font-mono">
                     {leader.role}
                   </p>
-                  <p className="text-xs text-slate-400 mt-1 font-mono">
-                    {COMMUNITY_INFO.collegeShort} • {leader.department} ({leader.year})
+                  <p className="text-xs text-slate-300 mt-1 font-mono flex items-center justify-center sm:justify-start gap-1">
+                    <GraduationCap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>{leader.institution || "Prashanti Institute of Technology & Science, Ujjain"}</span>
+                  </p>
+                  <p className="text-[11px] text-slate-400 font-mono">
+                    {leader.department} ({leader.year})
                   </p>
                 </div>
 
@@ -763,7 +811,7 @@ export function TeamDirectoryClient() {
               </div>
               <h4 className="text-sm font-bold text-white">Product Design &amp; Events</h4>
               <p className="text-xs text-slate-400 leading-relaxed font-light">
-                <strong>Aayesha</strong> guides students in building innovative products on AWS and manages high-impact campus workshops.
+                <strong>Aaysha</strong> guides students in building innovative products on AWS and manages high-impact campus workshops.
               </p>
             </div>
 
@@ -777,7 +825,7 @@ export function TeamDirectoryClient() {
               </div>
               <h4 className="text-sm font-bold text-white">Marketing &amp; Design</h4>
               <p className="text-xs text-slate-400 leading-relaxed font-light">
-                <strong>Muskan</strong> &amp; <strong>Harshit</strong> craft visual infographics, LinkedIn campaigns, and share student achievements.
+                <strong>Muskan</strong> &amp; <strong>Krishub</strong> craft visual infographics, LinkedIn campaigns, and share student achievements.
               </p>
             </div>
           </div>

@@ -8,11 +8,15 @@ import { TextScrambleBanner } from "@/components/animations/TextScrambleBanner";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 
+
+
 export const metadata: Metadata = {
   title: "Interactive GSAP Animation Lab | AWS SBG PITS",
   description:
     "Explore high-performance GSAP animations including ScrollTrigger pinning, FLIP layout morphing, Draggable cloud architectures, and elastic magnetic interactions.",
 };
+
+
 
 export default function AnimationsPage() {
   return (
@@ -138,3 +142,6 @@ export default function AnimationsPage() {
     </div>
   );
 }
+
+
+
