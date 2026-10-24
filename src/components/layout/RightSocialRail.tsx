@@ -102,7 +102,7 @@ export function RightSocialRail() {
                 onClick={playClick}
                 onMouseEnter={playHover}
                 aria-label={item.label}
-                className={`relative flex items-center justify-center w-8 h-8 rounded-lg text-slate-300 hover:bg-white/5 transition-all duration-200 ${item.hoverClass}`}
+                className={`relative flex items-center justify-center w-8 h-8 rounded-lg text-slate-300 hover:bg-white/5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9900] ${item.hoverClass}`}
               >
                 <Icon className="w-4 h-4" />
               </a>

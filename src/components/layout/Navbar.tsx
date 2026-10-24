@@ -67,7 +67,7 @@ export function Navbar() {
             href="/"
             onClick={playClick}
             onMouseEnter={playHover}
-            className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none shrink-0"
+            className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9900] rounded-lg shrink-0"
           >
             {/* Geometric Purple Pixel-Chip Brand Logo Emblem */}
             <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#080A0F] border border-purple-500/40 p-0.5 flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:border-purple-400 group-hover:shadow-purple-500/50 transition-all duration-300">
@@ -94,14 +94,14 @@ export function Navbar() {
           </Link>
 
           {/* 2. Center Futuristic Beveled HUD Frame (Responsive across tablets and screens) */}
-          <nav className="hidden lg:flex items-center relative shrink-0">
+          <nav aria-label="Main Navigation" className="hidden lg:flex items-center relative shrink-0">
             {/* SVG Beveled Polygon Bracket Border */}
-            <div className="relative flex items-center px-4 xl:px-8 py-1.5 xl:py-2 bg-[#080A0F]/90 backdrop-blur-xl border border-white/20 shadow-[0_4px_25px_rgba(0,0,0,0.6)] [clip-path:polygon(12px_0%,calc(100%-12px)_0%,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0%_calc(100%-12px),0%_12px)]">
+            <div className="relative flex items-center px-4 xl:px-8 py-2 xl:py-2.5 bg-[#080A0F]/90 backdrop-blur-xl border border-white/20 shadow-[0_4px_25px_rgba(0,0,0,0.6)] [clip-path:polygon(12px_0%,calc(100%-12px)_0%,100%_12px,100%_calc(100%-12px),calc(100%-12px)_100%,12px_100%,0%_calc(100%-12px),0%_12px)]">
               {/* Corner tech accents */}
-              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-[#FF9900]/70" />
-              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[#FF9900]/70" />
-              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-[#FF9900]/70" />
-              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-[#FF9900]/70" />
+              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-[#FF9900]/70 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[#FF9900]/70 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-[#FF9900]/70 pointer-events-none" />
+              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-[#FF9900]/70 pointer-events-none" />
 
               <div className="flex items-center gap-4 xl:gap-8 text-[10px] xl:text-[11px] font-mono font-bold tracking-[0.14em] uppercase">
                 {/* Learning / Resources */}
@@ -110,7 +110,7 @@ export function Navbar() {
                   onClick={playClick}
                   onMouseEnter={playHover}
                   className={cn(
-                    "transition-colors hover:text-[#FF9900]",
+                    "transition-colors hover:text-[#FF9900] focus-visible:outline-none focus-visible:text-[#FF9900]",
                     pathname === "/resources" ? "text-[#FF9900]" : "text-slate-300"
                   )}
                 >
@@ -119,7 +119,7 @@ export function Navbar() {
 
                 {/* Workshops with EARLY BIRD badge */}
                 <div className="relative flex flex-col items-center">
-                  <span className="absolute -top-3.5 text-[7px] xl:text-[8px] font-mono font-black tracking-wider text-[#FF9900] bg-[#FF9900]/15 px-1.5 py-0.2 rounded border border-[#FF9900]/30 animate-pulse">
+                  <span className="absolute -top-3.5 text-[7px] xl:text-[7.5px] font-mono font-black tracking-wider text-[#FF9900] bg-[#FF9900]/20 px-1.5 py-0.5 rounded border border-[#FF9900]/40 leading-none pointer-events-none">
                     EARLY BIRD
                   </span>
                   <Link
@@ -127,7 +127,7 @@ export function Navbar() {
                     onClick={playClick}
                     onMouseEnter={playHover}
                     className={cn(
-                      "transition-colors hover:text-[#FF9900] pt-1",
+                      "transition-colors hover:text-[#FF9900] focus-visible:outline-none focus-visible:text-[#FF9900]",
                       pathname === "/events" ? "text-[#FF9900]" : "text-slate-300"
                     )}
                   >
@@ -141,7 +141,7 @@ export function Navbar() {
                   onClick={playClick}
                   onMouseEnter={playHover}
                   className={cn(
-                    "transition-colors hover:text-[#FF9900]",
+                    "transition-colors hover:text-[#FF9900] focus-visible:outline-none focus-visible:text-[#FF9900]",
                     pathname === "/projects" ? "text-[#FF9900]" : "text-slate-300"
                   )}
                 >
@@ -154,7 +154,7 @@ export function Navbar() {
                   onClick={playClick}
                   onMouseEnter={playHover}
                   className={cn(
-                    "transition-colors hover:text-[#FF9900]",
+                    "transition-colors hover:text-[#FF9900] focus-visible:outline-none focus-visible:text-[#FF9900]",
                     pathname === "/about" ? "text-[#FF9900]" : "text-slate-300"
                   )}
                 >
@@ -164,16 +164,17 @@ export function Navbar() {
             </div>
           </nav>
 
-          {/* 3. Right Leader Profile Element & Sound Toggle (Responsive Desktop/Tablet) */}
-          <div className="hidden sm:flex items-center gap-2 lg:gap-3 shrink-0">
+          {/* 3. Right Controls: Unified Sound Toggle, Leader Profile Element & Mobile Menu Button */}
+          <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-3 shrink-0">
+            {/* Single Unified SoundToggle across all viewports */}
             <SoundToggle />
 
-            {/* Ashwin Chauhan Leader Profile Card */}
+            {/* Ashwin Chauhan Leader Profile Card (Desktop & Tablet) */}
             <Link
               href="/team"
               onClick={playClick}
               onMouseEnter={playHover}
-              className="flex items-center gap-2 lg:gap-2.5 px-2.5 py-1 rounded-full bg-[#080A0F]/90 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-950/20 transition-all duration-200 shadow-md shadow-purple-500/10 group focus:outline-none focus:ring-2 focus:ring-[#FF9900]/50"
+              className="hidden sm:flex items-center gap-2 lg:gap-2.5 px-2.5 py-1 rounded-full bg-[#080A0F]/90 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-950/20 transition-all duration-200 shadow-md shadow-purple-500/10 group focus:outline-none focus:ring-2 focus:ring-[#FF9900]/50"
               title="Group Leader Profile: Ashwin Chauhan • Student Builder Group Leader"
             >
               <div className="relative w-7 h-7 lg:w-8 lg:h-8 rounded-full overflow-hidden bg-slate-900 border border-purple-500/60 shadow-sm shadow-purple-500/30 group-hover:border-purple-400 group-hover:shadow-purple-500/50 transition-all shrink-0 flex items-center justify-center">
@@ -202,13 +203,8 @@ export function Navbar() {
                 </span>
               </div>
             </Link>
-          </div>
 
-          {/* Mobile Menu Trigger, Compact Leader Avatar & Sound Toggle */}
-          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
-            <SoundToggle />
-
-            {/* Mobile Compact Leader Avatar */}
+            {/* Mobile Compact Leader Avatar (Mobile only) */}
             <Link
               href="/team"
               onClick={playClick}
@@ -232,13 +228,14 @@ export function Navbar() {
               )}
             </Link>
 
+            {/* Tablet & Mobile Menu Toggle */}
             <button
               onClick={() => {
                 playClick();
                 setMobileMenuOpen(!mobileMenuOpen);
               }}
-              aria-label="Toggle menu"
-              className="p-2 rounded-lg bg-[#080A0F] border border-white/10 text-white"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              className="lg:hidden p-2 rounded-lg bg-[#080A0F] border border-white/10 hover:border-white/30 text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF9900]/50"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>

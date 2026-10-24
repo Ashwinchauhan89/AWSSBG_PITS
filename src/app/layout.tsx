@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { LeftNavRail } from "@/components/layout/LeftNavRail";
@@ -6,6 +6,13 @@ import { RightSocialRail } from "@/components/layout/RightSocialRail";
 import { Footer } from "@/components/layout/Footer";
 import { ToastProvider } from "@/components/shared/ToastProvider";
 import { GsapScrollProgress } from "@/components/gsap/GsapScrollProgress";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#080A0F",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -63,7 +70,7 @@ export default function RootLayout({
           <Navbar />
           <LeftNavRail />
           <RightSocialRail />
-          <main className="flex-1 relative z-10">{children}</main>
+          <main className="flex-1 relative z-10 overflow-x-clip">{children}</main>
           <Footer />
           <ToastProvider />
         </ClientLayoutShell>

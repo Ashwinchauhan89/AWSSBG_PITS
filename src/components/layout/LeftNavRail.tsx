@@ -20,7 +20,7 @@ const RAIL_ITEMS: RailItem[] = [
   { id: "home", label: "Home", sectionId: "hero", href: "/#hero", icon: Home },
   { id: "events", label: "Events", sectionId: "events", href: "/events", icon: Calendar },
   { id: "projects", label: "Projects", sectionId: "projects", href: "/projects", icon: Layers },
-  { id: "contact", label: "Contact Us", sectionId: "contact", href: "/contact", icon: PhoneCall },
+  { id: "contact", label: "Contact Us", href: "/contact", icon: PhoneCall },
   { id: "about", label: "About Us", sectionId: "community", href: "/about", icon: Users },
 ];
 
@@ -46,19 +46,26 @@ export function LeftNavRail() {
     if (!isHomePage) return;
 
     const handleScroll = () => {
-      const sections = ["hero", "community", "technology", "roadmap", "events", "projects", "team", "highlights", "join"];
       const scrollPos = window.scrollY + window.innerHeight / 3;
+      const sectionMappings = [
+        { id: "hero", navId: "home" },
+        { id: "community", navId: "about" },
+        { id: "technology", navId: "about" },
+        { id: "roadmap", navId: "home" },
+        { id: "events", navId: "events" },
+        { id: "projects", navId: "projects" },
+        { id: "team", navId: "about" },
+        { id: "highlights", navId: "home" },
+        { id: "join", navId: "home" },
+      ];
 
-      for (const section of sections) {
-        const el = document.getElementById(section);
+      for (const mapping of sectionMappings) {
+        const el = document.getElementById(mapping.id);
         if (el) {
           const top = el.offsetTop;
           const height = el.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
-            if (section === "hero") setHomeScrollSection("home");
-            else if (section === "events") setHomeScrollSection("events");
-            else if (section === "projects") setHomeScrollSection("projects");
-            else if (section === "community") setHomeScrollSection("about");
+            setHomeScrollSection(mapping.navId);
             break;
           }
         }
@@ -102,7 +109,7 @@ export function LeftNavRail() {
           }}
           onMouseEnter={playHover}
           aria-label="AWS SBG Home"
-          className="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-500/20 hover:scale-105 transition-all duration-300 p-1.5 shadow-md shadow-purple-500/20"
+          className="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-500/20 hover:scale-105 transition-all duration-300 p-1.5 shadow-md shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9900]"
         >
           <Image
             src="/images/branding/community-mark-transparent.png"
@@ -127,7 +134,7 @@ export function LeftNavRail() {
               onMouseEnter={playHover}
               aria-label={item.label}
               className={cn(
-                "group relative flex flex-col items-center justify-center w-14 py-2 px-1 rounded-xl transition-all duration-200",
+                "group relative flex flex-col items-center justify-center w-14 py-2 px-1 rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9900]",
                 isActive
                   ? "bg-white/10 text-white shadow-inner"
                   : "text-slate-400 hover:text-white hover:bg-white/5"

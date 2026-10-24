@@ -12,8 +12,9 @@ export function FloatingDroneBot({ onClick }: FloatingDroneBotProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 lg:bottom-8 lg:right-8 z-40 select-none cursor-pointer"
+    <button
+      type="button"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-40 select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9900] focus-visible:ring-offset-4 focus-visible:ring-offset-[#080A0F] rounded-2xl p-1 bg-transparent border-0"
       onClick={() => {
         playClick();
         onClick?.();
@@ -24,6 +25,7 @@ export function FloatingDroneBot({ onClick }: FloatingDroneBotProps) {
       }}
       onMouseLeave={() => setIsHovered(false)}
       title="Ask Builder AI / SBG Drone Companion"
+      aria-label="Ask Builder AI - Open Interactive Terminal Assistant"
     >
       <div className="relative flex flex-col items-center">
         {/* Chat Speech Bubble Tooltip (Responsive) */}
@@ -110,6 +112,6 @@ export function FloatingDroneBot({ onClick }: FloatingDroneBotProps) {
           </svg>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

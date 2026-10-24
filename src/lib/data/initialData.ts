@@ -142,7 +142,8 @@ export const INITIAL_TEAM_MEMBERS: TeamMember[] = [
     isLead: false,
     group: "core",
     institution: "Prashanti Institute of Technology & Science, Ujjain",
-    avatarUrl: "/images/team/tanish-namdev.jpg",
+
+    avatarUrl: "/images/team/tanish-namdev.webp",
     bio: "Directs foundational and advanced cloud computing tracks, architecting secure multi-tier virtual environments, networking topologies, and serverless backends.",
     department: "Computer Science & Engineering",
     year: "3rd Year",
