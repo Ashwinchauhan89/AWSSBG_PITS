@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CommunityBanner } from "@/components/layout/CommunityBanner";
 import { Navbar } from "@/components/layout/Navbar";
@@ -8,16 +7,6 @@ import { RightSocialRail } from "@/components/layout/RightSocialRail";
 import { Footer } from "@/components/layout/Footer";
 import { ToastProvider } from "@/components/shared/ToastProvider";
 import { GsapScrollProgress } from "@/components/gsap/GsapScrollProgress";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -67,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className="h-full antialiased dark"
     >
       <body className="min-h-full flex flex-col bg-[#080A0F] text-[#F5F7FA] selection:bg-amber-500 selection:text-[#080A0F] relative">
         <ClientLayoutShell>

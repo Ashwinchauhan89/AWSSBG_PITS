@@ -4,6 +4,8 @@ description: Official GSAP skill for Vue, Svelte, and other non-React frameworks
 license: MIT
 ---
 
+
+
 # GSAP with Vue, Svelte, and Other Frameworks
 
 ## When to Use This Skill

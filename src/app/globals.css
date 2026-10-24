@@ -1,6 +1,71 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Amazon Ember Typography System
+   Primary Typeface for PITS Cloud Computing / AWS Student Builder Group
+   Supports weights: Light (300), Regular (400), Medium (500), Bold (700), ExtraBold (800), Heavy (900)
+   with fallback: "Amazon Ember", Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif
+   ========================================================================== */
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local("Amazon Ember Light"), local("AmazonEmber-Light");
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Amazon Ember"), local("Amazon Ember Regular"), local("AmazonEmber-Regular");
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Amazon Ember Italic"), local("AmazonEmber-Italic");
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local("Amazon Ember Medium"), local("AmazonEmber-Medium");
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Amazon Ember Bold"), local("AmazonEmber-Bold");
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: local("Amazon Ember ExtraBold"), local("AmazonEmber-ExtraBold");
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: local("Amazon Ember Heavy"), local("AmazonEmber-Heavy");
+}
+
 :root {
+  --font-amazon-ember: "Amazon Ember", Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-code-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --background: #080a0f;
   --foreground: #f5f7fa;
   --obsidian: #080a0f;
@@ -30,8 +95,8 @@
   --color-aws-navy-surface: var(--aws-navy-surface);
   --color-aws-navy-card: var(--aws-navy-card);
   --color-aws-navy-border: var(--aws-navy-border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-amazon-ember);
+  --font-mono: var(--font-code-mono);
   --breakpoint-xs: 380px;
   --breakpoint-3xl: 1920px;
   --breakpoint-4xl: 2560px;
@@ -46,17 +111,30 @@ html {
   color-scheme: dark;
   overflow-x: hidden;
   max-width: 100vw;
+  font-family: var(--font-amazon-ember);
 }
 
 body {
   background-color: #080a0f;
   color: #f5f7fa;
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-amazon-ember);
   overflow-x: hidden;
   max-width: 100vw;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global Typography Hierarchy & Consistency across all UI elements */
+h1, h2, h3, h4, h5, h6,
+p, span, a, button, input, select, textarea, label, table, th, td,
+nav, aside, footer, header, main {
+  font-family: var(--font-amazon-ember);
+}
+
+/* Explicitly preserve monospaced typography for code, terminal chips, and telemetry */
+code, kbd, samp, pre, .font-mono {
+  font-family: var(--font-code-mono) !important;
 }
 
 /* Master Responsive Container for Mobile, Tablets, Laptops & LED Displays */

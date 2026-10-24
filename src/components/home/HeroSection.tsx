@@ -137,7 +137,7 @@ export function HeroSection() {
 
         {/* Dramatic Ornate Monumental Title with Flourishing Calligraphy Swoosh */}
         <div className="relative flex flex-col items-center w-full px-2">
-          <h1 className="gsap-hero-title text-[2.75rem] xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[10rem] 3xl:text-[12rem] 4xl:text-[14rem] font-serif font-black tracking-tight xs:tracking-wide sm:tracking-wider text-white uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)] leading-[0.95] max-w-full">
+          <h1 className="gsap-hero-title text-[2.75rem] xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[10rem] 3xl:text-[12rem] 4xl:text-[14rem] font-sans font-black tracking-tight xs:tracking-wide sm:tracking-wider text-white uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)] leading-[0.95] max-w-full">
             BUILDERS
           </h1>
 
