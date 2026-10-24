@@ -26,6 +26,8 @@ export function Navbar() {
   const [prevPathname, setPrevPathname] = React.useState(pathname);
   const [isScrolled, setIsScrolled] = React.useState(false);
 
+  const [avatarError, setAvatarError] = React.useState(false);
+
   // Close mobile drawer on route change
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
@@ -162,25 +164,73 @@ export function Navbar() {
             </div>
           </nav>
 
-          {/* 3. Right Profile Button & Sound Toggle (Responsive) */}
+          {/* 3. Right Leader Profile Element & Sound Toggle (Responsive Desktop/Tablet) */}
           <div className="hidden sm:flex items-center gap-2 lg:gap-3 shrink-0">
             <SoundToggle />
 
-            {/* ASHWIN Profile Button */}
+            {/* Ashwin Chauhan Leader Profile Card */}
             <Link
               href="/team"
               onClick={playClick}
               onMouseEnter={playHover}
-              className="px-3 lg:px-4 py-1.5 rounded-lg bg-[#080A0F] border border-white/30 hover:border-[#FF9900] text-[11px] lg:text-xs font-mono font-bold tracking-widest text-white hover:text-[#FF9900] shadow-md transition-all uppercase"
-              title="Group Leader Profile: Ashwin Chauhan"
+              className="flex items-center gap-2 lg:gap-2.5 px-2.5 py-1 rounded-full bg-[#080A0F]/90 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-950/20 transition-all duration-200 shadow-md shadow-purple-500/10 group focus:outline-none focus:ring-2 focus:ring-[#FF9900]/50"
+              title="Group Leader Profile: Ashwin Chauhan • Student Builder Group Leader"
             >
-              ASHWIN
+              <div className="relative w-7 h-7 lg:w-8 lg:h-8 rounded-full overflow-hidden bg-slate-900 border border-purple-500/60 shadow-sm shadow-purple-500/30 group-hover:border-purple-400 group-hover:shadow-purple-500/50 transition-all shrink-0 flex items-center justify-center">
+                {!avatarError ? (
+                  <Image
+                    src="/images/team/ashwin-chauhan.jpg"
+                    alt="Ashwin Chauhan - Student Builder Group Leader"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover object-top"
+                    onError={() => setAvatarError(true)}
+                  />
+                ) : (
+                  <span className="text-[10px] font-mono font-bold text-amber-400">
+                    AC
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-col text-left leading-tight pr-1">
+                <span className="text-[11px] lg:text-xs font-bold text-white group-hover:text-[#FF9900] transition-colors truncate font-sans">
+                  Ashwin Chauhan
+                </span>
+                <span className="text-[8.5px] lg:text-[9px] font-mono text-slate-400 group-hover:text-slate-300 transition-colors truncate">
+                  <span className="hidden xl:inline">Student Builder Group Leader</span>
+                  <span className="xl:hidden">SBG Leader</span>
+                </span>
+              </div>
             </Link>
           </div>
 
-          {/* Mobile Menu Trigger & Sound Toggle */}
+          {/* Mobile Menu Trigger, Compact Leader Avatar & Sound Toggle */}
           <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
             <SoundToggle />
+
+            {/* Mobile Compact Leader Avatar */}
+            <Link
+              href="/team"
+              onClick={playClick}
+              className="sm:hidden relative w-8 h-8 rounded-full overflow-hidden bg-slate-900 border border-purple-500/50 shadow-sm shadow-purple-500/25 active:scale-95 transition-all flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[#FF9900]/50"
+              title="Ashwin Chauhan • Student Builder Group Leader"
+              aria-label="View Leader Profile: Ashwin Chauhan"
+            >
+              {!avatarError ? (
+                <Image
+                  src="/images/team/ashwin-chauhan.jpg"
+                  alt="Ashwin Chauhan - Student Builder Group Leader"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover object-top"
+                  onError={() => setAvatarError(true)}
+                />
+              ) : (
+                <span className="text-[10px] font-mono font-bold text-amber-400">
+                  AC
+                </span>
+              )}
+            </Link>
 
             <button
               onClick={() => {
@@ -219,6 +269,46 @@ export function Navbar() {
             </div>
           </div>
 
+          {/* Mobile Leader Profile Card */}
+          <Link
+            href="/team"
+            onClick={() => {
+              playClick();
+              setMobileMenuOpen(false);
+            }}
+            className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-purple-950/40 via-[#101A2C] to-slate-900 border border-purple-500/30 hover:border-purple-400 transition-all group"
+          >
+            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-slate-900 border border-purple-500/60 shadow-md shadow-purple-500/30 shrink-0 flex items-center justify-center">
+              {!avatarError ? (
+                <Image
+                  src="/images/team/ashwin-chauhan.jpg"
+                  alt="Ashwin Chauhan - Student Builder Group Leader"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover object-top"
+                  onError={() => setAvatarError(true)}
+                />
+              ) : (
+                <span className="text-xs font-mono font-bold text-amber-400">
+                  AC
+                </span>
+              )}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-xs font-bold text-white group-hover:text-[#FF9900] transition-colors truncate">
+                  Ashwin Chauhan
+                </span>
+                <span className="text-[8px] font-mono font-bold text-[#FF9900] bg-[#FF9900]/15 px-1.5 py-0.5 rounded border border-[#FF9900]/30 shrink-0">
+                  LEADER
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-slate-400 block truncate">
+                Student Builder Group Leader
+              </span>
+            </div>
+          </Link>
+
           <div className="grid grid-cols-2 gap-2 text-xs font-mono">
             <Link
               href="/"
@@ -252,9 +342,9 @@ export function Navbar() {
             <Link
               href="/team"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-2 p-2.5 rounded-lg bg-white/5 border border-white/10 text-[#FF9900] font-bold"
+              className="flex items-center gap-2 p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:border-[#FF9900]/50"
             >
-              <span>ASHWIN (LEAD)</span>
+              <span>TEAM DIRECTORY</span>
             </Link>
             <Link
               href="/about"
