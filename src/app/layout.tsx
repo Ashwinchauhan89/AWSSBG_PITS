@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { CommunityBanner } from "@/components/layout/CommunityBanner";
 import { Navbar } from "@/components/layout/Navbar";
 import { LeftNavRail } from "@/components/layout/LeftNavRail";
 import { RightSocialRail } from "@/components/layout/RightSocialRail";
@@ -61,7 +60,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#080A0F] text-[#F5F7FA] selection:bg-amber-500 selection:text-[#080A0F] relative">
         <ClientLayoutShell>
           <GsapScrollProgress />
-          <CommunityBanner />
           <Navbar />
           <LeftNavRail />
           <RightSocialRail />

@@ -56,12 +56,6 @@ export function Footer() {
               <MessageCircle className="w-3.5 h-3.5" />
               Join WhatsApp Community
             </a>
-            <Link
-              href="/join"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 hover:from-amber-400 hover:to-orange-500 transition-all shadow-md shadow-orange-500/20"
-            >
-              Apply for Core Team
-            </Link>
           </div>
         </div>
       </div>
@@ -240,11 +234,6 @@ export function Footer() {
             </div>
             <ul className="space-y-1.5 text-xs pt-1">
               <li>
-                <Link href="/join" className="text-amber-400 hover:text-amber-300 font-medium">
-                  → Apply for Core Team Roles
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="hover:text-slate-200">
                   → Contact Organizing Team
                 </Link>
@@ -344,10 +333,6 @@ export function Footer() {
             <div className="flex items-center gap-4">
               <Link href="/about" className="hover:text-slate-300">
                 Mission
-              </Link>
-              <span>•</span>
-              <Link href="/join" className="hover:text-slate-300">
-                Join Core Team
               </Link>
               <span>•</span>
               <Link href="/contact" className="hover:text-slate-300">

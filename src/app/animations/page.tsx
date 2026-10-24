@@ -126,7 +126,7 @@ export default function AnimationsPage() {
             Join the AWS Student Builder Group at Prashanti Institute of Technology &amp; Science to collaborate on real-world projects, workshops, and cloud architectures.
           </p>
           <div className="pt-2 flex justify-center gap-4">
-            <Link href="/join">
+            <Link href="/#community">
               <Button size="lg" className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold border-none shadow-xl">
                 Join Community
               </Button>

@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Calendar, ChevronDown, Sparkles, ShieldCheck } from "lucide-react";
+import { ArrowRight, Calendar, ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { GsapMagnetic } from "@/components/gsap/GsapMagnetic";
 import { gsap, useGSAP } from "@/lib/gsap";

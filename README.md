@@ -11,8 +11,7 @@ Official web platform for the **AWS Student Builder Group (SBG)** at **Prashanti
 - **Home (`/`)**: Hero section with AWS-inspired gradients, animated cloud infrastructure architecture visualizer, verified community metrics, domain tracks, upcoming events preview, featured student projects, and core team preview.
 - **About (`/about`)**: Clear statement of the student builder mission, academic cross-department participation, hands-on learning philosophy, and community distinction from corporate AWS.
 - **Events (`/events`)**: Categorized technical workshops, bootcamps, and hackathons with search filtering, status badges (upcoming/past), capacity indicators, and direct registration modal.
-- **Core Team (`/team`)**: Leadership directory highlighting appointed Group Leader **Ashwin Chauhan**, alongside clearly distinguished open positions with direct recruitment call-to-actions.
-- **Join Core Team (`/join`)**: Application portal with strict client & server validation (7.0+ CGPA requirement, branch, motivation, technical background), anti-duplicate submission safeguards, and transparent privacy disclosures.
+- **Core Team (`/team`)**: Leadership directory highlighting appointed Group Leader **Ashwin Chauhan**, directorate leads, learning roadmaps, and domain responsibilities.
 - **Projects (`/projects`)**: Student cloud projects across Cloud Computing, AI/ML, Generative AI, Web Development, and Cybersecurity, with interactive submission modal.
 - **Learning Resources (`/resources`)**: Curated, verified pathways to AWS Skill Builder, AWS Well-Architected whitepapers, and Amazon Bedrock workshops, with explicit notice regarding certification exam voucher requirements.
 - **Contact (`/contact`)**: Form with validation, campus location details, community email, WhatsApp community invite, and official AWS SBG program references.

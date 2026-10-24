@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { applicationSchema } from "@/lib/validations/applicationSchema";
 import { dbService } from "@/lib/data/store";
 
 export const dynamic = "force-dynamic";
@@ -22,77 +21,14 @@ export async function GET() {
   }
 }
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
-    const validationResult = applicationSchema.safeParse(body);
-
-    if (!validationResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Validation failed",
-          details: validationResult.error.flatten().fieldErrors,
-        },
-        { status: 400 }
-      );
-    }
-
-    const validData = validationResult.data;
-
-    // Check duplicate email
-    const existing = await dbService.getApplications();
-    const alreadyApplied = existing.some(
-      (app) =>
-        app.collegeEmail.toLowerCase() === validData.collegeEmail.toLowerCase()
-    );
-
-    if (alreadyApplied) {
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            "An application has already been submitted with this college email address. To update your application, please reach out via the Contact page.",
-        },
-        { status: 409 }
-      );
-    }
-
-    const application = await dbService.createApplication({
-      fullName: validData.fullName,
-      collegeEmail: validData.collegeEmail,
-      personalEmail: validData.personalEmail || undefined,
-      department: validData.department,
-      currentYear: validData.currentYear,
-      cgpa: validData.cgpa,
-      technicalSkills: validData.technicalSkills,
-      preferredPosition: validData.preferredPosition,
-      whyJoin: validData.whyJoin,
-      projectLinks: validData.projectLinks || undefined,
-      linkedinUrl: validData.linkedinUrl || undefined,
-    });
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Application submitted successfully",
-        storageMode: dbService.getStorageMode(),
-        databaseConfigured: dbService.isConfigured(),
-        data: {
-          id: application.id,
-          fullName: application.fullName,
-          preferredPosition: application.preferredPosition,
-          createdAt: application.createdAt,
-        },
-      },
-      { status: 201 }
-    );
-  } catch {
-    return NextResponse.json(
-      { success: false, error: "Internal server error occurred while processing application" },
-      { status: 500 }
-    );
-  }
+export async function POST() {
+  return NextResponse.json(
+    {
+      success: false,
+      error: "Core Team recruitment has concluded. Applications are no longer accepted.",
+    },
+    { status: 410 }
+  );
 }
 
 export async function PATCH(req: NextRequest) {

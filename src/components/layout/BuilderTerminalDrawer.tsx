@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Terminal, X, Send, Sparkles, CornerDownLeft, ChevronRight, Layers, Calendar, Users, Briefcase, ExternalLink } from "lucide-react";
+import { Terminal, X, Send, ChevronRight, ExternalLink } from "lucide-react";
 import { useSound } from "@/components/audio/SoundManager";
 import Link from "next/link";
 
@@ -24,14 +24,14 @@ const INITIAL_MESSAGES: Message[] = [
   {
     id: "init-2",
     sender: "ai",
-    text: "Greetings, Builder! I am the SBG Assistant. Ask me anything about our technical workshops, core team recruitment, student projects, or group leader Ashwin Chauhan. Or type 'help' for terminal commands.",
+    text: "Greetings, Builder! I am the SBG Assistant. Ask me anything about our technical workshops, student projects, community initiatives, or group leader Ashwin Chauhan. Or type 'help' for terminal commands.",
     timestamp: "00:01",
   },
 ];
 
 const SUGGESTIONS = [
   "Upcoming Workshops & Hackathons",
-  "How to join Core Team (7.0 CGPA)",
+  "Connect with the Community",
   "Who is the Group Leader?",
   "Explore Student Projects",
   "WhatsApp Community Invite",
@@ -101,7 +101,7 @@ export function BuilderTerminalDrawer({
 
       if (q === "help" || q === "/help") {
         replyText =
-          "AVAILABLE PROTOCOLS:\n• events — View 6 proposed curriculum workshops & hackathons\n• team — View Ashwin Chauhan & 9 open domain roles\n• join — Recruitment criteria & 7.0+ CGPA requirement\n• projects — Cloud & AI student innovations\n• leader — Details about Group Leader Ashwin Chauhan\n• clear — Reset terminal memory";
+          "AVAILABLE PROTOCOLS:\n• events — View 6 proposed curriculum workshops & hackathons\n• team — View Ashwin Chauhan & Directorate team\n• community — WhatsApp community & Meetup groups\n• projects — Cloud & AI student innovations\n• leader — Details about Group Leader Ashwin Chauhan\n• clear — Reset terminal memory";
       } else if (q.includes("event") || q.includes("workshop") || q.includes("hackathon") || q.includes("schedule")) {
         replyText =
           "We offer 6 proposed curriculum tracks:\n1. Introduction to AWS Cloud\n2. Cloud Fundamentals Workshop\n3. Generative AI Learning Session\n4. AI/ML Project Workshop\n5. Build and Deploy with AWS\n6. Hackathon & Project Showcase\n\nAll events feature hands-on labs and peer collaboration.";
@@ -109,9 +109,9 @@ export function BuilderTerminalDrawer({
         actionText = "Open Events Schedule";
       } else if (q.includes("join") || q.includes("apply") || q.includes("recruitment") || q.includes("cgpa") || q.includes("eligibility")) {
         replyText =
-          "ELIGIBILITY CRITERIA FOR CORE TEAM:\n• Minimum 7.0 CGPA\n• Good knowledge of Cloud Computing or AI/ML\n• Basic web development or DevOps understanding\n• Active willingness to conduct workshops\n• Final selection includes a technical & leadership interview.";
-        actionUrl = "/join";
-        actionText = "Apply for Core Team";
+          "Core Team recruitment for the current term has concluded. Students are warmly welcomed to participate in all open campus workshops, hackathons, and community study jams. For inquiries, feel free to reach out to the organizing team.";
+        actionUrl = "/contact";
+        actionText = "Contact Organizing Team";
       } else if (q.includes("leader") || q.includes("ashwin") || q.includes("chauhan") || q.includes("who is leading")) {
         replyText =
           "Ashwin Chauhan is the appointed AWS Student Builder Group Leader at Prashanti Institute of Technology & Science, Ujjain. He is a passionate student technologist leading campus cloud literacy (note: student leader, not an AWS corporate employee).";

@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import Link from "next/link";
 import {
   ShieldCheck,
   Sparkles,
-  ArrowRight,
   Award,
   Users,
   Compass,
@@ -30,8 +28,6 @@ import {
   GraduationCap,
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
 import { INITIAL_TEAM_MEMBERS, COMMUNITY_INFO } from "@/lib/data/initialData";
 import { TeamMember } from "@/lib/types";
 import { toast } from "sonner";
@@ -65,12 +61,6 @@ export function TeamDirectoryClient() {
   // Directors & Core Members (excluding the leader)
   const appointedDirectors = useMemo(
     () => INITIAL_TEAM_MEMBERS.filter((m) => !m.isLead && !m.isVacant),
-    []
-  );
-
-  // Vacant / Student Cohort Positions
-  const cohortRole = useMemo(
-    () => INITIAL_TEAM_MEMBERS.find((m) => m.isVacant),
     []
   );
 
@@ -417,13 +407,6 @@ export function TeamDirectoryClient() {
             ))}
           </div>
 
-          <Link
-            href={`/join?role=${encodeURIComponent(`${director.role} Associate`)}`}
-            className="text-xs font-mono font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
-          >
-            <span>Join Directorate</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
         </div>
       </div>
     );
@@ -831,33 +814,6 @@ export function TeamDirectoryClient() {
           </div>
         </div>
 
-        {/* 4. Junior Student Builder Recruitment Callout */}
-        <div className="hud-corner rounded-3xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-slate-900/90 to-sky-500/10 p-8 sm:p-10 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-3 max-w-2xl text-center md:text-left">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono font-bold">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>CALLING 1ST TO 3RD YEAR STUDENTS</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-              Join as a Domain Associate &amp; Junior Builder
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-              Want to work directly under our appointed Directors? We are recruiting junior associates to shadow and build alongside our Cloud, AI/ML, Data Engineering, DevOps, Events, Marketing, and Design teams.
-            </p>
-            <div className="flex items-center gap-4 text-xs font-mono text-slate-400 pt-1 justify-center md:justify-start">
-              <span>• Min 7.0 CGPA</span>
-              <span>• All Engineering Branches</span>
-              <span>• Hands-on Mentorship</span>
-            </div>
-          </div>
-
-          <Link href="/join">
-            <Button size="lg" className="gap-2 shrink-0 rounded-full shadow-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-bold uppercase text-xs">
-              <Sparkles className="w-4 h-4" />
-              <span>Apply for Associate Cohort</span>
-            </Button>
-          </Link>
-        </div>
 
         {/* 5. Educational Community Disclaimer */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center text-xs text-slate-400 space-y-1">

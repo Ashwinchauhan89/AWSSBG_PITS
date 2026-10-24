@@ -135,12 +135,17 @@ export default function AboutPage() {
               </div>
 
               <div className="pt-2">
-                <Link href="/join">
+                <a
+                  href={COMMUNITY_INFO.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full"
+                >
                   <Button className="w-full gap-2">
                     <Sparkles className="w-4 h-4" />
-                    <span>Apply to Join Core Team</span>
+                    <span>Join WhatsApp Community</span>
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -228,9 +233,9 @@ export default function AboutPage() {
                 Browse Upcoming Workshops
               </Button>
             </Link>
-            <Link href="/join">
+            <Link href="/contact">
               <Button size="md" className="gap-2">
-                <span>Apply for Core Team</span>
+                <span>Contact Organizing Team</span>
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>

@@ -194,7 +194,7 @@ export function ProjectsPreview() {
 
             <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
               <GsapMagnetic strength={0.2}>
-                <Link href="/join">
+                <Link href="/contact">
                   <Button
                     size="md"
                     className="gap-2 px-6 py-3 rounded-full font-mono text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 hover:from-amber-400 hover:to-orange-400 shadow-lg shadow-orange-500/20"

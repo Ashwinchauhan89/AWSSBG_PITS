@@ -9,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/events",
     "/team",
-    "/join",
     "/projects",
     "/resources",
     "/contact",
@@ -19,6 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: currentDate,
     changeFrequency: route === "" || route === "/events" ? "daily" : "weekly",
-    priority: route === "" ? 1.0 : route === "/join" || route === "/events" ? 0.9 : 0.7,
+    priority: route === "" ? 1.0 : route === "/events" ? 0.9 : 0.7,
   }));
 }

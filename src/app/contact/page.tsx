@@ -34,8 +34,8 @@ const FAQS = [
     a: "AWS Free Tier account creation typically requires a credit or debit card for identity verification. In our campus labs, we guide students through setting up zero-cost AWS Budgets with billing alert alarms to protect against accidental charges.",
   },
   {
-    q: "How can I join the organizing Core Team?",
-    a: "Head to our 'Join Core Team' recruitment page, review the minimum 7.0 CGPA and technical criteria, and submit your application. We interview candidates on a rolling basis.",
+    q: "How can I get involved or volunteer with the team?",
+    a: "While formal Core Team recruitment for this term has closed, students can actively participate in all campus workshops, collaborate on student cloud projects, and connect directly with our leads via our WhatsApp community.",
   },
 ];
 
@@ -250,7 +250,7 @@ export default function ContactPage() {
                       >
                         <option value="General Inquiry">General Inquiry</option>
                         <option value="Event Registration">Event Registration Query</option>
-                        <option value="Core Team Recruitment">Core Team Recruitment</option>
+                        <option value="Community & Volunteering">Community & Volunteering</option>
                         <option value="Project Collaboration">Project Collaboration</option>
                         <option value="Faculty / Institutional">Faculty / Academic</option>
                       </select>

@@ -4,17 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-  Menu,
-  X,
-  Sparkles,
-  Users,
-  Calendar,
-  Layers,
-  BookOpen,
-  PhoneCall,
-  MessageCircle,
-} from "lucide-react";
+import { Menu, X, PhoneCall } from "lucide-react";
 import {
   Instagram,
   TwitterX,
@@ -186,16 +176,6 @@ export function Navbar() {
             >
               ASHWIN
             </Link>
-
-            <Link
-              href="/join"
-              onClick={playClick}
-              onMouseEnter={playHover}
-              className="inline-flex items-center gap-1.5 px-3 lg:px-3.5 py-1.5 rounded-lg text-[11px] lg:text-xs font-mono font-bold bg-[#FF9900] text-slate-950 hover:bg-amber-400 transition-colors shadow-md shadow-[#FF9900]/20 uppercase"
-            >
-              <Sparkles className="w-3 h-3" />
-              <span>JOIN</span>
-            </Link>
           </div>
 
           {/* Mobile Menu Trigger & Sound Toggle */}
@@ -292,14 +272,6 @@ export function Navbar() {
               <span>CONTACT CAMPUS CHAPTER</span>
             </Link>
           </div>
-
-          <Link
-            href="/join"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block w-full py-2.5 text-center rounded-lg bg-[#FF9900] text-slate-950 font-mono font-bold text-xs uppercase shadow-lg shadow-[#FF9900]/25"
-          >
-            JOIN CORE TEAM (MIN 7.0 CGPA)
-          </Link>
 
           {/* Mobile Social Links Row (Full parity with desktop rail) */}
           <div className="pt-2 border-t border-white/10">
