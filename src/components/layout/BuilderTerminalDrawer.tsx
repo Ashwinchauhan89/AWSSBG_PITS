@@ -132,7 +132,7 @@ export function BuilderTerminalDrawer({
         return;
       } else {
         replyText =
-          `Command recognized: "${query}". You can explore our community workshops, apply for domain lead roles, or inspect student cloud architectures. What would you like to explore next?`;
+          `Command recognized: "${query}". You can explore our community workshops, connect with our team leads, or inspect student cloud architectures. What would you like to explore next?`;
       }
 
       playSuccess();
@@ -265,7 +265,7 @@ export function BuilderTerminalDrawer({
               type="text"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
-              placeholder="Ask about workshops, 7.0 CGPA criteria, Ashwin Chauhan, or type 'help'..."
+              placeholder="Ask about workshops, cloud technologies, Ashwin Chauhan, or type 'help'..."
               className="w-full bg-transparent text-white font-mono text-xs focus:outline-none placeholder:text-slate-500"
             />
           </div>

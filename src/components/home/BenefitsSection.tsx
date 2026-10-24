@@ -213,7 +213,7 @@ export function BenefitsSection() {
           })}
         </div>
 
-        {/* Join CTA redirect */}
+        {/* Community culture link */}
         <div className="mt-14 text-center">
           <Link
             href="/about"
