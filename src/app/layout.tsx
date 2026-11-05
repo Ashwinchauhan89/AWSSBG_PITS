@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
@@ -65,17 +66,32 @@ export default function RootLayout({
       className="h-full antialiased dark"
     >
       <body className="min-h-full flex flex-col bg-[#080A0F] text-[#F5F7FA] selection:bg-amber-500 selection:text-[#080A0F] relative">
-        <ClientLayoutShell>
-          <GsapScrollProgress />
-          <Navbar />
-          <LeftNavRail />
-          <RightSocialRail />
-          <main className="flex-1 relative z-10 overflow-x-clip">{children}</main>
-          <Footer />
-          <ToastProvider />
-        </ClientLayoutShell>
+        <ClerkProvider
+          appearance={{
+            variables: {
+              colorPrimary: "#FF9900",
+              colorPrimaryForeground: "#080A0F",
+              colorBackground: "#0D1117",
+              colorForeground: "#F5F7FA",
+              colorMuted: "#161B22",
+              colorMutedForeground: "#94A3B8",
+              colorInput: "#080A0F",
+              colorInputForeground: "#F5F7FA",
+              borderRadius: "0.5rem",
+            },
+          }}
+        >
+          <ClientLayoutShell>
+            <GsapScrollProgress />
+            <Navbar />
+            <LeftNavRail />
+            <RightSocialRail />
+            <main className="flex-1 relative z-10 overflow-x-clip">{children}</main>
+            <Footer />
+            <ToastProvider />
+          </ClientLayoutShell>
+        </ClerkProvider>
       </body>
     </html>
   );
 }
-

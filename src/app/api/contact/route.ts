@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 import { contactSchema } from "@/lib/validations/contactSchema";
 import { dbService } from "@/lib/data/store";
 
@@ -6,6 +7,14 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Access requires authentication" },
+        { status: 401 }
+      );
+    }
+
     const contacts = await dbService.getContacts();
     return NextResponse.json({
       success: true,
@@ -71,6 +80,14 @@ export async function POST(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Access requires authentication" },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
     const { id } = body;
 

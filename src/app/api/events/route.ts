@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 import { dbService } from "@/lib/data/store";
 import { CommunityEvent } from "@/lib/types";
 
@@ -22,6 +23,14 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Event creation requires an authenticated session" },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
     if (!body.title || !body.date || !body.venue) {
       return NextResponse.json(
@@ -60,6 +69,14 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Event deletion requires an authenticated session" },
+        { status: 401 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     if (!id) {

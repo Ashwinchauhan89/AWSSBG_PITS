@@ -28,8 +28,10 @@ import {
   ApplicationStatus,
 } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
+import { useUser, UserButton, SignInButton } from "@clerk/nextjs";
 
 export default function AdminPage() {
+  const { user, isLoaded, isSignedIn } = useUser();
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const [passkey, setPasskey] = React.useState("");
   const [isVerifying, setIsVerifying] = React.useState(false);
@@ -61,6 +63,51 @@ export default function AdminPage() {
   const [newEventVenue, setNewEventVenue] = React.useState("");
   const [newEventCategory, setNewEventCategory] = React.useState("AWS Cloud");
 
+  const fetchData = React.useCallback(async () => {
+    try {
+      const [appRes, cntRes, evtRes] = await Promise.all([
+        fetch("/api/applications"),
+        fetch("/api/contact"),
+        fetch("/api/events"),
+      ]);
+
+      const [appData, cntData, evtData] = await Promise.all([
+        appRes.json(),
+        cntRes.json(),
+        evtRes.json(),
+      ]);
+
+      if (appData.success) setApplications(appData.data);
+      if (cntData.success) setContacts(cntData.data);
+      if (evtData.success) setEvents(evtData.data);
+    } catch {
+      toast.error("Failed to load dashboard records");
+    }
+  }, []);
+
+  // Auto-authenticate when signed in via Clerk
+  React.useEffect(() => {
+    let isMounted = true;
+    if (isLoaded && isSignedIn && !isAuthenticated) {
+      fetch("/api/admin")
+        .then((res) => res.json())
+        .then((data) => {
+          if (isMounted && data.authenticated) {
+            setIsAuthenticated(true);
+            setSystemInfo(data.system);
+            toast.success(`Welcome, ${user?.firstName || "Administrator"}!`);
+            fetchData();
+          }
+        })
+        .catch(() => {
+          // Fallback to manual passkey if necessary
+        });
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [isLoaded, isSignedIn, isAuthenticated, user, fetchData]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsVerifying(true);
@@ -86,28 +133,6 @@ export default function AdminPage() {
       toast.error("Error communicating with administration backend");
     } finally {
       setIsVerifying(false);
-    }
-  };
-
-  const fetchData = async () => {
-    try {
-      const [appRes, cntRes, evtRes] = await Promise.all([
-        fetch("/api/applications"),
-        fetch("/api/contact"),
-        fetch("/api/events"),
-      ]);
-
-      const [appData, cntData, evtData] = await Promise.all([
-        appRes.json(),
-        cntRes.json(),
-        evtRes.json(),
-      ]);
-
-      if (appData.success) setApplications(appData.data);
-      if (cntData.success) setContacts(cntData.data);
-      if (evtData.success) setEvents(evtData.data);
-    } catch {
-      toast.error("Failed to load dashboard records");
     }
   };
 
@@ -244,6 +269,46 @@ export default function AdminPage() {
             </p>
           </div>
 
+          {/* Primary Clerk Authentication Action */}
+          <div className="space-y-3 pt-2">
+            {!isSignedIn ? (
+              <SignInButton mode="modal" fallbackRedirectUrl="/admin">
+                <Button
+                  className="w-full h-11 bg-gradient-to-r from-[#FF9900] to-amber-500 text-slate-950 font-bold font-mono text-xs shadow-lg shadow-[#FF9900]/20 hover:brightness-110"
+                >
+                  <ShieldCheck className="w-4 h-4 mr-2" />
+                  Sign In with Clerk
+                </Button>
+              </SignInButton>
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsVerifying(true);
+                  fetch("/api/admin")
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.authenticated) {
+                        setIsAuthenticated(true);
+                        setSystemInfo(data.system);
+                        fetchData();
+                      }
+                    })
+                    .finally(() => setIsVerifying(false));
+                }}
+                isLoading={isVerifying}
+                className="w-full h-11 bg-gradient-to-r from-[#FF9900] to-amber-500 text-slate-950 font-bold font-mono text-xs shadow-lg shadow-[#FF9900]/20 hover:brightness-110"
+              >
+                Enter Dashboard as {user?.firstName || "Admin"}
+              </Button>
+            )}
+
+            <div className="relative flex py-2 items-center">
+              <div className="flex-grow border-t border-slate-800"></div>
+              <span className="flex-shrink mx-4 text-[10px] font-mono text-slate-500 uppercase">Or use Passkey</span>
+              <div className="flex-grow border-t border-slate-800"></div>
+            </div>
+          </div>
+
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-1.5">
               <label className="block text-xs font-semibold text-slate-300">
@@ -269,7 +334,7 @@ export default function AdminPage() {
               className="w-full"
               isLoading={isVerifying}
             >
-              Verify &amp; Enter Dashboard
+              Verify with Passkey
             </Button>
           </form>
         </div>
@@ -294,6 +359,19 @@ export default function AdminPage() {
         </div>
 
         <div className="flex items-center gap-3">
+          {isSignedIn && (
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800">
+              <UserButton />
+              <div className="flex flex-col text-left text-xs leading-none">
+                <span className="font-semibold text-white truncate max-w-[120px]">
+                  {user?.fullName || "Admin"}
+                </span>
+                <span className="text-[9px] font-mono text-emerald-400">
+                  Clerk Verified
+                </span>
+              </div>
+            </div>
+          )}
           <Button
             variant="outline"
             size="sm"
@@ -825,6 +903,42 @@ export default function AdminPage() {
               <Badge variant="orange" size="md">
                 100% Frontend Architecture
               </Badge>
+            </div>
+          </div>
+
+          {/* System & Auth Diagnostics */}
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8 space-y-4">
+            <div className="flex items-center gap-2 text-white font-bold text-sm">
+              <ShieldCheck className="w-4 h-4 text-[#FF9900]" />
+              <span>Authentication &amp; Backend Infrastructure Diagnostics</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
+                <span className="text-[10px] font-mono text-slate-400 uppercase">Auth Provider</span>
+                <p className="text-sm font-bold text-white flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  Clerk Auth (Next.js 16)
+                </p>
+                <p className="text-[10px] font-mono text-slate-500">
+                  {isSignedIn ? `User: ${user?.primaryEmailAddress?.emailAddress || "Authenticated"}` : "Passkey Session"}
+                </p>
+              </div>
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
+                <span className="text-[10px] font-mono text-slate-400 uppercase">Storage Mode</span>
+                <p className="text-sm font-bold text-white capitalize">
+                  {systemInfo?.storageMode || "In-Memory / Dynamic"}
+                </p>
+                <p className="text-[10px] font-mono text-slate-500">
+                  Configured: {systemInfo?.databaseConfigured ? "Yes" : "Local Store"}
+                </p>
+              </div>
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
+                <span className="text-[10px] font-mono text-slate-400 uppercase">Server Timestamp</span>
+                <p className="text-xs font-mono text-slate-300 truncate">
+                  {systemInfo?.serverTimestamp ? new Date(systemInfo.serverTimestamp).toLocaleString() : "Live"}
+                </p>
+                <p className="text-[10px] font-mono text-emerald-400">Status: Operational</p>
+              </div>
             </div>
           </div>
 

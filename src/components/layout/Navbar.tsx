@@ -4,7 +4,8 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, PhoneCall } from "lucide-react";
+import { Menu, X, PhoneCall, LogIn, UserPlus, ShieldCheck } from "lucide-react";
+import { SignInButton, SignUpButton, UserButton, Show } from "@clerk/nextjs";
 import {
   Instagram,
   TwitterX,
@@ -228,6 +229,43 @@ export function Navbar() {
               )}
             </Link>
 
+            {/* Auth Controls (Desktop & Tablet) */}
+            <React.Suspense fallback={<div className="w-8 h-8 rounded-full bg-white/5 animate-pulse" />}>
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button
+                    onClick={playClick}
+                    onMouseEnter={playHover}
+                    className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-slate-200 bg-white/5 border border-white/10 hover:border-[#FF9900]/60 hover:text-[#FF9900] hover:bg-[#FF9900]/10 transition-all focus:outline-none focus:ring-2 focus:ring-[#FF9900]/50"
+                  >
+                    <LogIn className="w-3.5 h-3.5 text-[#FF9900]" />
+                    <span>SIGN IN</span>
+                  </button>
+                </SignInButton>
+              </Show>
+              <Show when="signed-in">
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/admin"
+                    onClick={playClick}
+                    onMouseEnter={playHover}
+                    className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium text-amber-400 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition-all focus:outline-none focus:ring-2 focus:ring-[#FF9900]/50"
+                    title="Admin Console"
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                    <span>ADMIN</span>
+                  </Link>
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: "w-8 h-8 rounded-full border border-purple-500/50 shadow-sm shadow-purple-500/25",
+                      },
+                    }}
+                  />
+                </div>
+              </Show>
+            </React.Suspense>
+
             {/* Tablet & Mobile Menu Toggle */}
             <button
               onClick={() => {
@@ -359,6 +397,66 @@ export function Navbar() {
               <span>CONTACT CAMPUS CHAPTER</span>
             </Link>
           </div>
+
+          {/* Mobile Auth Controls */}
+          <React.Suspense fallback={<div className="h-10 rounded-lg bg-white/5 animate-pulse" />}>
+            <Show when="signed-out">
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+                <SignInButton mode="modal">
+                  <button
+                    onClick={() => {
+                      playClick();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-white hover:border-[#FF9900]/50 hover:text-[#FF9900] transition-colors"
+                  >
+                    <LogIn className="w-3.5 h-3.5 text-[#FF9900]" />
+                    <span>SIGN IN</span>
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button
+                    onClick={() => {
+                      playClick();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-gradient-to-r from-[#FF9900] to-amber-500 text-slate-950 font-mono font-bold text-xs hover:brightness-110 shadow-md shadow-[#FF9900]/20 transition-all"
+                  >
+                    <UserPlus className="w-3.5 h-3.5" />
+                    <span>REGISTER</span>
+                  </button>
+                </SignUpButton>
+              </div>
+            </Show>
+            <Show when="signed-in">
+              <div className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/10 mt-2">
+                <div className="flex items-center gap-2.5">
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: "w-8 h-8 rounded-full border border-[#FF9900]/50",
+                      },
+                    }}
+                  />
+                  <div className="flex flex-col text-left">
+                    <span className="text-xs font-mono font-bold text-white">BUILDER ACCOUNT</span>
+                    <span className="text-[10px] font-mono text-emerald-400">Authenticated Session</span>
+                  </div>
+                </div>
+                <Link
+                  href="/admin"
+                  onClick={() => {
+                    playClick();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-xs font-mono text-amber-400 hover:bg-amber-500/20"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>ADMIN</span>
+                </Link>
+              </div>
+            </Show>
+          </React.Suspense>
 
           {/* Mobile Social Links Row (Full parity with desktop rail) */}
           <div className="pt-2 border-t border-white/10">
