@@ -1,12 +1,16 @@
 import { HeroSection } from "@/components/home/HeroSection";
+import { TechnologyMarquee } from "@/components/home/TechnologyMarquee";
+import { AboutCommunitySection } from "@/components/home/AboutCommunitySection";
+import { WhyJoinSection } from "@/components/home/WhyJoinSection";
 import { CommunityMissionSection } from "@/components/home/CommunityMissionSection";
-import { DomainsSection } from "@/components/home/DomainsSection";
-import { LearningRoadmapSection } from "@/components/home/LearningRoadmapSection";
-import { EventsPreview } from "@/components/home/EventsPreview";
-import { ProjectsPreview } from "@/components/home/ProjectsPreview";
 import { TeamPreview } from "@/components/home/TeamPreview";
-import { BenefitsSection } from "@/components/home/BenefitsSection";
-import { JoinCtaSection } from "@/components/home/JoinCtaSection";
+import { EventsShowcaseSection } from "@/components/home/EventsShowcaseSection";
+import { LearningEcosystemSection } from "@/components/home/LearningEcosystemSection";
+import { CommunityCollaborationSection } from "@/components/home/CommunityCollaborationSection";
+import { CommunityImpactSection } from "@/components/home/CommunityImpactSection";
+import { CampusInfoSection } from "@/components/home/CampusInfoSection";
+import { CommunityFaqSection } from "@/components/home/CommunityFaqSection";
+import { CommunityCtaSection } from "@/components/home/CommunityCtaSection";
 
 export const metadata = {
   title: "AWS Student Builder Group | Prashanti Institute of Technology & Science",
@@ -17,32 +21,44 @@ export const metadata = {
 export default function HomePage() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
+      {/* Existing Hero Section — STRICTLY PRESERVED & PROTECTED */}
       <HeroSection />
 
-      {/* Section 1 — The Community */}
+      {/* SECTION 01 — TECHNOLOGY MARQUEE */}
+      <TechnologyMarquee />
+
+      {/* SECTION 02 — ABOUT OUR COMMUNITY */}
+      <AboutCommunitySection />
+
+      {/* SECTION 03 — WHY JOIN OUR COMMUNITY */}
+      <WhyJoinSection />
+
+      {/* SECTION 04 — LEARN, BUILD & CONNECT */}
       <CommunityMissionSection />
 
-      {/* Section 2 — Explore Technology */}
-      <DomainsSection />
-
-      {/* Section C — Learning Roadmap */}
-      <LearningRoadmapSection />
-
-      {/* Section 4 — Events and Experiences */}
-      <EventsPreview />
-
-      {/* Section 5 — Student Projects */}
-      <ProjectsPreview />
-
-      {/* Section 6 — Meet the Team */}
+      {/* SECTION 05 — MEET OUR BUILDERS */}
       <TeamPreview />
 
-      {/* Campus Cohort Highlights */}
-      <BenefitsSection />
+      {/* SECTION 06 — EVENTS & COMMUNITY ACTIVITIES */}
+      <EventsShowcaseSection />
 
-      {/* Section 7 — Join the Community */}
-      <JoinCtaSection />
+      {/* SECTION 07 — OUR LEARNING ECOSYSTEM */}
+      <LearningEcosystemSection />
+
+      {/* SECTION 08 — COMMUNITY COLLABORATION */}
+      <CommunityCollaborationSection />
+
+      {/* SECTION 09 — COMMUNITY IMPACT */}
+      <CommunityImpactSection />
+
+      {/* SECTION 10 — CAMPUS & COMMUNITY INFORMATION */}
+      <CampusInfoSection />
+
+      {/* SECTION 11 — FAQ */}
+      <CommunityFaqSection />
+
+      {/* SECTION 12 — COMMUNITY CTA */}
+      <CommunityCtaSection />
     </div>
   );
 }
