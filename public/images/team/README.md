@@ -10,10 +10,10 @@ Place the team photos in this directory (`public/images/team/`). The website aut
 | **Anchit Malik** | Co-Lead & Director of Data Engineering | `anchit-malik.webp` | Active (1080×1080) |
 | **Tanish Namdev** | Technical Lead & Director of Cloud Computing | `tanish-namdev.webp` | Active (1080×1080) |
 | **Shafque Ansari** | Director of Artificial Intelligence, Machine Learning & MLOps | `shafque-ansari.webp` | Active (1080×1080) |
-| **Aaysha Malik** | Director of Innovation, Logistics & Event Execution | `aaysha-malik.jpg` | Pending confirmation |
-| **Aakansha Panchal** | Director of Software Engineering & DevOps | `aakansha-panchal.jpg` | Pending confirmation |
-| **Muskan Goyal** | Director of Marketing & Digital Development | `muskan-goyal.jpg` | Pending confirmation |
-| **Harshit Singh Sikarwar** | Director of Graphic Design, Research & Creative Social Outreach | `harshit-singh-sikarwar.jpg` | Pending confirmation |
+| **Aaysha Malik** | Director of Innovation, Logistics & Event Execution | `aaysha-malik.webp` | Active (1080×1080) |
+| **Aakansha Panchal** | Director of Software Engineering & DevOps | `aakansha-panchal.webp` | Active (1080×1080) |
+| **Muskan Goyal** | Director of Marketing & Digital Development | `muskan-goyal.webp` | Active (1080×1080) |
+| **Harshit Singh Sikarwar** | Director of Graphic Design, Research & Creative Social Outreach | `harshit-singh-sikarwar.webp` | Active (1080×1080) |
 
 > **Format Standards:**
 > - Standard resolution: **1080 × 1080 px** (1:1 square aspect ratio)

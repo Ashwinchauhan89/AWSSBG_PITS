@@ -114,7 +114,7 @@ export function BuilderTerminalDrawer({
         actionText = "Contact Organizing Team";
       } else if (q.includes("team") || q.includes("director") || q.includes("member") || q.includes("harshit") || q.includes("anchit") || q.includes("tanish") || q.includes("shafque") || q.includes("aaysha") || q.includes("aakansha") || q.includes("muskan")) {
         replyText =
-          "Leadership Directory:\n• Overall Leader: Ashwin Chauhan (Student Builder Group Leader)\n• Core Team: Anchit Malik, Tanish Namdev, Shafque Ansari, Aaysha Malik, Aakansha Panchal\n• Additional Members: Muskan Goyal, Harshit Singh Sikarwar\n\nAll 8 student leaders drive cloud literacy and hands-on projects at PITS Ujjain.";
+          "Leadership Directory:\n• Overall Leader: Ashwin Chauhan (Student Builder Group Leader)\n• Core Team: Anchit Malik, Tanish Namdev, Shafque Ansari, Aaysha Malik, Muskan Goyal, Harshit Singh Sikarwar, Aakansha Panchal\n\nAll 8 student leaders drive cloud literacy and hands-on projects at PITS Ujjain.";
         actionUrl = "/team";
         actionText = "Explore Team Directory";
       } else if (q.includes("leader") || q.includes("ashwin") || q.includes("chauhan") || q.includes("who is leading")) {

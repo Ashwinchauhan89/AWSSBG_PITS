@@ -121,6 +121,7 @@ export function JoinCtaSection() {
             </div>
             <span className="hidden sm:inline text-slate-600">•</span>
             <div className="flex items-center gap-1.5">
+
               <Zap className="w-3.5 h-3.5 text-sky-400 shrink-0" />
               <span>Free &amp; Open to All Engineering Students</span>
             </div>
