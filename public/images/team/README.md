@@ -7,9 +7,9 @@ Place the team photos in this directory (`public/images/team/`). The website aut
 | Person | Role | Filename | Status |
 |---|---|---|---|
 | **Ashwin Chauhan** | Student Builder Group Leader | `ashwin-chauhan.webp` | Active (1080×1080) |
-| **Anchit Malik** | Co-Lead & Director of Data Engineering | `anchit-malik.jpg` | Pending confirmation |
+| **Anchit Malik** | Co-Lead & Director of Data Engineering | `anchit-malik.webp` | Active (1080×1080) |
 | **Tanish Namdev** | Technical Lead & Director of Cloud Computing | `tanish-namdev.webp` | Active (1080×1080) |
-| **Shafque Ansari** | Director of Artificial Intelligence, Machine Learning & MLOps | `shafque-ansari.jpg` | Pending confirmation |
+| **Shafque Ansari** | Director of Artificial Intelligence, Machine Learning & MLOps | `shafque-ansari.webp` | Active (1080×1080) |
 | **Aaysha Malik** | Director of Innovation, Logistics & Event Execution | `aaysha-malik.jpg` | Pending confirmation |
 | **Aakansha Panchal** | Director of Software Engineering & DevOps | `aakansha-panchal.jpg` | Pending confirmation |
 | **Muskan Goyal** | Director of Marketing & Digital Development | `muskan-goyal.jpg` | Pending confirmation |
