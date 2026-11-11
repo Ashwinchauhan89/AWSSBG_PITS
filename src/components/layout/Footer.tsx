@@ -21,6 +21,10 @@ import {
   Meetup,
 } from "@/components/ui/Icons";
 import { COMMUNITY_INFO } from "@/lib/data/initialData";
+import {
+  OFFICIAL_COMMUNITY_SOCIALS,
+  ALL_COMMUNITY_CHANNELS,
+} from "@/lib/config/socialLinks";
 import { FooterAnimationWrapper } from "./FooterAnimationWrapper";
 
 export function Footer() {
@@ -40,26 +44,60 @@ export function Footer() {
     { label: "Student Projects", href: "/projects" },
   ];
 
-  const socialLinks = [
+  const officialSocialTrio = [
     {
-      name: "Meetup",
-      href: COMMUNITY_INFO.meetupUrl,
-      icon: Meetup,
-      label: "Join AWS SBG PITS on Meetup",
-      accent: "hover:text-red-400 hover:border-red-500/40 hover:bg-red-500/10",
+      name: OFFICIAL_COMMUNITY_SOCIALS.linkedin.name,
+      label: OFFICIAL_COMMUNITY_SOCIALS.linkedin.label,
+      href: OFFICIAL_COMMUNITY_SOCIALS.linkedin.url,
+      accessibleLabel: OFFICIAL_COMMUNITY_SOCIALS.linkedin.accessibleLabel,
+      icon: OFFICIAL_COMMUNITY_SOCIALS.linkedin.icon,
+      badge: "LinkedIn",
+      accent:
+        "hover:text-sky-300 hover:border-sky-500/40 hover:bg-sky-500/10 text-sky-400",
     },
     {
+      name: OFFICIAL_COMMUNITY_SOCIALS.discord.name,
+      label: OFFICIAL_COMMUNITY_SOCIALS.discord.label,
+      href: OFFICIAL_COMMUNITY_SOCIALS.discord.url,
+      accessibleLabel: OFFICIAL_COMMUNITY_SOCIALS.discord.accessibleLabel,
+      icon: OFFICIAL_COMMUNITY_SOCIALS.discord.icon,
+      badge: "Discord",
+      accent:
+        "hover:text-indigo-300 hover:border-indigo-500/40 hover:bg-indigo-500/10 text-indigo-400",
+    },
+    {
+      name: OFFICIAL_COMMUNITY_SOCIALS.instagram.name,
+      label: "@aws.sbg.pits",
+      href: OFFICIAL_COMMUNITY_SOCIALS.instagram.url,
+      accessibleLabel: OFFICIAL_COMMUNITY_SOCIALS.instagram.accessibleLabel,
+      icon: OFFICIAL_COMMUNITY_SOCIALS.instagram.icon,
+      badge: "Instagram",
+      accent:
+        "hover:text-pink-300 hover:border-pink-500/40 hover:bg-pink-500/10 text-pink-400",
+    },
+  ];
+
+  const socialLinks = [
+    {
       name: "LinkedIn",
-      href: COMMUNITY_INFO.linkedinOrgUrl,
+      href: OFFICIAL_COMMUNITY_SOCIALS.linkedin.url,
       icon: Linkedin,
-      label: "Connect with AWS SBG PITS on LinkedIn",
+      label: OFFICIAL_COMMUNITY_SOCIALS.linkedin.accessibleLabel,
       accent: "hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10",
     },
     {
+      name: "Discord",
+      href: OFFICIAL_COMMUNITY_SOCIALS.discord.url,
+      icon: Discord,
+      label: OFFICIAL_COMMUNITY_SOCIALS.discord.accessibleLabel,
+      accent:
+        "hover:text-indigo-400 hover:border-indigo-500/40 hover:bg-indigo-500/10",
+    },
+    {
       name: "Instagram",
-      href: COMMUNITY_INFO.instagramUrl || "https://www.instagram.com/aws_pits/",
+      href: OFFICIAL_COMMUNITY_SOCIALS.instagram.url,
       icon: Instagram,
-      label: "Follow AWS SBG PITS on Instagram",
+      label: OFFICIAL_COMMUNITY_SOCIALS.instagram.accessibleLabel,
       accent: "hover:text-pink-400 hover:border-pink-500/40 hover:bg-pink-500/10",
     },
     {
@@ -71,19 +109,18 @@ export function Footer() {
         "hover:text-emerald-400 hover:border-emerald-500/40 hover:bg-emerald-500/10",
     },
     {
+      name: "Meetup",
+      href: COMMUNITY_INFO.meetupUrl,
+      icon: Meetup,
+      label: "Join AWS SBG PITS on Meetup",
+      accent: "hover:text-red-400 hover:border-red-500/40 hover:bg-red-500/10",
+    },
+    {
       name: "GitHub",
       href: COMMUNITY_INFO.githubOrgUrl,
       icon: Github,
       label: "Explore AWS SBG PITS on GitHub",
       accent: "hover:text-white hover:border-white/40 hover:bg-white/10",
-    },
-    {
-      name: "Discord",
-      href: "https://discord.com",
-      icon: Discord,
-      label: "Connect with AWS SBG PITS on Discord",
-      accent:
-        "hover:text-indigo-400 hover:border-indigo-500/40 hover:bg-indigo-500/10",
     },
   ];
 
@@ -278,24 +315,61 @@ export function Footer() {
                 and stay updated with community announcements.
               </p>
 
-              {/* Social Icons Grid */}
-              <div className="flex flex-wrap items-center gap-2.5 pt-1">
-                {socialLinks.map((social) => {
-                  const IconComponent = social.icon;
+              {/* Official Primary Social Links List */}
+              <div className="space-y-2 pt-1">
+                {officialSocialTrio.map((channel) => {
+                  const Icon = channel.icon;
                   return (
                     <a
-                      key={social.name}
-                      href={social.href}
+                      key={channel.name}
+                      href={channel.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={social.label}
-                      title={social.name}
-                      className={`gsap-social-icon relative flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-slate-300 hover:text-white transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 ${social.accent}`}
+                      aria-label={channel.accessibleLabel}
+                      className={`group flex items-center justify-between p-2 rounded-xl bg-white/[0.03] border border-white/10 hover:border-purple-500/40 hover:bg-purple-950/20 transition-all duration-200 text-xs text-slate-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400`}
                     >
-                      <IconComponent className="w-4 h-4" />
+                      <div className="flex items-center gap-2.5 truncate">
+                        <span className={`p-1.5 rounded-lg bg-white/5 border border-white/10 ${channel.accent}`}>
+                          <Icon className="w-3.5 h-3.5" />
+                        </span>
+                        <div className="flex flex-col text-left truncate">
+                          <span className="text-[11px] font-medium text-slate-200 group-hover:text-white truncate">
+                            {channel.label}
+                          </span>
+                          <span className="text-[9px] font-mono text-slate-500 group-hover:text-slate-400">
+                            {channel.badge}
+                          </span>
+                        </div>
+                      </div>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-purple-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 ml-2" />
                     </a>
                   );
                 })}
+              </div>
+
+              {/* Quick Channels Grid */}
+              <div className="pt-2">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block mb-2">
+                  All Channels &amp; Forums:
+                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  {socialLinks.map((social) => {
+                    const IconComponent = social.icon;
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.label}
+                        title={social.name}
+                        className={`gsap-social-icon relative flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-slate-300 hover:text-white transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 ${social.accent}`}
+                      >
+                        <IconComponent className="w-4 h-4" />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Verified Official Links Badge */}

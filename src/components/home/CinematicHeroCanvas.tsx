@@ -235,6 +235,8 @@ export function CinematicHeroCanvas() {
     };
   }, []);
 
+
+
   return (
     <canvas
       ref={canvasRef}

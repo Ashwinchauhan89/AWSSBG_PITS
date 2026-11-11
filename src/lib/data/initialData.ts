@@ -19,8 +19,10 @@ export const COMMUNITY_INFO = {
   officialAwsSbgUrl: "https://builder.aws.com/community/student-builder-groups",
   meetupUrl: "https://www.meetup.com/aws-sbg-at-prashanti-institute-of-technology-and-science/",
   githubOrgUrl: "https://github.com",
-  linkedinOrgUrl: "https://www.linkedin.com/company/aws-student-builder-group-at-prashanti-institute-of-technology-science",
-  instagramUrl: "https://www.instagram.com/aws_pits/",
+  linkedinOrgUrl: "https://www.linkedin.com/company/aws-student-builder-group-at-prashanti-institute-of-technology-science/",
+  discordUrl: "https://discord.gg/u94MQe64K",
+  instagramUrl: "https://www.instagram.com/aws.sbg.pits/",
+  instagramHandle: "@aws.sbg.pits",
 };
 
 export const INITIAL_TEAM_MEMBERS: TeamMember[] = [

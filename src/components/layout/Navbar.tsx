@@ -14,9 +14,11 @@ import {
   YouTube,
   WhatsApp,
   Discord,
+  Meetup,
 } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 import { COMMUNITY_INFO } from "@/lib/data/initialData";
+import { OFFICIAL_COMMUNITY_SOCIALS } from "@/lib/config/socialLinks";
 import { SoundToggle } from "@/components/audio/SoundToggle";
 import { useSound } from "@/components/audio/SoundManager";
 
@@ -167,6 +169,46 @@ export function Navbar() {
 
           {/* 3. Right Controls: Unified Sound Toggle, Leader Profile Element & Mobile Menu Button */}
           <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-3 shrink-0">
+            {/* Desktop Compact Official Social Links Pill (LinkedIn, Discord, Instagram) */}
+            <div className="hidden 2xl:flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-slate-400 shadow-sm">
+              <a
+                href={OFFICIAL_COMMUNITY_SOCIALS.linkedin.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={playClick}
+                onMouseEnter={playHover}
+                aria-label={OFFICIAL_COMMUNITY_SOCIALS.linkedin.accessibleLabel}
+                title={OFFICIAL_COMMUNITY_SOCIALS.linkedin.label}
+                className="p-1 rounded-full hover:text-sky-400 hover:bg-sky-500/10 transition-colors"
+              >
+                <Linkedin className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={OFFICIAL_COMMUNITY_SOCIALS.discord.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={playClick}
+                onMouseEnter={playHover}
+                aria-label={OFFICIAL_COMMUNITY_SOCIALS.discord.accessibleLabel}
+                title={OFFICIAL_COMMUNITY_SOCIALS.discord.label}
+                className="p-1 rounded-full hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors"
+              >
+                <Discord className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={OFFICIAL_COMMUNITY_SOCIALS.instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={playClick}
+                onMouseEnter={playHover}
+                aria-label={OFFICIAL_COMMUNITY_SOCIALS.instagram.accessibleLabel}
+                title={OFFICIAL_COMMUNITY_SOCIALS.instagram.label}
+                className="p-1 rounded-full hover:text-pink-400 hover:bg-pink-500/10 transition-colors"
+              >
+                <Instagram className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
             {/* Single Unified SoundToggle across all viewports */}
             <SoundToggle />
 
@@ -458,32 +500,61 @@ export function Navbar() {
             </Show>
           </React.Suspense>
 
-          {/* Mobile Social Links Row (Full parity with desktop rail) */}
+          {/* Mobile Social Links Row */}
           <div className="pt-2 border-t border-white/10">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
               Official Channels:
             </span>
-            <div className="flex items-center justify-between gap-1 text-slate-300">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-pink-400" title="Instagram">
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-white" title="X">
-                <TwitterX className="w-4 h-4" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-sky-400" title="LinkedIn">
+            <div className="flex items-center justify-between gap-1.5 text-slate-300">
+              <a
+                href={OFFICIAL_COMMUNITY_SOCIALS.linkedin.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center py-2 px-2.5 rounded-lg bg-white/5 border border-white/10 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-colors"
+                title={OFFICIAL_COMMUNITY_SOCIALS.linkedin.label}
+                aria-label={OFFICIAL_COMMUNITY_SOCIALS.linkedin.accessibleLabel}
+              >
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-blue-500" title="Facebook">
-                <Facebook className="w-4 h-4" />
+              <a
+                href={OFFICIAL_COMMUNITY_SOCIALS.discord.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center py-2 px-2.5 rounded-lg bg-white/5 border border-white/10 hover:text-indigo-400 hover:border-indigo-500/40 hover:bg-indigo-500/10 transition-colors"
+                title={OFFICIAL_COMMUNITY_SOCIALS.discord.label}
+                aria-label={OFFICIAL_COMMUNITY_SOCIALS.discord.accessibleLabel}
+              >
+                <Discord className="w-4 h-4" />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-red-500" title="YouTube">
-                <YouTube className="w-4 h-4" />
+              <a
+                href={OFFICIAL_COMMUNITY_SOCIALS.instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center py-2 px-2.5 rounded-lg bg-white/5 border border-white/10 hover:text-pink-400 hover:border-pink-500/40 hover:bg-pink-500/10 transition-colors"
+                title={OFFICIAL_COMMUNITY_SOCIALS.instagram.label}
+                aria-label={OFFICIAL_COMMUNITY_SOCIALS.instagram.accessibleLabel}
+              >
+                <Instagram className="w-4 h-4" />
               </a>
-              <a href={COMMUNITY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-emerald-400" title="WhatsApp">
+              <a
+                href={COMMUNITY_INFO.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center py-2 px-2.5 rounded-lg bg-white/5 border border-white/10 hover:text-emerald-400 hover:border-emerald-500/40 hover:bg-emerald-500/10 transition-colors"
+                title="WhatsApp Community Group"
+                aria-label="Join AWS SBG PITS WhatsApp Community Group"
+              >
                 <WhatsApp className="w-4 h-4" />
               </a>
-              <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 hover:text-indigo-400" title="Discord">
-                <Discord className="w-4 h-4" />
+              <a
+                href={COMMUNITY_INFO.meetupUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center py-2 px-2.5 rounded-lg bg-white/5 border border-white/10 hover:text-red-400 hover:border-red-500/40 hover:bg-red-500/10 transition-colors"
+                title="Meetup Community Group"
+                aria-label="Join AWS SBG PITS on Meetup"
+              >
+                <Meetup className="w-4 h-4" />
               </a>
             </div>
           </div>

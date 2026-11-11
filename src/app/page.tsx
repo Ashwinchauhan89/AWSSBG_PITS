@@ -10,6 +10,7 @@ import { CommunityCollaborationSection } from "@/components/home/CommunityCollab
 import { CommunityImpactSection } from "@/components/home/CommunityImpactSection";
 import { CampusInfoSection } from "@/components/home/CampusInfoSection";
 import { CommunityFaqSection } from "@/components/home/CommunityFaqSection";
+import { SocialShowcaseSection } from "@/components/home/SocialShowcaseSection";
 import { CommunityCtaSection } from "@/components/home/CommunityCtaSection";
 
 export const metadata = {
@@ -57,7 +58,10 @@ export default function HomePage() {
       {/* SECTION 11 — FAQ */}
       <CommunityFaqSection />
 
-      {/* SECTION 12 — COMMUNITY CTA */}
+      {/* SECTION 12 — STAY CONNECTED WITH OUR COMMUNITY */}
+      <SocialShowcaseSection />
+
+      {/* SECTION 13 — COMMUNITY CTA */}
       <CommunityCtaSection />
     </div>
   );

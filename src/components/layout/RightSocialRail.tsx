@@ -3,14 +3,14 @@
 import * as React from "react";
 import {
   Instagram,
-  TwitterX,
   Linkedin,
-  Facebook,
-  YouTube,
   WhatsApp,
   Discord,
+  Meetup,
+  Github,
 } from "@/components/ui/Icons";
 import { COMMUNITY_INFO } from "@/lib/data/initialData";
+import { OFFICIAL_COMMUNITY_SOCIALS } from "@/lib/config/socialLinks";
 import { useSound } from "@/components/audio/SoundManager";
 
 interface SocialItem {
@@ -23,39 +23,25 @@ interface SocialItem {
 
 const SOCIAL_ITEMS: SocialItem[] = [
   {
-    id: "instagram",
-    label: "Instagram",
-    href: "https://instagram.com",
-    icon: Instagram,
-    hoverClass: "hover:text-pink-400 hover:scale-110",
-  },
-  {
-    id: "x",
-    label: "X (Twitter)",
-    href: "https://x.com",
-    icon: TwitterX,
-    hoverClass: "hover:text-white hover:scale-110",
-  },
-  {
     id: "linkedin",
-    label: "LinkedIn",
-    href: "https://linkedin.com",
+    label: "LinkedIn: AWS SBG at PITS",
+    href: OFFICIAL_COMMUNITY_SOCIALS.linkedin.url,
     icon: Linkedin,
     hoverClass: "hover:text-sky-400 hover:scale-110",
   },
   {
-    id: "facebook",
-    label: "Facebook",
-    href: "https://facebook.com",
-    icon: Facebook,
-    hoverClass: "hover:text-blue-500 hover:scale-110",
+    id: "discord",
+    label: "Discord Community",
+    href: OFFICIAL_COMMUNITY_SOCIALS.discord.url,
+    icon: Discord,
+    hoverClass: "hover:text-indigo-400 hover:scale-110",
   },
   {
-    id: "youtube",
-    label: "YouTube",
-    href: "https://youtube.com",
-    icon: YouTube,
-    hoverClass: "hover:text-red-500 hover:scale-110",
+    id: "instagram",
+    label: "Instagram @aws.sbg.pits",
+    href: OFFICIAL_COMMUNITY_SOCIALS.instagram.url,
+    icon: Instagram,
+    hoverClass: "hover:text-pink-400 hover:scale-110",
   },
   {
     id: "whatsapp",
@@ -65,11 +51,18 @@ const SOCIAL_ITEMS: SocialItem[] = [
     hoverClass: "hover:text-emerald-400 hover:scale-110",
   },
   {
-    id: "discord",
-    label: "Discord Community",
-    href: "https://discord.com",
-    icon: Discord,
-    hoverClass: "hover:text-indigo-400 hover:scale-110",
+    id: "meetup",
+    label: "Meetup Events",
+    href: COMMUNITY_INFO.meetupUrl,
+    icon: Meetup,
+    hoverClass: "hover:text-red-400 hover:scale-110",
+  },
+  {
+    id: "github",
+    label: "GitHub Repositories",
+    href: COMMUNITY_INFO.githubOrgUrl,
+    icon: Github,
+    hoverClass: "hover:text-white hover:scale-110",
   },
 ];
 
