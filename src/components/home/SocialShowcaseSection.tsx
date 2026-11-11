@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { Sparkles, ArrowUpRight, ShieldCheck, ExternalLink, Radio } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Radio } from "lucide-react";
 import { PRIMARY_SOCIAL_SHOWCASE_CARDS } from "@/lib/config/socialLinks";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { useSound } from "@/components/audio/SoundManager";

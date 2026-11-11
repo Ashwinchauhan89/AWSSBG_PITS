@@ -8,10 +8,7 @@ import { Menu, X, PhoneCall, LogIn, UserPlus, ShieldCheck } from "lucide-react";
 import { SignInButton, SignUpButton, UserButton, Show } from "@clerk/nextjs";
 import {
   Instagram,
-  TwitterX,
   Linkedin,
-  Facebook,
-  YouTube,
   WhatsApp,
   Discord,
   Meetup,

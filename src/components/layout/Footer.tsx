@@ -21,10 +21,7 @@ import {
   Meetup,
 } from "@/components/ui/Icons";
 import { COMMUNITY_INFO } from "@/lib/data/initialData";
-import {
-  OFFICIAL_COMMUNITY_SOCIALS,
-  ALL_COMMUNITY_CHANNELS,
-} from "@/lib/config/socialLinks";
+import { OFFICIAL_COMMUNITY_SOCIALS } from "@/lib/config/socialLinks";
 import { FooterAnimationWrapper } from "./FooterAnimationWrapper";
 
 export function Footer() {
